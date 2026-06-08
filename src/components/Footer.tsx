@@ -55,7 +55,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             {/* Social handles */}
             <div className="flex gap-3">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61590887721251"
                 target="_blank"
                 rel="noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-white/10 flex items-center justify-center text-gray-400 transition-all cursor-pointer"
@@ -64,7 +64,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/ashonikagreenenergy/"
                 target="_blank"
                 rel="noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-[#ffffff15] flex items-center justify-center text-gray-400 transition-all cursor-pointer"
@@ -73,7 +73,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/@AshonikaGreenEnergy"
                 target="_blank"
                 rel="noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-[#ffffff15] flex items-center justify-center text-gray-400 transition-all cursor-pointer"
@@ -82,7 +82,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <Youtube className="w-4 h-4" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/ashonika-green-energy"
                 target="_blank"
                 rel="noreferrer"
                 className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-[#ffffff15] flex items-center justify-center text-gray-400 transition-all cursor-pointer"
