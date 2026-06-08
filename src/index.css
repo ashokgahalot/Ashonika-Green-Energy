@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Custom wave keyframes and translations */
+  --animate-wave-slow: wave-slow 15s ease-in-out infinite;
+  --animate-wave: wave 10s ease-in-out infinite;
+  --animate-fadeIn: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wave-slow {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(-15%) scaleY(1.08); }
+  100% { transform: translateX(0) scaleY(1); }
+}
+
+@keyframes wave {
+  0% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(12%) scaleY(0.92); }
+  100% { transform: translateX(0) scaleY(1); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Base style resets and scroll smoothing */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #041120;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #092646;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #103c6e;
+}
+
+/* Typography styles matching guidelines */
+h1, h2, h3, h4 {
+  font-family: var(--font-display), var(--font-sans);
+  letter-spacing: -0.02em;
+}

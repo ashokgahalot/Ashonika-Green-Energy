@@ -1,0 +1,6 @@
+{
+  "name": "Ashonika Green Energy",
+  "description": "Premium, modern, futuristic corporate website for Ashonika Green Energy, a leading solar EPC and green energy solutions provider.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
