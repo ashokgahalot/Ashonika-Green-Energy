@@ -225,7 +225,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
             {/* Direct WhatsApp Message Integration option */}
             <div className="pt-6 border-t border-white/5">
               <a
-                href="https://wa.me/917728023503?text=Hi%20Ashonika%2520Green%2520Energy,%2520I'm%2520interested%2520in%2520a%2520free%2520solar%2520rooftop%2520survey."
+                href="https://wa.me/917728023503?text=Hi%2C%20Ashonika%20Green%20Energy."
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-3 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-[#071B2F] border border-[#25D366]/30 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
