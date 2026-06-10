@@ -24,15 +24,15 @@ export default function About() {
 
       const interval = setInterval(() => {
         stepCurrent++;
-        setProjects(Math.round((1250 / steps) * stepCurrent));
-        setCapacity(Math.round(((28.4 / steps) * stepCurrent) * 10) / 10);
-        setCo2(Math.round((5400 / steps) * stepCurrent));
+        setProjects(Math.round((225 / steps) * stepCurrent));
+        setCapacity(Math.round(((15.5 / steps) * stepCurrent) * 10) / 10);
+        setCo2(Math.round((2500 / steps) * stepCurrent));
         setClientSatisfaction(Math.round((98 / steps) * stepCurrent));
 
         if (stepCurrent >= steps) {
-          setProjects(1250);
-          setCapacity(28.4);
-          setCo2(5400);
+          setProjects(225);
+          setCapacity(15.5);
+          setCo2(2500);
           setClientSatisfaction(98);
           clearInterval(interval);
         }

@@ -302,12 +302,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-[#051322] px-4 py-2.5 rounded-2xl border border-emerald-500/15">
-            <Landmark className="w-4 h-4 text-[#FFC107]" />
-            <span className="text-[10px] font-mono font-bold tracking-wider text-emerald-400 uppercase">
-              Commercial Showcase • Active Site
-            </span>
-          </div>
+
         </div>
 
 

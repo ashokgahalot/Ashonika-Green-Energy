@@ -33,7 +33,6 @@ export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
     { label: 'Home', id: 'home' },
     { label: 'About Us', id: 'about' },
     { label: 'Services', id: 'services' },
-    { label: 'Solar Calculator', id: 'calculator' },
     { label: 'Why Choose Us', id: 'timeline' },
     { label: 'Projects', id: 'projects' },
   ];

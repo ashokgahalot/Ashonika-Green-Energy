@@ -204,7 +204,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                 </a>
 
                 <a
-                  href="mailto:contact@ashonikagreen.com"
+                  href="mailto:ashonikagreenenergy@gmail.com"
                   className="flex gap-4 items-center group/loc hover:text-emerald-400 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-indigo-500/20 to-indigo-500/5 flex items-center justify-center border border-indigo-500/20 text-indigo-400 shrink-0">
@@ -215,7 +215,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       Corporate Mail
                     </h4>
                     <p className="text-xs text-gray-400 mt-1 font-mono">
-                      contact@ashonikagreen.com
+                      ashonikagreenenergy@gmail.com
                     </p>
                   </div>
                 </a>
