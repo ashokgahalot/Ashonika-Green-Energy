@@ -237,7 +237,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                 </a>
 
                 <a
-                  href="mailto:ashonikagreenenergy@gmail.com"
+                  href="mailto:info@ashonika.com"
                   className="flex gap-4 items-center group/loc hover:text-emerald-400 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-indigo-500/20 to-indigo-500/5 flex items-center justify-center border border-indigo-500/20 text-indigo-400 shrink-0">
@@ -248,7 +248,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       Corporate Mail
                     </h4>
                     <p className="text-xs text-gray-400 mt-1 font-mono">
-                      ashonikagreenenergy@gmail.com
+                      info@ashonika.com
                     </p>
                   </div>
                 </a>
@@ -324,9 +324,6 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                     onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, ''))}
                     className="w-full text-center tracking-widest font-mono font-bold px-4 py-3 rounded-xl bg-[#071626] border border-white/10 text-lg text-[#FFC107] focus:border-amber-500 focus:outline-hidden"
                   />
-                  <div className="text-[10px] text-emerald-400 font-mono">
-                    🔑 Verification Demo Key: <strong className="underline">123456</strong>
-                  </div>
                   {otpError && (
                     <p className="text-xs text-rose-450 font-bold mt-1">
                       ⚠️ {otpError}

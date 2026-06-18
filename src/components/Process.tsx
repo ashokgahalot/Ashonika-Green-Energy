@@ -154,15 +154,15 @@ export default function Process() {
         </div>
 
         {/* Mobile vertical steps list */}
-        <div className="lg:hidden flex flex-col gap-6 mb-10">
+        <div className="lg:hidden flex flex-col gap-4 mb-10">
           {stepsData.map((step, idx) => (
             <div
               key={step.number}
-              className="relative p-5 rounded-2xl bg-[#09223c]/60 border border-white/15 shadow-md flex gap-4 items-start"
+              className="relative p-4 rounded-2xl bg-[#09223c]/60 border border-white/15 shadow-md flex gap-4 items-center"
             >
               {/* Vertical timeline connector line */}
               {idx < stepsData.length - 1 && (
-                <div className="absolute top-[52px] bottom-[-24px] left-[31px] w-[2px] bg-gradient-to-b from-emerald-500 to-transparent pointer-events-none" />
+                <div className="absolute top-[38px] bottom-[-22px] left-[33px] sm:left-[37px] w-[2px] bg-gradient-to-b from-emerald-500 to-transparent pointer-events-none z-0" />
               )}
 
               {/* Step number and icon */}
@@ -171,28 +171,13 @@ export default function Process() {
               </div>
 
               {/* Step detailed information */}
-              <div className="space-y-2 flex-1">
-                <div className="flex flex-wrap items-center justify-between gap-1">
-                  <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-widest leading-none">
-                    Step 0{step.number}
-                  </span>
-                </div>
-                <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+              <div className="flex-1 min-w-0">
+                <span className="block text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-widest leading-none">
+                  Step 0{step.number}
+                </span>
+                <h3 className="text-sm sm:text-base font-bold text-white tracking-tight mt-1 leading-snug">
                   {step.title}
                 </h3>
-                <p className="text-gray-400 text-xs leading-relaxed">
-                  {step.description}
-                </p>
-
-                {/* Sub-steps checkboxes/badges embedded directly inside the vertical view for clarity */}
-                <div className="space-y-1.5 pt-2 border-t border-white/5">
-                  {step.detailedPoints.map((pt, pIdx) => (
-                    <div key={pIdx} className="flex gap-2.5 items-start text-[11px] text-gray-300">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>{pt}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           ))}

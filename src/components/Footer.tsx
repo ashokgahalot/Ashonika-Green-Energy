@@ -104,7 +104,7 @@ export default function Footer({ onNavigate }: FooterProps) {
             </p>
             <p className="flex items-center gap-2">
               <Mail className="w-4 h-4 text-[#0B8F4D] shrink-0" />
-              ashonikagreenenergy@gmail.com
+              info@ashonika.com
             </p>
           </div>
 
