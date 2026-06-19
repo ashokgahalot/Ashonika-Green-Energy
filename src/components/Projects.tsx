@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { Eye, MapPin, Minimize2, ZoomIn, Landmark, ChevronLeft, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react';
 import SectionBackground3D from './SectionBackground3D.tsx';
+import TiltCard from './TiltCard.tsx';
 
 interface ProjectItem {
   id: string;
@@ -233,7 +234,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                   key={project.id} 
                   className="w-1/2 md:w-1/4 shrink-0 px-2 lg:px-3 pb-4"
                 >
-                  <div
+                  <TiltCard
                     id={`project-card-${project.id}`}
                     className="group relative bg-slate-50 border border-slate-200/60 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 cursor-pointer hover:shadow-xl h-full flex flex-col justify-between"
                     onClick={() => setSelectedProject(project)}
@@ -255,15 +256,15 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                           <MapPin className="w-3 h-3 text-red-500 shrink-0" />
                           <span className="truncate">{project.location}</span>
                         </span>
-                        <h3 className="text-xs md:text-sm font-bold text-slate-800 group-hover:text-emerald-600 transition-all line-clamp-1">
+                        <h3 className="text-xs md:text-sm font-bold text-slate-800 dark:text-slate-150 group-hover:text-emerald-600 transition-all line-clamp-1">
                           {project.title}
                         </h3>
-                        <p className="text-[10px] text-slate-500 font-medium">
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                           Capacity: {project.capacity}
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </TiltCard>
                 </div>
               ))}
             </div>
@@ -448,10 +449,10 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
         {/* Gallery Showcase Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {filteredProjects.map((project) => (
-            <div
+            <TiltCard
               id={`project-card-${project.id}`}
               key={project.id}
-              className="group relative p-3 md:p-5 bg-slate-50 border border-slate-200/60 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 cursor-pointer hover:shadow-xl"
+              className="group relative p-3 md:p-5 bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/40 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 cursor-pointer hover:shadow-xl"
               onClick={() => setSelectedProject(project)}
             >
               {/* Responsive Project thumbnail */}
@@ -466,18 +467,18 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
               </div>
 
               <div>
-                <span className="flex items-center gap-1 text-[8px] md:text-[10px] text-slate-500 font-bold font-mono uppercase tracking-wider">
+                <span className="flex items-center gap-1 text-[8px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold font-mono uppercase tracking-wider">
                   <MapPin className="w-3 h-3 md:w-3.5 md:h-3.5 text-red-500 shrink-0" />
                   <span className="truncate">{project.location}</span>
                 </span>
-                <h3 className="text-xs md:text-base lg:text-lg font-bold text-slate-800 mt-1 group-hover:text-emerald-600 transition-all line-clamp-1">
+                <h3 className="text-xs md:text-base lg:text-lg font-bold text-slate-800 dark:text-slate-100 mt-1 group-hover:text-emerald-600 transition-all line-clamp-1">
                   {project.title}
                 </h3>
-                <p className="text-[10px] md:text-xs text-slate-500 font-medium mt-1">
+                <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">
                   Capacity: {project.capacity}
                 </p>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>

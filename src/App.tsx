@@ -5,8 +5,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles, ChevronRight, Calculator, PhoneCall, CheckCircle, HelpCircle, Sun } from 'lucide-react';
+import { AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar.tsx';
 import InteractiveScene from './components/InteractiveScene.tsx';
+import SkeletonLoader from './components/SkeletonLoader.tsx';
+import CursorFollowerArt from './components/CursorFollowerArt.tsx';
 import About from './components/About.tsx';
 import Services from './components/Services.tsx';
 import WhyChooseUs from './components/WhyChooseUs.tsx';
@@ -17,6 +20,7 @@ import ContactForm from './components/Contactform.tsx';
 import Footer from './components/Footer.tsx';
 
 export default function App() {
+  const [initializing, setInitializing] = useState(true);
   const [currentPage, setCurrentPage] = useState<'home' | 'projects'>('home');
   const [activeSection, setActiveSection] = useState<string>('home');
   const [contactSubject, setContactSubject] = useState<string>('Solar Installation');
@@ -37,6 +41,14 @@ export default function App() {
       localStorage.setItem('theme', 'light');
     }
   }, [theme]);
+
+  useEffect(() => {
+    // Beautiful loader bootstrap time to allow interactive elements to load
+    const timer = setTimeout(() => {
+      setInitializing(false);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
@@ -138,6 +150,14 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-emerald-600 selection:text-white relative transition-colors duration-300">
       
+      {/* Futuristic Solar Energy Cursor Follower Art */}
+      <CursorFollowerArt />
+
+      {/* Animated Framer-Motion System-Initialization Skeleton Loader */}
+      <AnimatePresence>
+        {initializing && <SkeletonLoader theme={theme} />}
+      </AnimatePresence>
+
       {/* Interactive Sticky Header Navigation */}
       <Navbar onNavigate={handleScrollToSection} activeSection={activeSection} theme={theme} toggleTheme={toggleTheme} />
 
