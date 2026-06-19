@@ -5,6 +5,164 @@
 
 import React, { useEffect, useRef } from 'react';
 
+interface EarthPoint {
+  lat: number;
+  lon: number;
+}
+
+// Highly accurate, recognizable coordinates for major world landmasses
+const LANDMASSES = [
+  {
+    name: 'North America',
+    poly: [
+      { lat: 9, lon: -83 }, { lat: 14, lon: -90 }, { lat: 16, lon: -95 }, { lat: 20, lon: -105 },
+      { lat: 25, lon: -110 }, { lat: 24, lon: -112 }, { lat: 30, lon: -115 }, { lat: 32, lon: -117 },
+      { lat: 34, lon: -120 }, { lat: 40, lon: -124 }, { lat: 48, lon: -125 }, { lat: 54, lon: -130 },
+      { lat: 59, lon: -140 }, { lat: 60, lon: -145 }, { lat: 60, lon: -150 }, { lat: 61, lon: -160 },
+      { lat: 65, lon: -168 }, { lat: 70, lon: -165 }, { lat: 72, lon: -156 }, { lat: 70, lon: -140 },
+      { lat: 74, lon: -120 }, { lat: 74, lon: -100 }, { lat: 79, lon: -95 }, { lat: 75, lon: -83 },
+      { lat: 66, lon: -83 }, { lat: 62, lon: -75 }, { lat: 58, lon: -63 }, { lat: 53, lon: -56 },
+      { lat: 48, lon: -65 }, { lat: 43, lon: -70 }, { lat: 35, lon: -75 }, { lat: 25, lon: -80 },
+      { lat: 25, lon: -97 }, { lat: 18, lon: -94 }, { lat: 9, lon: -83 }
+    ]
+  },
+  {
+    name: 'South America',
+    poly: [
+      { lat: 12, lon: -72 }, { lat: 10, lon: -60 }, { lat: 5, lon: -50 }, { lat: -5, lon: -35 },
+      { lat: -10, lon: -35 }, { lat: -23, lon: -42 }, { lat: -34, lon: -53 }, { lat: -45, lon: -60 },
+      { lat: -52, lon: -65 }, { lat: -55, lon: -68 }, { lat: -56, lon: -72 }, { lat: -45, lon: -75 },
+      { lat: -30, lon: -72 }, { lat: -15, lon: -75 }, { lat: -5, lon: -81 }, { lat: 5, lon: -78 },
+      { lat: 12, lon: -72 }
+    ]
+  },
+  {
+    name: 'Africa',
+    poly: [
+      { lat: 37, lon: 11 }, { lat: 32, lon: 32 }, { lat: 30, lon: 34 }, { lat: 12, lon: 43 },
+      { lat: 11, lon: 51 }, { lat: -4, lon: 41 }, { lat: -22, lon: 35 }, { lat: -34, lon: 20 },
+      { lat: -33, lon: 18 }, { lat: -15, lon: 12 }, { lat: -5, lon: 11 }, { lat: 5, lon: 9 },
+      { lat: 4, lon: -9 }, { lat: 14, lon: -17 }, { lat: 21, lon: -17 }, { lat: 32, lon: -10 },
+      { lat: 36, lon: 2 }, { lat: 37, lon: 11 }
+    ]
+  },
+  {
+    name: 'Eurasia',
+    poly: [
+      { lat: 36, lon: -6 }, { lat: 43, lon: -9 }, { lat: 48, lon: -5 }, { lat: 50, lon: 1 },
+      { lat: 55, lon: 5 }, { lat: 60, lon: 5 }, { lat: 65, lon: 10 }, { lat: 70, lon: 20 },
+      { lat: 71, lon: 26 }, { lat: 68, lon: 40 }, { lat: 67, lon: 60 }, { lat: 73, lon: 80 },
+      { lat: 77, lon: 105 }, { lat: 73, lon: 125 }, { lat: 70, lon: 140 }, { lat: 71, lon: 165 },
+      { lat: 66, lon: 170 }, { lat: 60, lon: 165 }, { lat: 51, lon: 156 }, { lat: 43, lon: 140 },
+      { lat: 38, lon: 125 }, { lat: 35, lon: 120 }, { lat: 22, lon: 114 }, { lat: 20, lon: 110 },
+      { lat: 15, lon: 108 }, { lat: 6, lon: 102 }, { lat: 1, lon: 104 }, { lat: 10, lon: 98 },
+      { lat: 15, lon: 96 }, { lat: 22, lon: 90 }, { lat: 16, lon: 82 }, { lat: 8, lon: 77 },
+      { lat: 15, lon: 74 }, { lat: 23, lon: 68 }, { lat: 25, lon: 60 }, { lat: 26, lon: 50 },
+      { lat: 15, lon: 50 }, { lat: 12, lon: 44 }, { lat: 25, lon: 37 }, { lat: 30, lon: 34 },
+      { lat: 31, lon: 34 }, { lat: 36, lon: 35 }, { lat: 41, lon: 29 }, { lat: 40, lon: 23 },
+      { lat: 45, lon: 13 }, { lat: 38, lon: 15 }, { lat: 43, lon: 7 }, { lat: 41, lon: 3 },
+      { lat: 36, lon: -6 }
+    ]
+  },
+  {
+    name: 'Australia',
+    poly: [
+      { lat: -22, lon: 113 }, { lat: -12, lon: 130 }, { lat: -11, lon: 136 }, { lat: -10, lon: 142 },
+      { lat: -18, lon: 146 }, { lat: -26, lon: 153 }, { lat: -34, lon: 151 }, { lat: -38, lon: 145 },
+      { lat: -35, lon: 136 }, { lat: -34, lon: 115 }, { lat: -22, lon: 113 }
+    ]
+  },
+  {
+    name: 'Greenland',
+    poly: [
+      { lat: 60, lon: -44 }, { lat: 65, lon: -35 }, { lat: 70, lon: -22 }, { lat: 79, lon: -17 },
+      { lat: 83, lon: -30 }, { lat: 82, lon: -60 }, { lat: 76, lon: -68 }, { lat: 70, lon: -54 },
+      { lat: 65, lon: -52 }, { lat: 60, lon: -44 }
+    ]
+  },
+  {
+    name: 'Madagascar',
+    poly: [
+      { lat: -12, lon: 49 }, { lat: -16, lon: 50 }, { lat: -25, lon: 47 }, { lat: -25, lon: 44 },
+      { lat: -20, lon: 44 }, { lat: -15, lon: 47 }, { lat: -12, lon: 49 }
+    ]
+  },
+  {
+    name: 'Japan',
+    poly: [
+      { lat: 31, lon: 130 }, { lat: 33, lon: 133 }, { lat: 35, lon: 135 }, { lat: 40, lon: 141 },
+      { lat: 45, lon: 142 }, { lat: 43, lon: 145 }, { lat: 36, lon: 140 }, { lat: 34, lon: 138 },
+      { lat: 31, lon: 130 }
+    ]
+  },
+  {
+    name: 'United Kingdom-Ireland',
+    poly: [
+      { lat: 50, lon: -5 }, { lat: 52, lon: -6 }, { lat: 55, lon: -7 }, { lat: 59, lon: -3 },
+      { lat: 56, lon: -2 }, { lat: 51, lon: 1 }, { lat: 50, lon: -5 }
+    ]
+  }
+];
+
+// Precompute Bounding Boxes for lightspeed performance
+const PRECOMPUTED_LANDMASSES = LANDMASSES.map(item => {
+  let minLat = 180, maxLat = -180, minLon = 180, maxLon = -180;
+  item.poly.forEach(pt => {
+    if (pt.lat < minLat) minLat = pt.lat;
+    if (pt.lat > maxLat) maxLat = pt.lat;
+    if (pt.lon < minLon) minLon = pt.lon;
+    if (pt.lon > maxLon) maxLon = pt.lon;
+  });
+  return {
+    ...item,
+    minLat,
+    maxLat,
+    minLon,
+    maxLon
+  };
+});
+
+function isPointInPolygon(lat: number, lon: number, polygon: { lat: number; lon: number }[]): boolean {
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const xi = polygon[i].lon, yi = polygon[i].lat;
+    const xj = polygon[j].lon, yj = polygon[j].lat;
+    
+    const intersect = ((yi > lat) !== (yj > lat))
+        && (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+  return inside;
+}
+
+function checkIsLand(lat: number, lon: number): boolean {
+  // Grid containment check against land polygons
+  for (const land of PRECOMPUTED_LANDMASSES) {
+    if (lat >= land.minLat && lat <= land.maxLat && lon >= land.minLon && lon <= land.maxLon) {
+      if (isPointInPolygon(lat, lon, land.poly)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+const generateEarthPoints = (): EarthPoint[] => {
+  const pts: EarthPoint[] = [];
+  // 1.2 spacing creates an exceptionally detailed, premium, recognizable digital grid of Earth
+  const step = 1.2;
+  for (let lat = -80; lat <= 80; lat += step) {
+    for (let lon = -180; lon < 180; lon += step) {
+      if (checkIsLand(lat, lon)) {
+        pts.push({ lat, lon });
+      }
+    }
+  }
+  return pts;
+};
+
+const REAL_EARTH_POINTS = generateEarthPoints();
+
 export default function InteractiveScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -158,6 +316,19 @@ export default function InteractiveScene() {
       ctx.arc(globeX, globeY, globeRadius * 1.5, 0, Math.PI * 2);
       ctx.fill();
 
+      // Deep glowing blue ocean background
+      ctx.save();
+      const oceanGrad = ctx.createRadialGradient(globeX, globeY, globeRadius * 0.2, globeX, globeY, globeRadius);
+      oceanGrad.addColorStop(0, '#04162e'); // Deep ocean navy
+      oceanGrad.addColorStop(0.7, '#020914'); // Dark ocean body
+      oceanGrad.addColorStop(0.97, '#0a2342'); // Cyan/blue atmospheric rim glow
+      oceanGrad.addColorStop(1, '#0e345e'); // Outer edge glow stroke
+      ctx.fillStyle = oceanGrad;
+      ctx.beginPath();
+      ctx.arc(globeX, globeY, globeRadius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
       // Grid/Globe Spherical Sphere Lines
       ctx.strokeStyle = 'rgba(74, 222, 128, 0.25)';
       ctx.lineWidth = 1;
@@ -189,42 +360,60 @@ export default function InteractiveScene() {
       }
 
       // Draw Earth continent points simulating digital grid mapping
-      ctx.fillStyle = 'rgba(74, 222, 128, 0.65)';
-      const continentPoints = [
-        // Simulated continents matrix
-        { lat: 15, lon: 30 }, { lat: 20, lon: 40 }, { lat: 25, lon: 35 }, { lat: 10, lon: 20 },
-        { lat: -10, lon: -20 }, { lat: -15, lon: -30 }, { lat: -25, lon: -15 }, { lat: 5, lon: -40 },
-        { lat: 45, lon: -100 }, { lat: 50, lon: -90 }, { lat: 35, lon: -120 }, { lat: 40, lon: -80 },
-        { lat: -20, lon: 130 }, { lat: -30, lon: 140 }, { lat: -25, lon: 125 }, { lat: -35, lon: 135 },
-        { lat: 55, lon: 10 }, { lat: 60, lon: -5 }, { lat: 48, lon: 20 }, { lat: 40, lon: 5 },
-      ];
-
-      continentPoints.forEach((pt) => {
+      ctx.fillStyle = 'rgba(74, 222, 128, 0.7)';
+      
+      REAL_EARTH_POINTS.forEach((pt) => {
         // Project 3D sphere coordinate to 2D
         const latRad = (pt.lat * Math.PI) / 180;
-        const lonRad = ((pt.lon + globeRot * 120) * Math.PI) / 180;
+        // High density Earth rotation aligned properly in radians
+        const lonRad = (pt.lon * Math.PI) / 180 + globeRot;
 
         const cosLat = Math.cos(latRad);
         const sinLat = Math.sin(latRad);
         const cosLon = Math.cos(lonRad);
         const sinLon = Math.sin(lonRad);
 
-        // Check if facing the viewer (Z > 0)
-        if (sinLon > 0) {
-          const px = globeX + globeRadius * cosLat * cosLon;
+        // Calculate depth (Z value where positive is facing the observer)
+        const z3d = cosLat * cosLon;
+
+        // Check if facing the viewer (Z > 0) with a tiny buffer
+        if (z3d > 0.05) {
+          const px = globeX + globeRadius * cosLat * sinLon;
           const py = globeY - globeRadius * sinLat;
-          const sz = (sinLon * 3.5) + 0.5;
+          
+          // Size based on depth to create 3D curving effect
+          const sz = (z3d * 2.1) + 0.4;
+
+          // Spherical shading: dots closer to the edge fade out smoothly
+          ctx.fillStyle = `rgba(52, 211, 153, ${z3d * 0.9})`;
 
           ctx.beginPath();
           ctx.arc(px, py, sz, 0, Math.PI * 2);
           ctx.fill();
 
-          // Luminous pulses from nodes
-          if (Math.random() > 0.99) {
-            ctx.strokeStyle = 'rgba(255, 193, 7, 0.5)';
+          // Luminous pulses from nodes on landmark corporate capital locations
+          const isLandmark = 
+            (pt.lat >= 24 && pt.lat <= 30 && pt.lon >= 74 && pt.lon <= 78) || // Delhi/Netaji Subhash Place (Main Hub)
+            (pt.lat >= 38 && pt.lat <= 42 && pt.lon >= -76 && pt.lon <= -72) || // New York area
+            (pt.lat >= 33 && pt.lat <= 36 && pt.lon >= 138 && pt.lon <= 141) || // Tokyo area
+            (pt.lat >= 50 && pt.lat <= 53 && pt.lon >= -2 && pt.lon <= 1) || // London
+            (pt.lat >= -35 && pt.lat <= -32 && pt.lon >= 149 && pt.lon <= 152); // Sydney
+
+          if (isLandmark && Math.random() > 0.98) {
+            ctx.save();
+            ctx.fillStyle = '#FFC107';
+            ctx.strokeStyle = 'rgba(255, 193, 7, 0.7)';
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = '#FFC107';
             ctx.beginPath();
-            ctx.arc(px, py, sz * 4, 0, Math.PI * 2);
+            ctx.arc(px, py, sz * 1.8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(px, py, sz * 4.5, 0, Math.PI * 2);
+            ctx.lineWidth = 0.75;
             ctx.stroke();
+            ctx.restore();
           }
         }
       });

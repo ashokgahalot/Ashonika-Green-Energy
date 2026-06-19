@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, RefreshCw, Send, Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
+import SectionBackground3D from './SectionBackground3D.tsx';
 
 interface ContactFormProps {
   selectedSubject?: string;
@@ -92,7 +93,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
           "Accept": "application/json"
         },
         body: JSON.stringify({
-          access_key: "b4d5bc7e-1814-4989-bf16-39f3a396efa7",
+          access_key: "e6626629-8344-4269-918d-bd76a9aa7850",
           name: formData.name,
           email: formData.email || "no-email-provided@ashonika.com",
           phone: formData.phone,
@@ -163,7 +164,8 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
   };
 
   return (
-    <section id="contact" className="relative py-28 bg-[#041120] overflow-hidden border-b border-white/5">
+    <section id="contact" className="relative py-28 bg-white dark:bg-slate-950 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40 transition-colors duration-300">
+      <SectionBackground3D type="contact" />
 
       <div className="absolute top-1/4 right-0 w-80 h-80 rounded-full bg-[#FFC107]/5 blur-3xl" />
       <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-emerald-600/5 blur-3xl" />
@@ -172,14 +174,14 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
         
         {/* Title Heading */}
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-xs font-bold tracking-widest text-[#FFC107] uppercase">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-xs font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase">
             <Mail className="w-3.5 h-3.5" />
             Corporate Communications
           </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Connect With Our <span className="bg-gradient-to-r from-emerald-400 to-[#FFC107] bg-clip-text text-transparent">Power Experts</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
+            Connect With Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Power Experts</span>
           </h2>
-          <p className="text-gray-400 text-sm md:text-base">
+          <p className="text-slate-600 dark:text-slate-350 text-sm md:text-base">
             Have a custom requirement, installation request, or maintenance query? Fill out our validated request form below.
           </p>
         </div>
@@ -188,10 +190,10 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           
           {/* Left Column: Corporate Coordinates */}
-          <div className="lg:col-span-5 p-8 rounded-3xl bg-linear-to-b from-[#09223c] to-[#041221] border border-white/10 shadow-2xl flex flex-col justify-between relative overflow-hidden group">
+          <div className="lg:col-span-5 p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800/40 shadow-md flex flex-col justify-between relative overflow-hidden group">
             
             <div className="space-y-6">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 block pb-2 border-b border-white/5">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 block pb-2 border-b border-slate-1 00">
                 Ashonika Headquarters
               </span>
 
@@ -204,33 +206,33 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   href="https://maps.google.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex gap-4 items-start group/loc hover:text-emerald-400 transition-colors"
+                  className="flex gap-4 items-start group/loc hover:text-emerald-600 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-emerald-500/20 to-emerald-500/5 flex items-center justify-center border border-emerald-500/20 text-emerald-400 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center border border-emerald-100 text-emerald-600 shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                       Operational office
                     </h4>
-                    <p className="text-xs text-gray-400 mt-1 leading-relaxed">
-                      124, 4th Floor, Netaji Subhash Place, Pitampura, New Delhi - 110034, India
+                    <p className="text-xs text-slate-605 mt-1 leading-relaxed">
+                      Madanganj-Kishangarh, Ajmer, Rajasthan, 305801
                     </p>
                   </div>
                 </a>
 
                 <a
                   href="tel:+917728023503"
-                  className="flex gap-4 items-center group/loc hover:text-[#FFC107] transition-colors"
+                  className="flex gap-4 items-center group/loc hover:text-emerald-600 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-amber-500/20 to-amber-500/5 flex items-center justify-center border border-amber-500/20 text-[#FFC107] shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center border border-amber-100 text-amber-700 shrink-0">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                       Telephone Helpline
                     </h4>
-                    <p className="text-xs text-gray-400 mt-1 font-mono">
+                    <p className="text-xs text-slate-605 mt-1 font-mono">
                       +91 77280-23503
                     </p>
                   </div>
@@ -238,16 +240,16 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
 
                 <a
                   href="mailto:info@ashonika.com"
-                  className="flex gap-4 items-center group/loc hover:text-emerald-400 transition-colors"
+                  className="flex gap-4 items-center group/loc hover:text-emerald-700 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-indigo-500/20 to-indigo-500/5 flex items-center justify-center border border-indigo-500/20 text-indigo-400 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center border border-indigo-100 text-indigo-600 shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                       Corporate Mail
                     </h4>
-                    <p className="text-xs text-gray-400 mt-1 font-mono">
+                    <p className="text-xs text-slate-605 mt-1 font-mono">
                       info@ashonika.com
                     </p>
                   </div>
@@ -256,14 +258,14 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
             </div>
 
             {/* Direct WhatsApp Message Integration option */}
-            <div className="pt-6 border-t border-white/5">
+            <div className="pt-6 border-t border-slate-200">
               <a
                 href="https://wa.me/917728023503?text=Hi%2C%20Ashonika%20Green%20Energy."
                 target="_blank"
                 rel="noreferrer"
-                className="w-full py-3 rounded-xl bg-[#25D366]/15 hover:bg-[#25D366] text-[#25D366] hover:text-[#071B2F] border border-[#25D366]/30 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 rounded-xl bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white border border-emerald-150 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
+                <MessageCircle className="w-4 h-4 fill-current animate-pulse" />
                 <span>Chat On WhatsApp</span>
               </a>
             </div>
@@ -273,22 +275,22 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
           {/* Right Column: Dynamic Form Screen with active state rendering */}
           <div className="lg:col-span-7">
             {formState === 'success' ? (
-              <div className="p-8 rounded-3xl bg-linear-to-b from-[#09223c] to-[#041221] border border-emerald-500/40 shadow-2xl space-y-6 text-center h-full flex flex-col justify-center items-center">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/45 flex items-center justify-center animate-bounce">
-                  <CheckCircle className="w-8 h-8 text-emerald-400" />
+              <div className="p-8 rounded-3xl bg-slate-50 border border-emerald-500/40 shadow-xl space-y-6 text-center h-full flex flex-col justify-center items-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-md">
+                  <CheckCircle className="w-8 h-8" />
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-xl md:text-2xl font-bold text-white">
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900">
                     Message Sent Successfully!
                   </h3>
-                  <p className="text-gray-300 text-sm max-w-sm mx-auto">
-                    Hi <span className="text-[#FFC107] font-semibold">{formData.name}</span>, your request has been recorded. Our specialized engineers will check your details and contact you shortly.
+                  <p className="text-slate-650 text-sm max-w-sm mx-auto">
+                    Hi <span className="text-emerald-600 font-semibold">{formData.name}</span>, your request has been recorded. Our specialized engineers will check your details and contact you shortly.
                   </p>
                 </div>
 
                 <button
                   onClick={handleReset}
-                  className="px-8 py-3 rounded-full bg-[#FFC107] hover:bg-[#ffcf40] text-[#071B2F] font-extrabold text-xs uppercase tracking-widest transition-all shadow-lg hover:scale-[1.02] cursor-pointer"
+                  className="px-8 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-widest transition-all shadow-md hover:scale-[1.02] cursor-pointer"
                 >
                   OK
                 </button>
@@ -296,22 +298,22 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
             ) : formState === 'otp_pending' ? (
               <form
                 onSubmit={handleVerifyOtp}
-                className="p-6 md:p-8 rounded-3xl bg-linear-to-b from-[#09223c] to-[#041221] border border-[#FFC107]/20 shadow-2xl space-y-6 text-center"
+                className="p-6 md:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-md space-y-6 text-center"
               >
                 <div className="space-y-3">
-                  <div className="w-14 h-14 rounded-full bg-[#FFC107]/10 flex items-center justify-center mx-auto text-[#FFC107]">
+                  <div className="w-14 h-14 rounded-full bg-amber-50 flex items-center justify-center mx-auto text-amber-700">
                     <Sparkles className="w-6 h-6 animate-pulse" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-bold text-slate-900">
                     OTP Verification Required
                   </h3>
-                  <p className="text-gray-300 text-xs max-w-md mx-auto leading-relaxed">
-                    To schedule a Free Site Survey, we require interactive verification. We have sent a 6-digit confirmation code to your number: <span className="text-white font-semibold">{formData.phone}</span>
+                  <p className="text-slate-650 text-xs max-w-md mx-auto leading-relaxed">
+                    To schedule a Free Site Survey, we require interactive verification. We have sent a 6-digit confirmation code to your number: <span className="text-slate-905 font-semibold">{formData.phone}</span>
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="otp-input" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                  <label htmlFor="otp-input" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                     Enter OTP Code *
                   </label>
                   <input
@@ -322,10 +324,10 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                     placeholder="Enter 6-Digit Code"
                     value={enteredOtp}
                     onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, ''))}
-                    className="w-full text-center tracking-widest font-mono font-bold px-4 py-3 rounded-xl bg-[#071626] border border-white/10 text-lg text-[#FFC107] focus:border-amber-500 focus:outline-hidden"
+                    className="w-full text-center tracking-widest font-mono font-bold px-4 py-3 rounded-xl bg-white border border-slate-200 text-lg text-emerald-600 focus:border-emerald-500 focus:outline-hidden"
                   />
                   {otpError && (
-                    <p className="text-xs text-rose-450 font-bold mt-1">
+                    <p className="text-xs text-rose-500 font-bold mt-1">
                       ⚠️ {otpError}
                     </p>
                   )}
@@ -335,7 +337,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   <button
                     type="button"
                     onClick={() => setFormState('idle')}
-                    className="w-1/3 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold border border-white/10 text-white transition-all uppercase tracking-wider"
+                    className="w-1/3 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold border border-slate-200 text-slate-700 transition-all uppercase tracking-wider"
                   >
                     Back
                   </button>
@@ -351,22 +353,22 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
               <form
                 id="site-survey-form"
                 onSubmit={handleSubmit}
-                className="p-6 md:p-8 rounded-3xl bg-linear-to-b from-[#09223c] to-[#041221] border border-white/10 shadow-2xl space-y-5"
+                className="p-6 md:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-md space-y-5"
               >
                 {/* Web3Forms Integration Fields */}
-                <input type="hidden" name="access_key" value="b4d5bc7e-1814-4989-bf16-39f3a396efa7" />
+                <input type="hidden" name="access_key" value="e6626629-8344-4269-918d-bd76a9aa7850" />
                 <input type="hidden" name="from_name" value="Ashonika Green Energy Website" />
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label htmlFor="form-field-name" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                    <label htmlFor="form-field-name" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                       Full Name *
                     </label>
                     <input
                       id="form-field-name"
                       type="text"
-                      className={`w-full px-4 py-3 rounded-xl bg-[#071626] border text-xs md:text-sm text-white focus:outline-hidden ${
-                        errors.name ? 'border-rose-500 focus:border-rose-500' : 'border-white/10 focus:border-emerald-500'
+                      className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-800 focus:outline-hidden ${
+                        errors.name ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 focus:border-emerald-500'
                       }`}
                       placeholder="e.g. Ashonika"
                       value={formData.name}
@@ -375,18 +377,18 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                         if (errors.name) setErrors({ ...errors, name: '' });
                       }}
                     />
-                    {errors.name && <p className="text-[10px] text-rose-400 font-semibold">{errors.name}</p>}
+                    {errors.name && <p className="text-[10px] text-rose-550 font-semibold">{errors.name}</p>}
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="form-field-phone" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                    <label htmlFor="form-field-phone" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                       Contact Number *
                     </label>
                     <input
                       id="form-field-phone"
                       type="tel"
-                      className={`w-full px-4 py-3 rounded-xl bg-[#071626] border text-xs md:text-sm text-white focus:outline-hidden ${
-                        errors.phone ? 'border-rose-500 focus:border-rose-500' : 'border-white/10 focus:border-emerald-500'
+                      className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-800 focus:outline-hidden ${
+                        errors.phone ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 focus:border-emerald-500'
                       }`}
                       placeholder="e.g. +91 77280-23503"
                       value={formData.phone}
@@ -395,19 +397,19 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                         if (errors.phone) setErrors({ ...errors, phone: '' });
                       }}
                     />
-                    {errors.phone && <p className="text-[10px] text-rose-400 font-semibold">{errors.phone}</p>}
+                    {errors.phone && <p className="text-[10px] text-rose-550 font-semibold">{errors.phone}</p>}
                   </div>
                 </div>
 
                 <div className="space-y-1.5 col-span-1 sm:col-span-2">
-                  <label htmlFor="form-field-email" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                  <label htmlFor="form-field-email" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                     Email address (Optional)
                   </label>
                   <input
                     id="form-field-email"
                     type="email"
-                    className={`w-full px-4 py-3 rounded-xl bg-[#071626] border text-xs md:text-sm text-white focus:outline-hidden ${
-                      errors.email ? 'border-rose-500 focus:border-rose-500' : 'border-white/10 focus:border-emerald-500'
+                    className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-800 focus:outline-hidden ${
+                      errors.email ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 focus:border-emerald-500'
                     }`}
                     placeholder="e.g. ashonika@company.com"
                     value={formData.email}
@@ -416,17 +418,17 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       if (errors.email) setErrors({ ...errors, email: '' });
                     }}
                   />
-                  {errors.email && <p className="text-[10px] text-rose-400 font-semibold">{errors.email}</p>}
+                  {errors.email && <p className="text-[10px] text-rose-550 font-semibold">{errors.email}</p>}
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="form-field-subject" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                  <label htmlFor="form-field-subject" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                     Subject *
                   </label>
                   <div className="relative">
                     <select
                       id="form-field-subject"
-                      className="w-full px-4 py-3 rounded-xl bg-[#071626] border border-white/10 text-xs md:text-sm text-white focus:border-emerald-500 focus:outline-hidden appearance-none cursor-pointer pr-10"
+                      className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-xs md:text-sm text-slate-800 focus:border-emerald-500 focus:outline-hidden appearance-none cursor-pointer pr-10"
                       value={formData.subject}
                       onChange={(e) => {
                         setFormData({ ...formData, subject: e.target.value });
@@ -444,7 +446,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       <option value="Free Site Survey">Free Site Survey</option>
                       <option value="Other">Other</option>
                     </select>
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                       <ArrowRight className="w-4 h-4 rotate-90" />
                     </div>
                   </div>
@@ -452,20 +454,20 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
 
                 {/* Conditional address layout blocks */}
                 {formData.subject === 'Free Site Survey' && (
-                  <div className="space-y-5 p-4 rounded-2xl bg-[#051424] border border-[#FFC107]/20 animate-fadeIn">
-                    <span className="text-[10px] font-bold text-[#FFC107] uppercase tracking-widest block font-mono">
+                  <div className="space-y-5 p-4 rounded-2xl bg-white border border-emerald-100 animate-fadeIn shadow-xs">
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest block font-mono">
                       Survey Address Parameters
                     </span>
 
                     <div className="space-y-1.5">
-                      <label htmlFor="form-field-address" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                      <label htmlFor="form-field-address" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                         Full Site Address *
                       </label>
                       <input
                         id="form-field-address"
                         type="text"
-                        className={`w-full px-4 py-3 rounded-xl bg-[#071626] border text-xs md:text-sm text-white focus:outline-hidden ${
-                          errors.siteAddress ? 'border-rose-500 focus:border-rose-500' : 'border-[#FFC107]/20 focus:border-[#FFC107]'
+                        className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-805 focus:outline-hidden ${
+                          errors.siteAddress ? 'border-rose-500 focus:border-rose-500' : 'border-emerald-100 focus:border-emerald-500'
                         }`}
                         placeholder="Complete location address where rooftop assessment is needed"
                         value={formData.siteAddress}
@@ -474,20 +476,20 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                           if (errors.siteAddress) setErrors({ ...errors, siteAddress: '' });
                         }}
                       />
-                      {errors.siteAddress && <p className="text-[10px] text-rose-400 font-semibold">{errors.siteAddress}</p>}
+                      {errors.siteAddress && <p className="text-[10px] text-rose-550 font-semibold">{errors.siteAddress}</p>}
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Date Select Row */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="form-field-date" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                        <label htmlFor="form-field-date" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                           Preferred Date *
                         </label>
                         <input
                           id="form-field-date"
                           type="date"
-                          className={`w-full px-4 py-3 rounded-xl bg-[#071626] border text-xs md:text-sm text-white focus:outline-hidden ${
-                            errors.scheduleDate ? 'border-rose-500 focus:border-rose-500' : 'border-[#FFC107]/20 focus:border-[#FFC107]'
+                          className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-805 focus:outline-hidden ${
+                            errors.scheduleDate ? 'border-rose-500 focus:border-rose-500' : 'border-emerald-100 focus:border-emerald-500'
                           }`}
                           value={formData.scheduleDate}
                           onChange={(e) => {
@@ -495,19 +497,19 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                             if (errors.scheduleDate) setErrors({ ...errors, scheduleDate: '' });
                           }}
                         />
-                        {errors.scheduleDate && <p className="text-[10px] text-rose-400 font-semibold">{errors.scheduleDate}</p>}
+                        {errors.scheduleDate && <p className="text-[10px] text-rose-550 font-semibold">{errors.scheduleDate}</p>}
                       </div>
 
                       {/* Time Select Row */}
                       <div className="space-y-1.5 text-left">
-                        <label htmlFor="form-field-time" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                        <label htmlFor="form-field-time" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                           Preferred Time (8:00 AM - 6:00 PM) *
                         </label>
                         <div className="relative">
                           <select
                             id="form-field-time"
-                            className={`w-full px-4 py-3 rounded-xl bg-[#071626] border text-xs md:text-sm text-white focus:outline-hidden appearance-none cursor-pointer pr-10 ${
-                              errors.scheduleTime ? 'border-rose-500 focus:border-rose-500' : 'border-[#FFC107]/20 focus:border-[#FFC107]'
+                            className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-805 focus:outline-hidden appearance-none cursor-pointer pr-10 ${
+                              errors.scheduleTime ? 'border-rose-500 focus:border-rose-500' : 'border-emerald-100 focus:border-emerald-500'
                             }`}
                             value={formData.scheduleTime}
                             onChange={(e) => {
@@ -522,25 +524,25 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                               </option>
                             ))}
                           </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-450">
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                             <ArrowRight className="w-4 h-4 rotate-90" />
                           </div>
                         </div>
-                        {errors.scheduleTime && <p className="text-[10px] text-rose-400 font-semibold">{errors.scheduleTime}</p>}
+                        {errors.scheduleTime && <p className="text-[10px] text-rose-550 font-semibold">{errors.scheduleTime}</p>}
                       </div>
                     </div>
                   </div>
                 )}
 
                 <div className="space-y-1.5">
-                  <label htmlFor="form-field-message" className="text-xs font-bold text-gray-400 uppercase tracking-wider block">
+                  <label htmlFor="form-field-message" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
                     Message *
                   </label>
                   <textarea
                     id="form-field-message"
                     rows={4}
-                    className={`w-full px-4 py-3 rounded-xl bg-[#071626] border text-xs md:text-sm text-white focus:outline-hidden ${
-                      errors.message ? 'border-rose-500 focus:border-rose-500' : 'border-white/10 focus:border-emerald-500'
+                    className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-800 focus:outline-hidden ${
+                      errors.message ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 focus:border-emerald-500'
                     }`}
                     placeholder="Provide specific guidelines, dimensions, or inquiries here..."
                     value={formData.message}
@@ -549,13 +551,13 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       if (errors.message) setErrors({ ...errors, message: '' });
                     }}
                   />
-                  {errors.message && <p className="text-[10px] text-rose-400 font-semibold">{errors.message}</p>}
+                  {errors.message && <p className="text-[10px] text-rose-550 font-semibold">{errors.message}</p>}
                 </div>
 
                 <button
                   type="submit"
                   disabled={formState === 'submitting'}
-                  className="w-full py-4 rounded-xl bg-[#FFC107] text-[#071B2F] font-extrabold text-xs uppercase tracking-widest hover:bg-[#ffcf40] hover:scale-[1.01] active:translate-y-px transition-all shadow-lg shadow-amber-950/20 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-505 text-white font-extrabold text-xs uppercase tracking-widest hover:bg-emerald-500 hover:scale-[1.01] active:translate-y-px transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {formState === 'submitting' ? (
                     <>

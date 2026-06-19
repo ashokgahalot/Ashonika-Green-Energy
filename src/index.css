@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", sans-serif;
@@ -64,4 +66,74 @@ html {
 h1, h2, h3, h4 {
   font-family: var(--font-display), var(--font-sans);
   letter-spacing: -0.02em;
+}
+
+/* Dark Mode Enhancements for Premium Readability & High Contrast */
+.dark {
+  --color-slate-50: #0f172a;
+  --color-slate-100: #1e293b;
+  --color-slate-200: #334155;
+  --color-slate-300: #475569;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #cbd5e1;
+  --color-slate-600: #e2e8f0;
+  --color-slate-650: #f1f5f9;
+  --color-slate-700: #f8fafc;
+  --color-slate-800: #ffffff;
+  --color-slate-900: #ffffff;
+  --color-slate-950: #020617;
+
+  /* Explicitly target and force text elements to higher-contrast configurations to tackle any low contrast values */
+  .text-slate-600,
+  .text-slate-605,
+  .text-slate-650,
+  .text-slate-700,
+  p:not([class*="text-emerald"]):not([class*="text-amber"]):not([class*="text-indigo"]):not([class*="text-lime"]) {
+    color: #cbd5e1 !important; /* Premium Slate-300 off-white for body copy readability */
+  }
+
+  .text-slate-800,
+  .text-slate-805,
+  .text-slate-900,
+  .text-slate-905,
+  h1:not([class*="text-transparent"]):not([class*="bg-clip-text"]),
+  h2:not([class*="text-transparent"]):not([class*="bg-clip-text"]),
+  h3:not([class*="text-transparent"]):not([class*="bg-clip-text"]),
+  h4:not([class*="text-transparent"]):not([class*="bg-clip-text"]),
+  h5:not([class*="text-transparent"]):not([class*="bg-clip-text"]),
+  h6:not([class*="text-transparent"]):not([class*="bg-clip-text"]) {
+    color: #ffffff !important; /* Pure white for high impact display headings */
+  }
+
+  .text-slate-500,
+  .text-slate-400 {
+    color: #94a3b8 !important; /* Soft slate-400 for subtext and helper copy */
+  }
+
+  /* Specific Layout Overrides */
+  #footer-section-wrapper svg:not(.lucide) {
+    color: #020617 !important; /* Wave SVG matches dark background to retain flat styling */
+  }
+
+  /* Enforce dark backgrounds on container panel cards and inputs */
+  .bg-white,
+  .bg-slate-50,
+  .bg-slate-50\/40,
+  .bg-slate-100\/60 {
+    background-color: #0f172a !important;
+  }
+
+  /* Ensure inputs have correct styles in dark mode */
+  input, select, textarea {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border-color: #334155 !important;
+  }
+
+  /* Keep gradient headings beautifully glowing */
+  .bg-gradient-to-r.bg-clip-text,
+  span.bg-clip-text {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+  }
 }

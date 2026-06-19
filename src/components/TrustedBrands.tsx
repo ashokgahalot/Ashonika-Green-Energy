@@ -132,7 +132,7 @@ export default function TrustedBrands() {
   };
 
   return (
-    <section id="trusted-brands-section" className="py-20 bg-[#071B2F] relative overflow-hidden border-t border-b border-white/5">
+    <section id="trusted-brands-section" className="py-20 bg-slate-50 dark:bg-slate-900/40 relative overflow-hidden border-t border-b border-slate-200/60 dark:border-slate-800/40 transition-colors duration-300">
       {/* Structural background decorations */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
@@ -141,14 +141,14 @@ export default function TrustedBrands() {
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/25 text-xs font-bold tracking-widest text-[#FFC107] uppercase select-none">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-xs font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase select-none">
             <Award className="w-3.5 h-3.5" />
             <span>Authorized Component Ecosystem</span>
           </div>
-          <h2 id="trusted-brands-heading" className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Our Elite <span className="text-[#FFC107]">Solar Brand</span> Partners
+          <h2 id="trusted-brands-heading" className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
+            Our Elite <span className="text-amber-600 dark:text-amber-400">Solar Brand</span> Partners
           </h2>
-          <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base leading-relaxed">
             We procure only Tier-1 equipment and premium hardware from the industry's most reputable manufacturers. Your rooftop solar system is engineered for guaranteed output, safety, and operational longevity.
           </p>
         </div>
@@ -167,8 +167,8 @@ export default function TrustedBrands() {
               key={brand.id}
               id={`brand-card-${brand.id}`}
               variants={itemVariants}
-              whileHover={{ y: -5, borderColor: 'rgba(255,193,7,0.3)', transition: { duration: 0.2 } }}
-              className="bg-[#09223c]/40 hover:bg-[#09223c]/70 border border-white/5 rounded-xl sm:rounded-2xl p-2.5 sm:p-5 relative overflow-hidden transition-all duration-300 shadow-xl group cursor-default flex flex-col justify-between"
+              whileHover={{ y: -5, borderColor: 'rgba(16,185,129,0.3)', transition: { duration: 0.2 } }}
+              className="bg-white dark:bg-slate-950 hover:bg-slate-50 dark:hover:bg-slate-900 border border-slate-200/60 dark:border-slate-800/40 rounded-xl sm:rounded-2xl p-2.5 sm:p-5 relative overflow-hidden transition-all duration-300 shadow-xs group cursor-default flex flex-col justify-between"
             >
               {/* Subtle top-right glowing gradient of the brand */}
               <div className={`absolute -top-12 -right-12 w-24 h-24 bg-gradient-to-br ${brand.color} opacity-[0.03] group-hover:opacity-[0.10] rounded-full blur-xl transition-all duration-300`} />
@@ -176,33 +176,33 @@ export default function TrustedBrands() {
               <div className="space-y-2.5 sm:space-y-4">
                 {/* Visual Avatar with first letter representing solar tech */}
                 <div className="flex items-center justify-between">
-                  <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${brand.color} p-[1px] flex items-center justify-center shadow-lg shadow-black/20`}>
-                    <div className="w-full h-full bg-[#071B2F] rounded-[7px] sm:rounded-[11px] flex items-center justify-center font-bold text-xs sm:text-base text-white group-hover:text-[#FFC107] transition-colors">
+                  <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-br ${brand.color} p-[1px] flex items-center justify-center shadow-xs`}>
+                    <div className="w-full h-full bg-white dark:bg-slate-950 rounded-[7px] sm:rounded-[11px] flex items-center justify-center font-bold text-xs sm:text-base text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                       {brand.name.charAt(0)}
                     </div>
                   </div>
-                  <span className="hidden sm:inline-block text-[10px] font-bold uppercase tracking-wider font-mono text-gray-400 bg-white/5 px-2.5 py-1 rounded-md border border-white/5">
+                  <span className="hidden sm:inline-block text-[10px] font-bold uppercase tracking-wider font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-900 px-2.5 py-1 rounded-md border border-slate-200 dark:border-slate-800">
                     {brand.badge}
                   </span>
                 </div>
 
                 {/* Brand Name & specialty descriptions */}
                 <div>
-                  <h3 className="text-[10px] sm:text-lg font-bold text-white group-hover:text-[#FFC107] transition-colors leading-tight sm:leading-snug">
+                  <h3 className="text-[10px] sm:text-lg font-bold text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-tight sm:leading-snug">
                     {brand.name}
                   </h3>
-                  <p className="hidden sm:block text-gray-400 text-xs mt-1 font-medium">
+                  <p className="hidden sm:block text-slate-600 dark:text-slate-350 text-xs mt-1 font-medium">
                     {brand.specialty}
                   </p>
                 </div>
               </div>
 
               {/* Verified Trust Tag in footer of the brand card */}
-              <div className="hidden sm:flex mt-5 pt-4 border-t border-white/5 items-center justify-between">
-                <span className="text-[10px] text-gray-500 font-mono tracking-wide">
+              <div className="hidden sm:flex mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 items-center justify-between">
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono tracking-wide">
                   {brand.established}
                 </span>
-                <div className="flex items-center gap-1 text-emerald-400 text-[10px] font-bold uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded-sm">
+                <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-sm border border-emerald-100 dark:border-emerald-500/10">
                   <CheckCircle2 className="w-3 h-3" />
                   <span>Approved</span>
                 </div>
@@ -212,20 +212,20 @@ export default function TrustedBrands() {
         </motion.div>
 
         {/* Micro Credential Banner below grid */}
-        <div id="trusted-brands-footer" className="mt-16 p-6 rounded-2xl bg-[#09223c]/20 border border-white/5 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div id="trusted-brands-footer" className="mt-16 p-6 rounded-2xl bg-slate-100/60 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/40 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-left">
-            <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 shrink-0 border border-emerald-500/20">
+            <div className="w-12 h-12 rounded-full bg-emerald-50 dark:bg-emerald-950/40 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 border border-emerald-100 dark:border-emerald-500/10">
               <Shield className="w-6 h-6 animate-pulse" />
             </div>
             <div>
-              <h4 className="font-bold text-white text-sm">Manufacturer Backed Warranty Agreements</h4>
-              <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+              <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm">Manufacturer Backed Warranty Agreements</h4>
+              <p className="text-xs text-slate-650 dark:text-slate-350 mt-1 leading-relaxed">
                 Our direct partnerships ensure 10 to 12 Year Manufacture Warranties on Smart Inverters and up to 25 to 30 Year Linear Power Warranties on premium Photovoltaic Panels.
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 py-1.5 px-3.5 rounded-lg bg-[#061525] border border-white/5 text-[11px] font-mono text-amber-400 whitespace-nowrap">
-            <Zap className="w-3.5 h-3.5 shrink-0 text-emerald-400" />
+          <div className="flex items-center gap-2 py-1.5 px-3.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-[11px] font-mono text-emerald-700 dark:text-emerald-400 whitespace-nowrap">
+            <Zap className="w-3.5 h-3.5 shrink-0 text-emerald-500" />
             <span>100% Guaranteed Genuine Components</span>
           </div>
         </div>

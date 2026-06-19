@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { Award, Landmark, Zap, Clock, TrendingUp, CheckSquare } from 'lucide-react';
+import SectionBackground3D from './SectionBackground3D.tsx';
 
 interface FeatureItem {
   id: string;
@@ -61,21 +62,22 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section id="timeline" className="relative py-20 bg-[#041120] overflow-hidden border-b border-white/5">
+    <section id="timeline" className="relative py-20 bg-white dark:bg-slate-950 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40 transition-colors duration-300">
+      <SectionBackground3D type="whychoose" />
       <div className="absolute top-1/2 left-0 w-80 h-80 rounded-full bg-emerald-500/5 blur-3xl animate-pulse" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Title Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-          <span className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-950/40 border border-emerald-500/20 text-[11px] font-bold tracking-widest text-[#FFC107] uppercase rounded-full">
+          <span className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-[11px] font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase rounded-full">
             <Award className="w-3.5 h-3.5" />
             Uncompromised Corporate Standards
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-            Why Partner with <span className="bg-gradient-to-r from-emerald-400 to-[#FFC107] bg-clip-text text-transparent">Ashonika?</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
+            Why Partner with <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika?</span>
           </h2>
-          <p className="text-gray-400 text-xs md:text-sm">
+          <p className="text-slate-600 dark:text-slate-350 text-xs md:text-sm">
             We deliver state-of-the-art clean energy solutions backed by rigorous certified safety engineering.
           </p>
         </div>
@@ -85,19 +87,19 @@ export default function WhyChooseUs() {
           {features.map((feature, index) => (
             <div
               key={feature.id}
-              className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#09223c]/60 border border-white/15 hover:border-emerald-500/30 transition-all duration-300 shadow-md hover:shadow-emerald-950/10 hover:-translate-y-0.5 flex flex-col sm:flex-row gap-2.5 sm:gap-4 items-start"
+              className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800/40 hover:border-emerald-500/30 dark:hover:border-emerald-500/30 transition-all duration-300 shadow-xs hover:shadow-lg hover:-translate-y-0.5 flex flex-col sm:flex-row gap-2.5 sm:gap-4 items-start"
             >
-              <div className={`p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl border shrink-0 ${feature.accent}`}>
-                {React.cloneElement(feature.icon as React.ReactElement, { className: 'w-4 h-4 sm:w-5 sm:h-5' })}
+              <div className={`p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl border shrink-0 ${feature.accent.replace('text-emerald-400', 'text-emerald-600').replace('text-indigo-400', 'text-indigo-600').replace('text-amber-400', 'text-amber-600').replace('text-sky-400', 'text-sky-650').replace('text-rose-450', 'text-rose-600').replace('text-lime-400', 'text-lime-600')}`}>
+                {React.cloneElement(feature.icon as React.ReactElement, { className: 'w-4 h-4 sm:w-5 sm:h-5 text-current' })}
               </div>
               <div className="space-y-0.5 sm:space-y-1">
-                <span className="text-[8px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-widest font-mono block">
+                <span className="text-[8px] sm:text-[10px] font-bold text-slate-550 dark:text-slate-400 uppercase tracking-widest font-mono block">
                   0{index + 1} / Feature
                 </span>
-                <h3 className="text-xs sm:text-sm font-bold text-white tracking-tight">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 tracking-tight">
                   {feature.title}
                 </h3>
-                <p className="text-gray-400 text-[10px] sm:text-xs md:text-[13px] leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-350 text-[10px] sm:text-xs md:text-[13px] leading-relaxed">
                   {feature.description}
                 </p>
               </div>

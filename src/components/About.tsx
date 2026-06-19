@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Target, Leaf, Sparkles, Award, ArrowRight, Sun, Zap, Cpu } from 'lucide-react';
 import { motion } from 'motion/react';
+import SectionBackground3D from './SectionBackground3D.tsx';
 
 export default function About() {
   // Animated counters state
@@ -45,10 +46,11 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" className="relative py-28 bg-[#071B2F] overflow-hidden">
+    <section id="about" className="relative py-28 bg-white dark:bg-slate-950 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40 transition-colors duration-300">
+      <SectionBackground3D type="about" />
 
       {/* Absolute Decorative Ambient Background circles */}
-      <div className="absolute top-1/4 left-0 w-80 h-80 rounded-full bg-emerald-600/10 blur-3xl" />
+      <div className="absolute top-1/4 left-0 w-80 h-80 rounded-full bg-emerald-500/5 blur-3xl" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-amber-500/5 blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -57,16 +59,16 @@ export default function About() {
           {/* Left Column: Ashonika introduction details */}
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3">
-              <span className="flex items-center gap-2 text-xs font-bold tracking-widest text-[#FFC107] uppercase">
+              <span className="flex items-center gap-2 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-450 uppercase">
                 <Sparkles className="w-4 h-4" />
                 World-Class Clean Energy
               </span>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                About <span className="bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">Ashonika</span>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
+                About <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika</span>
               </h2>
             </div>
             
-            <div className="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed">
+            <div className="space-y-4 text-slate-600 dark:text-slate-350 text-sm md:text-base leading-relaxed">
               <p>
                 Ashonika stands at the forefront of the clean energy transition, specializing in premium, high-tier Solar Engineering, Procurement, and Commissioning (EPC) solutions. We are dedicated to delivering highly efficient grid-tied, hybrid, and off-grid power structures that empower residential, business, and industrial clients with complete energy independence.
               </p>
@@ -79,54 +81,54 @@ export default function About() {
           {/* Right Column: Key metrics counters in an elegant 2x2 grid */}
           <div className="lg:col-span-5">
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-[#09223c] border border-white/5 text-center relative overflow-hidden group hover:border-[#FFC107]/30 transition-colors shadow-lg">
-                <div className="absolute top-0 right-0 w-12 h-12 bg-[#FFC107]/5 rounded-bl-full group-hover:scale-150 transition-transform" />
-                <div className="text-2xl md:text-3xl font-extrabold text-[#FFC107] font-mono mb-1">
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/60 text-center relative overflow-hidden group hover:border-amber-500/40 transition-colors shadow-xs">
+                <div className="absolute top-0 right-0 w-12 h-12 bg-amber-500/5 rounded-bl-full group-hover:scale-150 transition-transform" />
+                <div className="text-2xl md:text-3xl font-extrabold text-amber-600 font-mono mb-1">
                   {projects}+
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-400 font-bold">
+                <div className="text-xs uppercase tracking-wider text-slate-800 font-bold">
                   Grid Projects
                 </div>
-                <div className="text-[10px] text-gray-500 mt-1">
+                <div className="text-[10px] text-slate-500 mt-1">
                   Successfully Completed
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#09223c] border border-white/5 text-center relative overflow-hidden group hover:border-emerald-500/30 transition-colors shadow-lg">
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/60 text-center relative overflow-hidden group hover:border-emerald-500/30 transition-colors shadow-xs">
                 <div className="absolute top-0 right-0 w-12 h-12 bg-emerald-500/5 rounded-bl-full group-hover:scale-150 transition-transform" />
-                <div className="text-2xl md:text-3xl font-extrabold text-emerald-400 font-mono mb-1">
+                <div className="text-2xl md:text-3xl font-extrabold text-emerald-600 font-mono mb-1">
                   {capacity} MW+
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-400 font-bold">
+                <div className="text-xs uppercase tracking-wider text-slate-800 font-bold">
                   Capacity Live
                 </div>
-                <div className="text-[10px] text-gray-500 mt-1">
+                <div className="text-[10px] text-slate-500 mt-1">
                   Active Solar Yield
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#09223c] border border-white/5 text-center relative overflow-hidden group hover:border-blue-500/30 transition-colors shadow-lg">
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/60 text-center relative overflow-hidden group hover:border-blue-500/30 transition-colors shadow-xs">
                 <div className="absolute top-0 right-0 w-12 h-12 bg-blue-500/5 rounded-bl-full group-hover:scale-150 transition-transform" />
-                <div className="text-2xl md:text-3xl font-extrabold text-blue-400 font-mono mb-1">
+                <div className="text-2xl md:text-3xl font-extrabold text-blue-600 font-mono mb-1">
                   {co2} T
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-400 font-bold">
+                <div className="text-xs uppercase tracking-wider text-slate-800 font-bold">
                   CO₂ Saved
                 </div>
-                <div className="text-[10px] text-gray-500 mt-1">
+                <div className="text-[10px] text-slate-500 mt-1">
                   Tons Mitigated Annually
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#09223c] border border-white/5 text-center relative overflow-hidden group hover:border-lime-500/30 transition-colors shadow-lg">
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/60 text-center relative overflow-hidden group hover:border-lime-500/30 transition-colors shadow-xs">
                 <div className="absolute top-0 right-0 w-12 h-12 bg-lime-500/5 rounded-bl-full group-hover:scale-150 transition-transform" />
-                <div className="text-2xl md:text-3xl font-extrabold text-lime-400 font-mono mb-1">
+                <div className="text-2xl md:text-3xl font-extrabold text-lime-600 font-mono mb-1">
                   {clientSatisfaction}%
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-400 font-bold">
+                <div className="text-xs uppercase tracking-wider text-slate-800 font-bold">
                   Satisfaction
                 </div>
-                <div className="text-[10px] text-gray-500 mt-1">
+                <div className="text-[10px] text-slate-500 mt-1">
                   Verified Client Happiness
                 </div>
               </div>
@@ -138,7 +140,7 @@ export default function About() {
         {/* Association section */}
         <motion.div 
           id="associations-section" 
-          className="mt-24 pt-16 border-t border-white/5"
+          className="mt-24 pt-16 border-t border-slate-200/60"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -162,21 +164,21 @@ export default function About() {
               }
             }}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-[10px] font-bold tracking-widest text-[#FFC107] uppercase">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-500/15 text-[10px] font-bold tracking-widest text-[#0B8F4D] uppercase">
               <Sparkles className="w-3 h-3" />
               Strategic Network
             </span>
-            <h3 className="text-2xl md:text-3xl font-extrabold text-white mt-3 tracking-tight">
-              Associated <span className="bg-gradient-to-r from-emerald-400 to-[#FFC107] bg-clip-text text-transparent">With</span>
+            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-3 tracking-tight">
+              Associated <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">With</span>
             </h3>
-            <p className="text-gray-400 text-xs md:text-sm mt-2">
+            <p className="text-slate-650 text-xs md:text-sm mt-2">
               Collaboratively driving high-efficiency clean energy deployments across key operational domains.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <motion.div 
-              className="flex items-center gap-4 p-5 rounded-2xl bg-linear-to-b from-[#09223c] to-[#041221] border border-white/10 hover:border-emerald-500/30 transition-all duration-300"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-emerald-500/30 transition-all duration-300"
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { 
@@ -186,18 +188,18 @@ export default function About() {
                 }
               }}
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20 shadow-inner">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 border border-emerald-500/20 shadow-inner">
                 <Sun className="w-6 h-6 animate-pulse" />
               </div>
               <div>
-                <span className="text-sm font-bold text-white tracking-tight">
+                <span className="text-sm font-bold text-slate-800 tracking-tight">
                   RP Solar Energy
                 </span>
               </div>
             </motion.div>
 
             <motion.div 
-              className="flex items-center gap-4 p-5 rounded-2xl bg-linear-to-b from-[#09223c] to-[#041221] border border-white/10 hover:border-emerald-500/30 transition-all duration-300"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-emerald-500/30 transition-all duration-300"
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { 
@@ -207,18 +209,18 @@ export default function About() {
                 }
               }}
             >
-              <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-[#FFC107] border border-amber-500/20 shadow-inner">
+              <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 border border-amber-500/20 shadow-inner">
                 <Zap className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-sm font-bold text-white tracking-tight">
+                <span className="text-sm font-bold text-slate-800 tracking-tight">
                   SB Power
                 </span>
               </div>
             </motion.div>
 
             <motion.div 
-              className="flex items-center gap-4 p-5 rounded-2xl bg-linear-to-b from-[#09223c] to-[#041221] border border-white/10 hover:border-emerald-500/30 transition-all duration-300"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-emerald-500/30 transition-all duration-300"
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { 
@@ -228,11 +230,11 @@ export default function About() {
                 }
               }}
             >
-              <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-450 border border-sky-500/20 shadow-inner">
+              <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-600 border border-sky-500/20 shadow-inner">
                 <Cpu className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-sm font-bold text-white tracking-tight whitespace-nowrap">
+                <span className="text-sm font-bold text-slate-800 tracking-tight whitespace-nowrap">
                   Solar Technician Ajmer
                 </span>
               </div>

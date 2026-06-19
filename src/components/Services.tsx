@@ -148,7 +148,7 @@ export default function Services({ onRequestSurvey }: ServicesProps = {}) {
   ];
 
   return (
-    <section id="services" className="relative py-28 bg-[#041120] overflow-hidden border-b border-white/5">
+    <section id="services" className="relative py-28 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40 transition-colors duration-300">
       {/* Interactive 3D Orbiting Panel Slabs Background */}
       <SectionBackground3D type="services" />
 
@@ -165,14 +165,14 @@ export default function Services({ onRequestSurvey }: ServicesProps = {}) {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/20 text-xs font-bold tracking-widest text-emerald-400 uppercase">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-xs font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase">
             <Cpu className="w-3.5 h-3.5 animate-pulse" />
             Ashonika Engineering Services
           </span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-            Our Premium <span className="bg-gradient-to-r from-[#FFC107] to-emerald-400 bg-clip-text text-transparent">Power Solutions</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
+            Our Premium <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Power Solutions</span>
           </h2>
-          <p className="text-gray-400 text-sm md:text-base">
+          <p className="text-slate-650 dark:text-slate-350 text-sm md:text-base">
             Engineered systems designed to transition homes and heavy industries to high-efficiency, independent green microgrids.
           </p>
         </motion.div>
@@ -189,25 +189,25 @@ export default function Services({ onRequestSurvey }: ServicesProps = {}) {
             >
               <div
                 id={`service-card-${service.id}`}
-                className="group relative p-3.5 sm:p-8 rounded-xl sm:rounded-2xl bg-[#092037]/60 backdrop-blur-md border border-white/5 shadow-xl transition-all duration-300 hover:border-emerald-600/30 hover:shadow-2xl hover:shadow-emerald-950/10 hover:-translate-y-1 overflow-hidden h-full flex flex-col justify-between"
+                className="group relative p-3.5 sm:p-8 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/40 shadow-md transition-all duration-300 hover:border-emerald-500/50 hover:shadow-xl hover:-translate-y-1 overflow-hidden h-full flex flex-col justify-between"
               >
                 {/* Card top edge gradient lighting */}
                 <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-[#FFC107]/40 to-emerald-500/40 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4 sm:mb-6">
-                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:border-emerald-500/35 transition-all">
+                    <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center group-hover:scale-110 group-hover:border-emerald-500/35 transition-all text-emerald-600">
                       {React.cloneElement(service.icon as React.ReactElement, { className: 'w-4 h-4 sm:w-6 sm:h-6' })}
                     </div>
-                    <span className="text-[9px] sm:text-xs font-mono text-gray-500 group-hover:text-emerald-400 transition-colors">
+                    <span className="text-[9px] sm:text-xs font-mono text-slate-500 group-hover:text-emerald-600 transition-colors">
                       {service.capacityRange}
                     </span>
                   </div>
 
-                  <h3 className="text-xs sm:text-base md:text-xl font-bold text-white mb-1.5 sm:mb-3 group-hover:text-[#FFC107] transition-colors leading-tight">
+                  <h3 className="text-xs sm:text-base md:text-xl font-bold text-slate-900 dark:text-slate-100 mb-1.5 sm:mb-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-450 transition-colors leading-tight">
                     {service.title}
                   </h3>
-                  <p className="text-gray-400 text-[10px] sm:text-xs md:text-sm leading-relaxed mb-3 sm:mb-6">
+                  <p className="text-slate-600 dark:text-slate-350 text-[10px] sm:text-xs md:text-sm leading-relaxed mb-3 sm:mb-6">
                     {service.description}
                   </p>
                 </div>

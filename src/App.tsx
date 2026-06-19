@@ -20,6 +20,27 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'projects'>('home');
   const [activeSection, setActiveSection] = useState<string>('home');
   const [contactSubject, setContactSubject] = useState<string>('Solar Installation');
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark' || stored === 'light') return stored;
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   // Trigger smooth scrolling or routing to section ID
   const handleScrollToSection = (sectionId: string) => {
@@ -115,29 +136,29 @@ export default function App() {
   }, [currentPage]);
 
   return (
-    <div className="min-h-screen bg-[#071B2F] text-gray-100 selection:bg-emerald-600 selection:text-white relative">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-emerald-600 selection:text-white relative transition-colors duration-300">
       
       {/* Interactive Sticky Header Navigation */}
-      <Navbar onNavigate={handleScrollToSection} activeSection={activeSection} />
+      <Navbar onNavigate={handleScrollToSection} activeSection={activeSection} theme={theme} toggleTheme={toggleTheme} />
 
       {currentPage === 'projects' ? (
         <div className="pt-20 min-h-screen flex flex-col">
           {/* Standing Projects Page Hero */}
-          <header className="relative pt-20 pb-16 bg-[#071B2F] overflow-hidden border-b border-white/5">
+          <header className="relative pt-20 pb-16 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40">
             <InteractiveScene />
             {/* Ambient Gradients to block canvas overflow */}
-            <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/50 to-transparent pointer-events-none" />
-            <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#071B2F] to-transparent pointer-events-none" />
+            <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-slate-950 to-transparent pointer-events-none transition-colors duration-300" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/25 text-xs font-bold tracking-widest text-[#FFC107] uppercase select-none">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase select-none">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Our National Engineering Portfolio</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight">
-                Ashonika <span className="bg-gradient-to-r from-emerald-400 to-[#FFC107] bg-clip-text text-transparent">Project Portfolio</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
+                Ashonika <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Project Portfolio</span>
               </h1>
-              <p className="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
                 Complete engineering logs of our nationwide grid-tie commissioning catalog, including live efficiency comparisons and case analyses.
               </p>
             </div>
@@ -162,28 +183,28 @@ export default function App() {
             {/* Dynamic Holographic Earth Glow Canvas Background */}
             <InteractiveScene />
 
-            {/* Ambient Top Gradients */}
-            <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-black/60 to-transparent z-10 pointer-events-none" />
-            <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#071B2F] to-transparent z-10 pointer-events-none" />
+             {/* Ambient Top Gradients */}
+            <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-black/5 to-transparent z-10 pointer-events-none" />
+            <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white dark:from-slate-950 to-transparent z-10 pointer-events-none transition-colors duration-300" />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center lg:text-left py-24">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 {/* Hero Copy (7cols) */}
                 <div className="lg:col-span-7 space-y-6 md:space-y-8">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/40 border border-emerald-500/25 text-xs font-bold tracking-widest text-[#FFC107] uppercase animate-pulse select-none">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase animate-pulse select-none">
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>Tomorrow's Smart Grid Today</span>
                   </div>
 
                   <div className="space-y-4">
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-none">
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-none">
                       Turn Your Electricity Bill Into a{' '}
-                      <span className="bg-gradient-to-r from-emerald-400 via-[#FFC107] to-emerald-400 bg-clip-text text-transparent">
+                      <span className="bg-gradient-to-r from-emerald-600 via-amber-500 to-emerald-600 bg-clip-text text-transparent">
                         Long-Term Asset
                       </span>
                     </h1>
-                    <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed">
                       End-to-End Solar EPC Solutions Designed for Maximum Savings and Long-Term Performance.
                     </p>
                   </div>
@@ -246,7 +267,7 @@ export default function App() {
       >
         <span className="absolute inset-0 rounded-full bg-emerald-500/40 animate-ping" />
         <PhoneCall className="w-6 h-6" />
-        <span className="absolute right-full mr-3 whitespace-nowrap bg-[#09223c] border border-white/10 px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none text-xs font-bold text-white shadow-lg shadow-black/20">
+        <span className="absolute right-full mr-3 whitespace-nowrap bg-white border border-slate-200 px-3 py-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none text-xs font-bold text-slate-800 shadow-lg shadow-black/5">
           Call solar helpline (+91 77280-23503)
         </span>
       </a>

@@ -15,14 +15,14 @@ export default function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="footer-section-wrapper" className="relative bg-[#020912] pt-24 pb-8 overflow-hidden">
+    <footer id="footer-section-wrapper" className="relative bg-slate-50 border-t border-slate-200/60 pt-24 pb-8 overflow-hidden font-sans">
       
       {/* Premium Undulating Wave animated vectors on top */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none z-10 select-none">
         <svg
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
-          className="relative block w-full h-12 md:h-16 text-[#041120]"
+          className="relative block w-full h-12 md:h-16 text-white"
           fill="currentColor"
         >
           {/* Animated Wave 1 */}
@@ -41,14 +41,14 @@ export default function Footer({ onNavigate }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-21 pt-8">
         
         {/* Main Columns Grid block */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-16 border-b border-white/5">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-16 border-b border-slate-200/60">
           
           {/* Logo & Slogan Column */}
           <div className="space-y-4 max-w-xl">
             <div className="cursor-pointer" onClick={() => onNavigate('home')}>
               <Logo />
             </div>
-            <p className="text-gray-400 text-xs md:text-sm leading-relaxed">
+            <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
               Ashonika Green Energy is a premier certified solar EPC corporation specializing in high-voltage microgrid layouts, net-metering synchronization, and lifetime tracking coordinates for commercial, public, and private properties.
             </p>
 
@@ -58,7 +58,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://www.facebook.com/profile.php?id=61590887721251"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-white/10 flex items-center justify-center text-gray-400 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-xl bg-white hover:bg-emerald-600 hover:text-white border border-slate-200 flex items-center justify-center text-slate-500 transition-all cursor-pointer"
                 aria-label="Facebook Profile"
               >
                 <Facebook className="w-4 h-4" />
@@ -67,7 +67,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://www.instagram.com/ashonikagreenenergy/"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-[#ffffff15] flex items-center justify-center text-gray-400 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-xl bg-white hover:bg-emerald-600 hover:text-white border border-slate-200 flex items-center justify-center text-slate-500 transition-all cursor-pointer"
                 aria-label="Instagram Profile"
               >
                 <Instagram className="w-4 h-4" />
@@ -76,7 +76,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://www.youtube.com/@AshonikaGreenEnergy"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-[#ffffff15] flex items-center justify-center text-gray-400 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-xl bg-white hover:bg-emerald-600 hover:text-white border border-slate-200 flex items-center justify-center text-slate-500 transition-all cursor-pointer"
                 aria-label="YouTube Channel"
               >
                 <Youtube className="w-4 h-4" />
@@ -85,7 +85,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://www.linkedin.com/company/ashonika-green-energy"
                 target="_blank"
                 rel="noreferrer"
-                className="w-10 h-10 rounded-xl bg-white/5 hover:bg-emerald-600 hover:text-white border border-[#ffffff15] flex items-center justify-center text-gray-400 transition-all cursor-pointer"
+                className="w-10 h-10 rounded-xl bg-white hover:bg-emerald-600 hover:text-white border border-slate-200 flex items-center justify-center text-slate-500 transition-all cursor-pointer"
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin className="w-4 h-4" />
@@ -94,16 +94,16 @@ export default function Footer({ onNavigate }: FooterProps) {
           </div>
 
           {/* Quick inline coordinates */}
-          <div className="space-y-3 font-mono text-[11px] md:text-xs text-gray-400 self-stretch md:self-auto flex flex-col justify-center border-t md:border-t-0 md:border-l border-white/5 pt-6 md:pt-0 md:pl-8 shrink-0">
-            <span className="text-[10px] font-bold text-emerald-405 tracking-widest uppercase block mb-1">
+          <div className="space-y-3 font-mono text-[11px] md:text-xs text-slate-600 self-stretch md:self-auto flex flex-col justify-center border-t md:border-t-0 md:border-l border-slate-200 pt-6 md:pt-0 md:pl-8 shrink-0">
+            <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 tracking-widest uppercase block mb-1">
               Contact Info
             </span>
             <p className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-[#FFC107] shrink-0" />
+              <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               +91 77280-23503
             </p>
             <p className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-[#0B8F4D] shrink-0" />
+              <Mail className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               info@ashonika.com
             </p>
           </div>
@@ -111,7 +111,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         </div>
 
         {/* Lower row: Copy notes */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-gray-500 gap-4">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
           <p>© {currentYear} Ashonika Green Energy Private Limited. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Engineered with
