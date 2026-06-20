@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Eye, MapPin, Minimize2, ZoomIn, Landmark, ChevronLeft, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Eye, MapPin, Minimize2, ZoomIn, Landmark, ChevronLeft, ChevronRight, ArrowRight, ArrowLeft, Search, X } from 'lucide-react';
 import SectionBackground3D from './SectionBackground3D.tsx';
 import TiltCard from './TiltCard.tsx';
 
@@ -114,6 +114,7 @@ interface ProjectsProps {
 export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, onBackToHome }: ProjectsProps) {
   const [filter, setFilter] = useState<'All' | 'Residential' | 'Commercial' | 'Industrial'>('All');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Carousel Active index state
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -146,6 +147,34 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
         'https://lh3.googleusercontent.com/d/18-SgWDtwmkRYI24PRTGgOntVS_kDX9kh',
         'https://lh3.googleusercontent.com/d/1Q-TT-dBmj4OHjIlCh7YrxIjbEyJXkE27',
         'https://lh3.googleusercontent.com/d/1FwbidEAIG8-XoBQx0vdpkCayEBcJ3Ww2'
+      ]
+    },
+    {
+      id: 'proj3',
+      title: 'Mr. Vinod (House)',
+      category: 'Residential',
+      location: 'Railway Station, Kishangarh, Rajasthan',
+      capacity: '3 kW Residential',
+      beforeImg: 'https://lh3.googleusercontent.com/d/1DdrQcTGILxBITQnTHfdjg4kpGvogSj2E',
+      afterImg: 'https://lh3.googleusercontent.com/d/19e3Y4oepIQYAej794WrbfltK8JLPbZ73',
+      description: 'A custom high-efficiency 3 kW residential rooftop solar PV system designed to reduce grid reliance and deliver sustainable domestic electricity for Mr. Vinod.',
+      images: [
+        'https://lh3.googleusercontent.com/d/1DdrQcTGILxBITQnTHfdjg4kpGvogSj2E',
+        'https://lh3.googleusercontent.com/d/19e3Y4oepIQYAej794WrbfltK8JLPbZ73'
+      ]
+    },
+    {
+      id: 'proj4',
+      title: 'Mr. Vikas Jain (House)',
+      category: 'Residential',
+      location: 'Shivaji Nagar, Kishangarh, Rajasthan',
+      capacity: '8 kW Residential',
+      beforeImg: 'https://lh3.googleusercontent.com/d/1z3aDDxLHldiJVDZ7HwaV1XSTP4hfUGg7',
+      afterImg: 'https://lh3.googleusercontent.com/d/1vGJD-OSEhoJEDphQgOfFv1OIjArxjMZS',
+      description: 'A stellar, state-of-the-art 8 kW residential solar plant integrated with premium tier-1 solar cells for smart home power solutions.',
+      images: [
+        'https://lh3.googleusercontent.com/d/1z3aDDxLHldiJVDZ7HwaV1XSTP4hfUGg7',
+        'https://lh3.googleusercontent.com/d/1vGJD-OSEhoJEDphQgOfFv1OIjArxjMZS'
       ]
     }
   ];
@@ -199,6 +228,18 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
     (p) => filter === 'All' || p.category === filter
   );
 
+  const searchedProjects = filteredProjects.filter((p) => {
+    if (!searchQuery.trim()) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      p.title.toLowerCase().includes(query) ||
+      p.location.toLowerCase().includes(query) ||
+      p.capacity.toLowerCase().includes(query) ||
+      p.category.toLowerCase().includes(query) ||
+      (p.description && p.description.toLowerCase().includes(query))
+    );
+  });
+
   // RENDER CAROUSEL MODE (4-columns on desktop / 2-columns on mobile format)
   if (viewMode === 'carousel') {
     return (
@@ -236,7 +277,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                 >
                   <TiltCard
                     id={`project-card-${project.id}`}
-                    className="group relative bg-slate-50 border border-slate-200/60 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 cursor-pointer hover:shadow-xl h-full flex flex-col justify-between"
+                    className="group relative bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/40 rounded-2xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 cursor-pointer hover:shadow-xl h-full flex flex-col justify-between"
                     onClick={() => setSelectedProject(project)}
                   >
                     {/* Responsive Project thumbnail */}
@@ -245,21 +286,21 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                         images={project.images}
                         alt={project.title}
                       />
-                      <div className="absolute top-2 left-2 bg-white/90 border border-slate-200 px-2.5 py-1 rounded-md text-[8px] font-bold text-emerald-700 capitalize font-mono z-20">
+                      <div className="absolute top-2 left-2 bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-850 px-2.5 py-1 rounded-md text-[8px] font-bold text-emerald-700 dark:text-emerald-400 capitalize font-mono z-20">
                         {project.category}
                       </div>
                     </div>
 
                     <div className="p-3 md:p-4 flex-1 flex flex-col justify-between">
                       <div className="space-y-1">
-                        <span className="flex items-center gap-1 text-[8px] md:text-[9px] text-slate-500 font-bold font-mono uppercase tracking-wider">
+                        <span className="flex items-center gap-1 text-[8px] md:text-[9px] text-slate-500 dark:text-slate-400 font-bold font-mono uppercase tracking-wider">
                           <MapPin className="w-3 h-3 text-red-500 shrink-0" />
                           <span className="truncate">{project.location}</span>
                         </span>
-                        <h3 className="text-xs md:text-sm font-bold text-slate-800 dark:text-slate-150 group-hover:text-emerald-600 transition-all line-clamp-1">
+                        <h3 className="text-xs md:text-sm font-bold text-slate-800 dark:text-slate-100 group-hover:text-emerald-600 transition-all line-clamp-1">
                           {project.title}
                         </h3>
-                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
+                        <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium font-sans">
                           Capacity: {project.capacity}
                         </p>
                       </div>
@@ -277,7 +318,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                     e.stopPropagation();
                     handlePrev();
                   }}
-                  className="absolute left-1 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/90 hover:bg-white border border-slate-200 text-slate-700 shadow-md cursor-pointer transition-all hover:scale-105"
+                  className="hidden md:block absolute left-1 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/90 hover:bg-white border border-slate-200 text-slate-700 shadow-md cursor-pointer transition-all hover:scale-105"
                   aria-label="Previous items"
                 >
                   <ChevronLeft className="w-4 h-4" />
@@ -287,7 +328,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                     e.stopPropagation();
                     handleNext();
                   }}
-                  className="absolute right-1 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/90 hover:bg-white border border-slate-200 text-slate-700 shadow-md cursor-pointer transition-all hover:scale-105"
+                  className="hidden md:block absolute right-1 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/90 hover:bg-white border border-slate-200 text-slate-700 shadow-md cursor-pointer transition-all hover:scale-105"
                   aria-label="Next items"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -431,7 +472,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
         )}
 
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
           <div className="space-y-4 max-w-xl">
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-100 text-[11px] font-bold tracking-widest text-[#0B8F4D] uppercase rounded-full">
               <Eye className="w-3.5 h-3.5" />
@@ -446,9 +487,73 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
           </div>
         </div>
 
+        {/* Dynamic Filtering and Keywords Search Engine Control Bar */}
+        <div className="mb-10 p-5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800/50 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Categories Tab Selector */}
+          <div className="flex flex-wrap gap-1.5 w-full md:w-auto">
+            {(['All', 'Residential', 'Commercial', 'Industrial'] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
+                  filter === cat
+                    ? 'bg-emerald-600 text-white shadow-sm'
+                    : 'bg-white dark:bg-slate-800 border border-slate-200/50 dark:border-slate-700/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Majestic Real-time Search Box */}
+          <div className="relative w-full md:w-96 select-none">
+            <input
+              type="text"
+              placeholder="Search by locations, people, capacity..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-xs md:text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-medium"
+            />
+            {/* Search Glass Icon */}
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <Search className="h-4 w-4" />
+            </div>
+            {/* Reset / Clear Icon */}
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Search Results count indicator */}
+        {searchQuery && (
+          <div className="mb-6 px-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
+            Found <span className="text-emerald-600 dark:text-emerald-400 font-bold">{searchedProjects.length}</span> site{searchedProjects.length !== 1 ? 's' : ''} matching "{searchQuery}"
+          </div>
+        )}
+
+        {/* Fallback empty view if search results are 0 */}
+        {searchedProjects.length === 0 && (
+          <div className="text-center py-16 px-4 bg-slate-50 dark:bg-slate-900/20 border border-dashed border-slate-200 dark:border-slate-800 rounded-3xl mb-12">
+            <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+              <Search className="w-6 h-6" />
+            </div>
+            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-250 mb-1">No matching commissioned sites found</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Try adjusting your keywords (location, name, capacity, category) or clear search filter
+            </p>
+          </div>
+        )}
+
         {/* Gallery Showcase Grid */}
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-          {filteredProjects.map((project) => (
+          {searchedProjects.map((project) => (
             <TiltCard
               id={`project-card-${project.id}`}
               key={project.id}
