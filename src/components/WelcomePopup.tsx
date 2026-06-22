@@ -82,7 +82,7 @@ export default function WelcomePopup() {
               <div className="w-full bg-emerald-50/60 dark:bg-slate-800/50 border border-emerald-100/50 dark:border-slate-800 rounded-2xl p-5 md:p-6 mb-6">
                 <p className="text-lg md:text-xl font-black text-slate-900 dark:text-white leading-relaxed font-sans tracking-wide space-y-2 uppercase">
                   <span className="block text-[#0b8f4d] dark:text-emerald-400">आज सोलर लगवाएगा,</span>
-                  <span className="block text-slate-800 dark:text-slate-200">तो कल बिजली का बिल बचाएगा।</span>
+                  <span className="block text-slate-800 dark:text-slate-200">तो कल बिजली का बिल घटाएगा।</span>
                   <span className="block text-amber-500 mt-2 text-sm font-semibold tracking-normal lowercase opacity-80 decoration-none">••••••••••</span>
                   <span className="block text-[#0b8f4d] dark:text-emerald-400 mt-2">सोलर पर भरोसा रख दोस्त,</span>
                   <span className="block text-slate-800 dark:text-slate-200">खूब पैसा बचाएगा।</span>
