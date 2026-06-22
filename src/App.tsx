@@ -10,6 +10,7 @@ import Navbar from './components/Navbar.tsx';
 import InteractiveScene from './components/InteractiveScene.tsx';
 import SkeletonLoader from './components/SkeletonLoader.tsx';
 import CursorFollowerArt from './components/CursorFollowerArt.tsx';
+import WelcomePopup from './components/WelcomePopup.tsx';
 import About from './components/About.tsx';
 import Services from './components/Services.tsx';
 import WhyChooseUs from './components/WhyChooseUs.tsx';
@@ -152,6 +153,9 @@ export default function App() {
       
       {/* Futuristic Solar Energy Cursor Follower Art */}
       <CursorFollowerArt />
+
+      {/* Modern Solar Energy Welcome Popup */}
+      <WelcomePopup />
 
       {/* Animated Framer-Motion System-Initialization Skeleton Loader */}
       <AnimatePresence>
