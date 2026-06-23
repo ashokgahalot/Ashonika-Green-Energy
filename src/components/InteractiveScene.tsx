@@ -8,6 +8,9 @@ import React, { useEffect, useRef } from 'react';
 interface EarthPoint {
   lat: number;
   lon: number;
+  cosLat: number;
+  sinLat: number;
+  lonRadBase: number;
 }
 
 // Highly accurate, recognizable coordinates for major world landmasses
@@ -149,12 +152,21 @@ function checkIsLand(lat: number, lon: number): boolean {
 
 const generateEarthPoints = (): EarthPoint[] => {
   const pts: EarthPoint[] = [];
-  // 1.2 spacing creates an exceptionally detailed, premium, recognizable digital grid of Earth
-  const step = 1.2;
+  // 1.8 spacing creates an exceptionally detailed, premium, recognizable digital grid of Earth, ultra-optimized for performance
+  const step = 1.8;
   for (let lat = -80; lat <= 80; lat += step) {
+    const latRad = (lat * Math.PI) / 180;
+    const cosLat = Math.cos(latRad);
+    const sinLat = Math.sin(latRad);
     for (let lon = -180; lon < 180; lon += step) {
       if (checkIsLand(lat, lon)) {
-        pts.push({ lat, lon });
+        pts.push({
+          lat,
+          lon,
+          cosLat,
+          sinLat,
+          lonRadBase: (lon * Math.PI) / 180,
+        });
       }
     }
   }
@@ -363,23 +375,18 @@ export default function InteractiveScene() {
       ctx.fillStyle = 'rgba(74, 222, 128, 0.7)';
       
       REAL_EARTH_POINTS.forEach((pt) => {
-        // Project 3D sphere coordinate to 2D
-        const latRad = (pt.lat * Math.PI) / 180;
-        // High density Earth rotation aligned properly in radians
-        const lonRad = (pt.lon * Math.PI) / 180 + globeRot;
-
-        const cosLat = Math.cos(latRad);
-        const sinLat = Math.sin(latRad);
+        // High density Earth rotation aligned properly in radians using precomputed math
+        const lonRad = pt.lonRadBase + globeRot;
         const cosLon = Math.cos(lonRad);
         const sinLon = Math.sin(lonRad);
 
         // Calculate depth (Z value where positive is facing the observer)
-        const z3d = cosLat * cosLon;
+        const z3d = pt.cosLat * cosLon;
 
         // Check if facing the viewer (Z > 0) with a tiny buffer
         if (z3d > 0.05) {
-          const px = globeX + globeRadius * cosLat * sinLon;
-          const py = globeY - globeRadius * sinLat;
+          const px = globeX + globeRadius * pt.cosLat * sinLon;
+          const py = globeY - globeRadius * pt.sinLat;
           
           // Size based on depth to create 3D curving effect
           const sz = (z3d * 2.1) + 0.4;
@@ -612,14 +619,46 @@ export default function InteractiveScene() {
       });
       ctx.globalAlpha = 1.0; // restore
 
-      animationFrameId = requestAnimationFrame(draw);
+      if (isLooping) {
+        animationFrameId = requestAnimationFrame(draw);
+      }
     };
 
-    draw();
+    let isIntersecting = false;
+    let isLooping = false;
+
+    const startLoop = () => {
+      if (!isLooping && isIntersecting) {
+        isLooping = true;
+        draw();
+      }
+    };
+
+    const stopLoop = () => {
+      isLooping = false;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.01 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
       resizeObserver.disconnect();
+      observer.disconnect();
     };
   }, []);
 

@@ -865,14 +865,46 @@ export default function SectionBackground3D({ type }: BackgroundProps) {
           break;
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (isLooping) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
-    render();
+    let isIntersecting = false;
+    let isLooping = false;
+
+    const startLoop = () => {
+      if (!isLooping && isIntersecting) {
+        isLooping = true;
+        render();
+      }
+    };
+
+    const stopLoop = () => {
+      isLooping = false;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.015 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
       resizeObserver.disconnect();
+      observer.disconnect();
     };
   }, [type]);
 

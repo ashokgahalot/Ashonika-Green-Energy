@@ -10,6 +10,7 @@ import Navbar from './components/Navbar.tsx';
 import InteractiveScene from './components/InteractiveScene.tsx';
 import SkeletonLoader from './components/SkeletonLoader.tsx';
 import CursorFollowerArt from './components/CursorFollowerArt.tsx';
+import InteractiveBackgroundParticles from './components/InteractiveBackgroundParticles.tsx';
 import WelcomePopup from './components/WelcomePopup.tsx';
 import About from './components/About.tsx';
 import Services from './components/Services.tsx';
@@ -153,6 +154,9 @@ export default function App() {
       
       {/* Futuristic Solar Energy Cursor Follower Art */}
       <CursorFollowerArt />
+
+      {/* Subtle, interactive, high-performance background particles */}
+      <InteractiveBackgroundParticles theme={theme} />
 
       {/* Modern Solar Energy Welcome Popup */}
       <WelcomePopup />
