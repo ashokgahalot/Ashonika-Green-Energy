@@ -95,8 +95,6 @@ export default function App() {
 
   // Trigger smooth scrolling or routing to section ID / path
   const handleScrollToSection = (sectionId: string) => {
-    const isHomePage = location.pathname === '/';
-
     const routeMap: Record<string, string> = {
       home: '/',
       about: '/about',
@@ -107,10 +105,8 @@ export default function App() {
       contact: '#contact'
     };
 
-    if (isHomePage) {
-      if (sectionId === 'projects-page') {
-        navigate('/projects');
-      } else if (sectionId === 'contact') {
+    if (sectionId === 'contact') {
+      if (location.pathname === '/') {
         const element = document.getElementById('contact');
         if (element) {
           const offset = 80; // height of fixed header navbar
@@ -122,93 +118,58 @@ export default function App() {
           });
         }
       } else {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const offset = 80;
-          const bodyRect = document.body.getBoundingClientRect().top;
-          const elementRect = element.getBoundingClientRect().top;
-          window.scrollTo({
-            top: elementRect - bodyRect - offset,
-            behavior: 'smooth'
-          });
-          setActiveSection(sectionId);
-        } else if (sectionId === 'home') {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-          setActiveSection('home');
-        } else {
-          const path = routeMap[sectionId];
-          if (path) navigate(path);
-        }
+        navigate('/');
+        // Let home page render, then scroll to contact form
+        setTimeout(() => {
+          const element = document.getElementById('contact');
+          if (element) {
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            window.scrollTo({
+              top: elementRect - bodyRect - offset,
+              behavior: 'smooth'
+            });
+          }
+        }, 150);
       }
-    } else {
-      // Not on home page, navigate to dedicated path
-      const path = routeMap[sectionId];
-      if (path) {
-        if (path === '#contact') {
-          navigate('/');
-          // Let home page render, then scroll to contact form
-          setTimeout(() => {
-            const element = document.getElementById('contact');
-            if (element) {
-              const offset = 80;
-              const bodyRect = document.body.getBoundingClientRect().top;
-              const elementRect = element.getBoundingClientRect().top;
-              window.scrollTo({
-                top: elementRect - bodyRect - offset,
-                behavior: 'smooth'
-              });
-            }
-          }, 150);
-        } else {
-          navigate(path);
-        }
+      return;
+    }
+
+    if (sectionId === 'home') {
+      if (location.pathname === '/') {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        setActiveSection('home');
+      } else {
+        navigate('/');
       }
+      return;
+    }
+
+    // For all other menu items, always redirect to their dedicated routes!
+    const targetPath = routeMap[sectionId];
+    if (targetPath) {
+      navigate(targetPath);
     }
   };
 
-  // Automated scroll observer to highlight current navigation tab (only active on home page)
+  // Set active navigation tab strictly corresponding to current route for multi-page behavior
   useEffect(() => {
-    const handleScroll = () => {
-      const path = location.pathname;
-      if (path !== '/') {
-        if (path === '/about') setActiveSection('about');
-        else if (path === '/services') setActiveSection('services');
-        else if (path === '/why-choose-us') setActiveSection('timeline');
-        else if (path === '/projects') setActiveSection('projects');
-        return;
-      }
-
-      const sections = [
-        'home',
-        'about',
-        'services',
-        'timeline',
-        'projects',
-        'process',
-        'contact'
-      ];
-
-      const scrollPosition = window.scrollY + 200; // offset factor
-
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Trigger once on load/route change to sync state
-    return () => window.removeEventListener('scroll', handleScroll);
+    const path = location.pathname;
+    if (path === '/') {
+      setActiveSection('home');
+    } else if (path === '/about') {
+      setActiveSection('about');
+    } else if (path === '/services') {
+      setActiveSection('services');
+    } else if (path === '/why-choose-us') {
+      setActiveSection('timeline');
+    } else if (path === '/projects') {
+      setActiveSection('projects');
+    }
   }, [location.pathname]);
 
   // Handle CTA inside services on sub-pages
