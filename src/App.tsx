@@ -97,11 +97,11 @@ export default function App() {
   const handleScrollToSection = (sectionId: string) => {
     const routeMap: Record<string, string> = {
       home: '/',
-      about: '/about',
-      services: '/services',
-      timeline: '/why-choose-us',
-      projects: '/projects',
-      'projects-page': '/projects',
+      about: '/about/',
+      services: '/services/',
+      timeline: '/why-choose-us/',
+      projects: '/projects/',
+      'projects-page': '/projects/',
       contact: '#contact'
     };
 
@@ -158,8 +158,8 @@ export default function App() {
 
   // Set active navigation tab strictly corresponding to current route for multi-page behavior
   useEffect(() => {
-    const path = location.pathname;
-    if (path === '/') {
+    const path = location.pathname.replace(/\/$/, '');
+    if (path === '' || path === '/') {
       setActiveSection('home');
     } else if (path === '/about') {
       setActiveSection('about');
