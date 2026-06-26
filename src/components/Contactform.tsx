@@ -202,12 +202,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
 
               {/* Address rows details */}
               <div className="space-y-4">
-                <a
-                  href="https://maps.google.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex gap-4 items-start group/loc hover:text-emerald-600 transition-colors"
-                >
+                <div className="flex gap-4 items-start">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center border border-emerald-100 text-emerald-600 shrink-0">
                     <MapPin className="w-4 h-4" />
                   </div>
@@ -215,11 +210,11 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                     <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
                       Operational office
                     </h4>
-                    <p className="text-xs text-slate-605 mt-1 leading-relaxed">
-                      Madanganj-Kishangarh, Ajmer, Rajasthan, 305801
+                    <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                      208, Norda Ki Dhani, Sarana, Magra, Ajmer, Rajasthan 305811
                     </p>
                   </div>
-                </a>
+                </div>
 
                 <a
                   href="tel:+917728023503"
