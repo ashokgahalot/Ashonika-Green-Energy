@@ -45,6 +45,15 @@ jobs:
       - name: Build Production Bundle
         run: npm run build
 
+      - name: Copy Root Files to Dist (Insurance for manual GitHub additions)
+        run: |
+          for file in CNAME robots.txt sitemap.xml; do
+            if [ -f "$file" ]; then
+              echo "Copying root $file to dist/"
+              cp "$file" dist/
+            fi
+          done
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
