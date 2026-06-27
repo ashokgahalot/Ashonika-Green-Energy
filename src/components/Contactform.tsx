@@ -38,9 +38,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
   }, [selectedSubject]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [formState, setFormState] = useState<'idle' | 'otp_pending' | 'submitting' | 'success'>('idle');
-  const [enteredOtp, setEnteredOtp] = useState('');
-  const [otpError, setOtpError] = useState('');
+  const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -111,7 +109,6 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
         setFormState('success');
       } else {
         console.error("Web3Forms submission failed:", result);
-        setOtpError(result.message || "Something went wrong with submission. Please try again.");
         // Fallback to success to not block user, but show log
         setFormState('success');
       }
@@ -125,21 +122,6 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) {
-      return;
-    }
-
-    if (formData.subject === 'Free Site Survey') {
-      setFormState('otp_pending');
-    } else {
-      await sendFormToWeb3Forms();
-    }
-  };
-
-  const handleVerifyOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setOtpError('');
-    if (enteredOtp !== '123456') {
-      setOtpError('Invalid verification code. Please enter 123456 to verify.');
       return;
     }
 
@@ -158,8 +140,6 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
       message: ''
     });
     setErrors({});
-    setEnteredOtp('');
-    setOtpError('');
     setFormState('idle');
   };
 
@@ -290,60 +270,6 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   OK
                 </button>
               </div>
-            ) : formState === 'otp_pending' ? (
-              <form
-                onSubmit={handleVerifyOtp}
-                className="p-6 md:p-8 rounded-3xl bg-slate-50 border border-slate-200 shadow-md space-y-6 text-center"
-              >
-                <div className="space-y-3">
-                  <div className="w-14 h-14 rounded-full bg-amber-50 flex items-center justify-center mx-auto text-amber-700">
-                    <Sparkles className="w-6 h-6 animate-pulse" />
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900">
-                    OTP Verification Required
-                  </h3>
-                  <p className="text-slate-650 text-xs max-w-md mx-auto leading-relaxed">
-                    To schedule a Free Site Survey, we require interactive verification. We have sent a 6-digit confirmation code to your number: <span className="text-slate-905 font-semibold">{formData.phone}</span>
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="otp-input" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                    Enter OTP Code *
-                  </label>
-                  <input
-                    id="otp-input"
-                    type="text"
-                    required
-                    maxLength={6}
-                    placeholder="Enter 6-Digit Code"
-                    value={enteredOtp}
-                    onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, ''))}
-                    className="w-full text-center tracking-widest font-mono font-bold px-4 py-3 rounded-xl bg-white border border-slate-200 text-lg text-emerald-600 focus:border-emerald-500 focus:outline-hidden"
-                  />
-                  {otpError && (
-                    <p className="text-xs text-rose-500 font-bold mt-1">
-                      ⚠️ {otpError}
-                    </p>
-                  )}
-                </div>
-
-                <div className="flex gap-3 pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setFormState('idle')}
-                    className="w-1/3 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold border border-slate-200 text-slate-700 transition-all uppercase tracking-wider"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="submit"
-                    className="w-2/3 py-3 rounded-xl bg-linear-to-r from-emerald-600 to-emerald-500 text-white text-xs font-bold uppercase tracking-widest hover:from-emerald-500 transition-colors shadow-lg"
-                  >
-                    Verify and Submit
-                  </button>
-                </div>
-              </form>
             ) : (
               <form
                 id="site-survey-form"
