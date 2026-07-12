@@ -911,7 +911,7 @@ export default function SolarCalculator() {
         </div>
 
         {/* SECTION 2 - RESULTS PAGE GRID */}
-        <div ref={resultsRef} className="mt-12">
+        <div ref={resultsRef} className="mt-6">
           <AnimatePresence>
             {showResults && (
               <motion.div
@@ -919,113 +919,113 @@ export default function SolarCalculator() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 30 }}
                 transition={{ type: "spring", damping: 20 }}
-                className="space-y-8"
+                className="space-y-5"
               >
                 
                 {/* RESULTS MAIN HEADER */}
-                <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/60 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden transition-colors duration-300">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800/60 shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden transition-colors duration-300">
                   <div className="absolute top-0 left-0 w-2 h-full bg-linear-to-b from-emerald-500 to-amber-500" />
                   
-                  <div className="space-y-2 text-center md:text-left">
-                    <h3 className="text-2xl font-black text-slate-900 dark:text-slate-50 tracking-tight">
+                  <div className="space-y-1 text-center md:text-left">
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 dark:text-slate-50 tracking-tight">
                       {language === 'hi' ? "सोलर कैलकुलेटर परिणाम" : "Solar Calculator Projections"}
                     </h3>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {language === 'hi' 
                         ? `परिणाम की गणना: ${INDIAN_STATES[selectedStateIndex].nameHi} • ${customerCategory === 'residential' ? 'घरेलू' : customerCategory === 'commercial' ? 'व्यावसायिक' : 'औद्योगिक'}`
                         : `Sized for ${INDIAN_STATES[selectedStateIndex].nameEn} • ${customerCategory.toUpperCase()} rate of ₹${tariffRate}/kWh`}
                     </p>
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-2.5">
                     <button
                       onClick={resetForm}
-                      className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950 font-bold text-xs text-slate-700 dark:text-slate-300 transition-all cursor-pointer"
+                      className="flex items-center gap-1 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-950 font-bold text-[11px] text-slate-700 dark:text-slate-300 transition-all cursor-pointer"
                     >
-                      <RotateCcw className="w-3.5 h-3.5" />
+                      <RotateCcw className="w-3 h-3" />
                       <span>{language === 'hi' ? "रीसेट करें" : "Reset Form"}</span>
                     </button>
                     <a
                       href="#contact"
-                      className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition-all shadow-md shadow-emerald-950/10 cursor-pointer"
+                      className="flex items-center gap-1 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-[11px] transition-all shadow-md shadow-emerald-950/10 cursor-pointer"
                     >
                       <span>{language === 'hi' ? "बुक करें" : "Book Consultation"}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3 h-3" />
                     </a>
                   </div>
                 </div>
 
                 {/* MAIN CARDS: PLANT SIZE, AREA & INVESTMENT */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   
                   {/* RECOMMENDED PLANT SIZE CARD */}
-                  <div className="bg-emerald-600 text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden flex flex-col justify-between group">
-                    <div className="absolute -right-8 -top-8 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+                  <div className="bg-emerald-600 text-white rounded-xl p-3.5 sm:p-4 shadow-md relative overflow-hidden flex flex-col justify-between group">
+                    <div className="absolute -right-8 -top-8 w-20 h-20 bg-white/10 rounded-full blur-lg pointer-events-none group-hover:scale-125 transition-transform duration-500" />
                     
-                    <div className="space-y-4">
-                      <div className="inline-flex p-3 bg-white/15 rounded-2xl">
-                        <Sun className="w-6 h-6 text-amber-300 animate-pulse-gentle" />
+                    <div className="space-y-1.5">
+                      <div className="inline-flex p-1.5 bg-white/15 rounded-lg">
+                        <Sun className="w-4.5 h-4.5 text-amber-300 animate-pulse-gentle" />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold tracking-wider uppercase text-emerald-100">
+                        <h4 className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-emerald-100">
                           {language === 'hi' ? "अनुशंसित सोलर प्लांट साइज" : "Recommended Solar Plant"}
                         </h4>
-                        <p className="text-4xl sm:text-5xl font-black tracking-tight mt-1">
+                        <p className="text-xl sm:text-2xl font-black tracking-tight mt-0.5">
                           <AnimatedCounter value={results.plantSize} formatter={(v) => `${v.toFixed(1)} kW`} />
                         </p>
                       </div>
                     </div>
 
-                    <div className="border-t border-white/10 pt-4 mt-6">
-                      <p className="text-xs text-emerald-100 flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-300" />
+                    <div className="border-t border-white/10 pt-2 mt-3">
+                      <p className="text-[10px] text-emerald-100 flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3 text-amber-300" />
                         <span>{language === 'hi' ? "आपकी बिजली की 100% भरपाई हेतु" : "Tailored to fully offset your grid bill"}</span>
                       </p>
                     </div>
                   </div>
 
                   {/* AREA REQUIRED CARD */}
-                  <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/60 shadow-xl flex flex-col justify-between transition-colors duration-300">
-                    <div className="space-y-4">
-                      <div className="inline-flex p-3 bg-slate-100 dark:bg-slate-950 rounded-2xl text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800/40">
-                        <Zap className="w-6 h-6 text-amber-500" />
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800/60 shadow-md flex flex-col justify-between transition-colors duration-300">
+                    <div className="space-y-1.5">
+                      <div className="inline-flex p-1.5 bg-slate-100 dark:bg-slate-950 rounded-lg text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800/40">
+                        <Zap className="w-4.5 h-4.5 text-amber-500" />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
+                        <h4 className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
                           {language === 'hi' ? "आवश्यक छत का क्षेत्रफल (लगभग)" : "Rooftop Area Required"}
                         </h4>
-                        <p className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-slate-50 tracking-tight mt-1">
+                        <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-50 tracking-tight mt-0.5">
                           <AnimatedCounter value={results.areaRequired} formatter={(v) => `${v.toLocaleString()} sq.ft.`} />
                         </p>
                       </div>
                     </div>
 
-                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-4 mt-6">
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-2 mt-3">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">
                         {language === 'hi' ? "छाया मुक्त ठोस कंक्रीट या शीट छत क्षेत्र" : "Shadow-free south-facing rooftop clearance"}
                       </p>
                     </div>
                   </div>
 
                   {/* BUDGETARY ESTIMATE CARD */}
-                  <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/60 shadow-xl flex flex-col justify-between transition-colors duration-300">
-                    <div className="space-y-4">
-                      <div className="inline-flex p-3 bg-slate-100 dark:bg-slate-950 rounded-2xl text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800/40">
-                        <PiggyBank className="w-6 h-6 text-emerald-500" />
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800/60 shadow-md flex flex-col justify-between transition-colors duration-300">
+                    <div className="space-y-1.5">
+                      <div className="inline-flex p-1.5 bg-slate-100 dark:bg-slate-950 rounded-lg text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-800/40">
+                        <PiggyBank className="w-4.5 h-4.5 text-emerald-500" />
                       </div>
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
+                        <h4 className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
                           {language === 'hi' ? "अनुमानित सौर निवेश (औसत)" : "Estimated Solar Investment"}
                         </h4>
-                        <p className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-slate-50 tracking-tight mt-1 flex items-baseline gap-1">
+                        <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-50 tracking-tight mt-0.5 flex items-baseline gap-1">
                           <span>₹</span>
                           <AnimatedCounter value={Math.round((results.investmentEstimate.min + results.investmentEstimate.max) / 2)} formatter={(v) => v.toLocaleString()} />
                         </p>
                       </div>
                     </div>
 
-                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-4 mt-6">
-                      <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
+                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-2 mt-3">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
                         <span>*</span>
                         <span>{language === 'hi' ? "सरकारी सब्सिडी सीधे आपके बैंक खाते में उपलब्ध" : "National portal subsidies apply additionally"}</span>
                       </p>
@@ -1035,57 +1035,57 @@ export default function SolarCalculator() {
                 </div>
 
                 {/* FINANCIAL RETURN ANALYSIS CARDS */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   
                   {/* SIMPLE PAYBACK PERIOD */}
-                  <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/60 shadow-xl flex flex-col justify-between transition-colors duration-300">
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800/60 shadow-md flex flex-col justify-between transition-colors duration-300">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="space-y-4">
-                        <div className="inline-flex p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-2xl text-emerald-650 dark:text-emerald-400 border border-emerald-500/10">
-                          <RotateCcw className="w-6 h-6" />
+                      <div className="space-y-1.5">
+                        <div className="inline-flex p-1.5 bg-emerald-50 dark:bg-emerald-950/40 rounded-lg text-emerald-655 dark:text-emerald-400 border border-emerald-500/10">
+                          <RotateCcw className="w-4.5 h-4.5" />
                         </div>
                         <div>
-                          <h4 className="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
+                          <h4 className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
                             {language === 'hi' ? "पेबैक अवधि (सरल)" : "Simple Payback Period"}
                           </h4>
-                          <p className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-slate-50 tracking-tight mt-1">
+                          <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-50 tracking-tight mt-0.5">
                             <AnimatedCounter value={results.paybackPeriod} formatter={(v) => `${v.toFixed(1)} ${language === 'hi' ? 'वर्ष' : 'Years'}`} />
                           </p>
                         </div>
                       </div>
-                      <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-500/10">
+                      <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-emerald-500/10">
                         {language === 'hi' ? "त्वरित रिकवरी" : "High-Speed Yield"}
                       </div>
                     </div>
-                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-4 mt-6">
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-2 mt-3">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">
                         {language === 'hi' ? "वह समय जिसमें आपकी सौर बचत निवेश लागत को पूरा करती है" : "Time required to fully recover your upfront solar technology investment"}
                       </p>
                     </div>
                   </div>
 
                   {/* ANNUAL RETURN ON INVESTMENT */}
-                  <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/60 shadow-xl flex flex-col justify-between transition-colors duration-300">
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800/60 shadow-md flex flex-col justify-between transition-colors duration-300">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="space-y-4">
-                        <div className="inline-flex p-3 bg-amber-50 dark:bg-amber-950/40 rounded-2xl text-amber-600 dark:text-amber-400 border border-amber-500/10">
-                          <TrendingUp className="w-6 h-6" />
+                      <div className="space-y-1.5">
+                        <div className="inline-flex p-1.5 bg-amber-50 dark:bg-amber-950/40 rounded-lg text-amber-600 dark:text-amber-400 border border-amber-500/10">
+                          <TrendingUp className="w-4.5 h-4.5" />
                         </div>
                         <div>
-                          <h4 className="text-xs sm:text-sm font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
+                          <h4 className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-slate-500 dark:text-slate-400">
                             {language === 'hi' ? "वार्षिक निवेश रिटर्न (ROI)" : "Annual Return on Investment (ROI)"}
                           </h4>
-                          <p className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mt-1">
+                          <p className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mt-0.5">
                             <AnimatedCounter value={results.roi} formatter={(v) => `${v.toFixed(1)}%`} />
                           </p>
                         </div>
                       </div>
-                      <div className="bg-amber-550/10 text-amber-600 dark:text-amber-400 text-xs font-bold px-3 py-1.5 rounded-full border border-amber-500/10">
+                      <div className="bg-amber-550/10 text-amber-600 dark:text-amber-400 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-amber-500/10">
                         {language === 'hi' ? "सावधि जमा से 3 गुना बेहतर" : "3x Better Than FD"}
                       </div>
                     </div>
-                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-4 mt-6">
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
+                    <div className="border-t border-slate-100 dark:border-slate-800/60 pt-2 mt-3">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400">
                         {language === 'hi' ? "फिक्स डिपॉजिट या म्यूचुअल फंड की तुलना में उत्कृष्ट टैक्स-फ्री रिटर्न दर" : "Consistent tax-free annual yield generated by your solar system asset"}
                       </p>
                     </div>
@@ -1094,46 +1094,46 @@ export default function SolarCalculator() {
                 </div>
 
                 {/* INTERACTIVE BENTO GRID: PRODUCTION & FINANCIAL SAVINGS */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   
                   {/* GENERATION BLUEPRINT (LEFT BENTO) */}
-                  <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/60 shadow-xl space-y-6 transition-colors duration-300">
-                    <h4 className="text-lg font-black text-slate-900 dark:text-slate-50 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800/60 pb-3">
-                      <Sun className="w-5 h-5 text-amber-500" />
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3 sm:p-3.5 border border-slate-200 dark:border-slate-800/60 shadow-md space-y-3 transition-colors duration-300">
+                    <h4 className="text-sm font-black text-slate-900 dark:text-slate-50 flex items-center gap-1.5 border-b border-slate-100 dark:border-slate-800/60 pb-1.5">
+                      <Sun className="w-4 h-4 text-amber-500" />
                       <span>{language === 'hi' ? "अनुमानित सौर ऊर्जा उत्पादन (kWh)" : "Estimated Electricity Generation"}</span>
                     </h4>
 
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                       
                       {/* MONTHLY GEN */}
-                      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
+                      <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
                         <div className="space-y-0.5">
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "मासिक उत्पादन" : "Monthly Generation"}</p>
-                          <p className="text-xxs text-slate-500 dark:text-slate-400">{language === 'hi' ? "प्रति माह औसत उत्पादन" : "Average generated units monthly"}</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "मासिक उत्पादन" : "Monthly Generation"}</p>
+                          <p className="text-[9px] text-slate-500 dark:text-slate-400">{language === 'hi' ? "प्रति माह औसत उत्पादन" : "Average generated units monthly"}</p>
                         </div>
-                        <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
+                        <p className="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100">
                           <AnimatedCounter value={results.monthlyGen} formatter={(v) => `${v.toLocaleString()} Units`} />
                         </p>
                       </div>
 
                       {/* ANNUAL GEN */}
-                      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
+                      <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
                         <div className="space-y-0.5">
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "वार्षिक उत्पादन" : "Annual Generation"}</p>
-                          <p className="text-xxs text-slate-500 dark:text-slate-400">{language === 'hi' ? "प्रति वर्ष संचयी ऊर्जा" : "Cumulative solar energy annually"}</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "वार्षिक उत्पादन" : "Annual Generation"}</p>
+                          <p className="text-[9px] text-slate-500 dark:text-slate-400">{language === 'hi' ? "प्रति वर्ष संचयी ऊर्जा" : "Cumulative solar energy annually"}</p>
                         </div>
-                        <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-slate-100">
+                        <p className="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100">
                           <AnimatedCounter value={results.annualGen} formatter={(v) => `${v.toLocaleString()} Units`} />
                         </p>
                       </div>
 
                       {/* LIFETIME GEN */}
-                      <div className="p-4 rounded-2xl bg-emerald-500/5 dark:bg-emerald-950/20 border border-emerald-500/20 flex justify-between items-center">
+                      <div className="p-2.5 rounded-lg bg-emerald-500/5 dark:bg-emerald-950/20 border border-emerald-500/20 flex justify-between items-center">
                         <div className="space-y-0.5">
-                          <p className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">{language === 'hi' ? "कुल संचयी उत्पादन (25 वर्ष)" : "Lifetime Generation (25 Years)"}</p>
-                          <p className="text-xxs text-slate-500 dark:text-slate-450">{language === 'hi' ? "सौर पैनल की पूर्ण परिचालन अवधि" : "Full operational design lifespan"}</p>
+                          <p className="text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">{language === 'hi' ? "कुल संचयी उत्पादन (25 वर्ष)" : "Lifetime Generation (25 Years)"}</p>
+                          <p className="text-[9px] text-slate-500 dark:text-slate-450">{language === 'hi' ? "सौर पैनल की पूर्ण परिचालन अवधि" : "Full operational design lifespan"}</p>
                         </div>
-                        <p className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400">
+                        <p className="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-400">
                           <AnimatedCounter value={results.lifetimeGen} formatter={(v) => `${v.toLocaleString()} Units`} />
                         </p>
                       </div>
@@ -1142,43 +1142,43 @@ export default function SolarCalculator() {
                   </div>
 
                   {/* FINANCIAL SAVINGS BLUEPRINT (RIGHT BENTO) */}
-                  <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800/60 shadow-xl space-y-6 transition-colors duration-300">
-                    <h4 className="text-lg font-black text-slate-900 dark:text-slate-50 flex items-center gap-2 border-b border-slate-100 dark:border-slate-800/60 pb-3">
-                      <TrendingUp className="w-5 h-5 text-emerald-500" />
+                  <div className="bg-white dark:bg-slate-900 rounded-xl p-3 sm:p-3.5 border border-slate-200 dark:border-slate-800/60 shadow-md space-y-3 transition-colors duration-300">
+                    <h4 className="text-sm font-black text-slate-900 dark:text-slate-50 flex items-center gap-1.5 border-b border-slate-100 dark:border-slate-800/60 pb-1.5">
+                      <TrendingUp className="w-4 h-4 text-emerald-500" />
                       <span>{language === 'hi' ? "वित्तीय बचत अनुमान (₹)" : "Estimated Financial Savings"}</span>
                     </h4>
 
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                       
                       {/* MONTHLY SAVINGS */}
-                      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
+                      <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
                         <div className="space-y-0.5">
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "मासिक बचत" : "Monthly Savings"}</p>
-                          <p className="text-xxs text-slate-500 dark:text-slate-400">{language === 'hi' ? "पहले महीने से बिजली बिल में कटौती" : "Reduction in utility bills first month"}</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "मासिक बचत" : "Monthly Savings"}</p>
+                          <p className="text-[9px] text-slate-500 dark:text-slate-400">{language === 'hi' ? "पहले महीने से बिजली बिल में कटौती" : "Reduction in utility bills first month"}</p>
                         </div>
-                        <p className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-450">
+                        <p className="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-450">
                           <AnimatedCounter value={results.monthlySavings} formatter={(v) => `₹ ${v.toLocaleString()}`} />
                         </p>
                       </div>
 
                       {/* ANNUAL SAVINGS */}
-                      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
+                      <div className="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/40 dark:border-slate-800/40 flex justify-between items-center">
                         <div className="space-y-0.5">
-                          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "वार्षिक बचत" : "Annual Savings"}</p>
-                          <p className="text-xxs text-slate-500 dark:text-slate-400">{language === 'hi' ? "वार्षिक संचयी वित्तीय लाभ" : "Yearly accumulated bill credits"}</p>
+                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{language === 'hi' ? "वार्षिक बचत" : "Annual Savings"}</p>
+                          <p className="text-[9px] text-slate-500 dark:text-slate-400">{language === 'hi' ? "वार्षिक संचयी वित्तीय लाभ" : "Yearly accumulated bill credits"}</p>
                         </div>
-                        <p className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-450">
+                        <p className="text-base sm:text-lg font-black text-emerald-600 dark:text-emerald-450">
                           <AnimatedCounter value={results.annualSavings} formatter={(v) => `₹ ${v.toLocaleString()}`} />
                         </p>
                       </div>
 
                       {/* LIFETIME SAVINGS */}
-                      <div className="p-4 rounded-2xl bg-amber-500/5 dark:bg-amber-950/20 border border-amber-500/20 flex justify-between items-center">
+                      <div className="p-2.5 rounded-lg bg-amber-500/5 dark:bg-amber-950/20 border border-amber-500/20 flex justify-between items-center">
                         <div className="space-y-0.5">
-                          <p className="text-xs font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider">{language === 'hi' ? "कुल संचयी बचत (25 वर्ष)" : "Lifetime Savings (25 Years)"}</p>
-                          <p className="text-xxs text-slate-500 dark:text-slate-450">{language === 'hi' ? "टैक्स फ्री संचयी वेल्थ क्रिएशन" : "Tax-free cumulative wealth generated"}</p>
+                          <p className="text-[10px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider">{language === 'hi' ? "कुल संचयी बचत (25 वर्ष)" : "Lifetime Savings (25 Years)"}</p>
+                          <p className="text-[9px] text-slate-500 dark:text-slate-450">{language === 'hi' ? "टैक्स फ्री संचयी वेल्थ क्रिएशन" : "Tax-free cumulative wealth generated"}</p>
                         </div>
-                        <p className="text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-450">
+                        <p className="text-base sm:text-lg font-black text-amber-600 dark:text-amber-450">
                           <AnimatedCounter value={results.lifetimeSavings} formatter={(v) => `₹ ${v.toLocaleString()}`} />
                         </p>
                       </div>
@@ -1189,43 +1189,43 @@ export default function SolarCalculator() {
                 </div>
 
                 {/* ENVIRONMENTAL ECO BENEFITS (FULL WIDTH) */}
-                <div className="bg-linear-to-r from-emerald-950 to-slate-950 text-white rounded-3xl p-6 sm:p-8 border border-emerald-900/40 shadow-xl relative overflow-hidden">
+                <div className="bg-linear-to-r from-emerald-950 to-slate-950 text-white rounded-xl p-3 sm:p-3.5 border border-emerald-900/40 shadow-md relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
                   
-                  <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                  <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
                     
-                    <div className="space-y-2">
-                      <h4 className="text-lg font-black tracking-tight flex items-center gap-2 text-emerald-400">
-                        <Leaf className="w-5 h-5 text-emerald-400" />
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-black tracking-tight flex items-center gap-1.5 text-emerald-400">
+                        <Leaf className="w-3.5 h-3.5 text-emerald-400" />
                         <span>{language === 'hi' ? "आपके सौर प्रोजेक्ट के पर्यावरणीय लाभ" : "Environmental Dividends"}</span>
                       </h4>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
+                      <p className="text-[10px] sm:text-[11px] text-slate-300 leading-relaxed max-w-xl">
                         {language === 'hi'
                           ? "रूफटॉप सौर पैनलों पर संक्रमण करके, आप कार्बन फुटप्रिंट को काफी कम करते हैं। कोयला आधारित बिजली की जगह स्वच्छ सौर ऊर्जा का यह योगदान आपके परिवेश को हरा-भरा बनाता है।"
                           : "By routing your electricity demand to solar, you displace coal-fired dispatch. Here is the cumulative positive footprint equivalent of your system over 25 years."}
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 sm:gap-6 w-full md:w-auto shrink-0 border-t md:border-t-0 md:border-l border-slate-800 pt-4 md:pt-0 md:pl-8">
+                    <div className="grid grid-cols-2 gap-3 w-full md:w-auto shrink-0 border-t md:border-t-0 md:border-l border-slate-800 pt-2.5 md:pt-0 md:pl-4">
                       
                       {/* CO2 CARDS */}
-                      <div className="space-y-1">
-                        <p className="text-xxs font-bold uppercase text-slate-400 tracking-wider">
+                      <div className="space-y-0.5">
+                        <p className="text-[9px] font-bold uppercase text-slate-400 tracking-wider">
                           {language === 'hi' ? "CO₂ कार्बन उत्सर्जन में कमी" : "CO₂ Reduction"}
                         </p>
-                        <p className="text-2xl sm:text-3xl font-black text-white flex items-baseline gap-1">
+                        <p className="text-lg sm:text-xl font-black text-white flex items-baseline gap-0.5">
                           <AnimatedCounter value={results.co2Reduced} formatter={(v) => v.toFixed(1)} />
-                          <span className="text-xs text-emerald-400 font-bold">{language === 'hi' ? "टन" : "Tonnes"}</span>
+                          <span className="text-[10px] text-emerald-400 font-bold">{language === 'hi' ? "टन" : "Tonnes"}</span>
                         </p>
                       </div>
 
                       {/* TREES PLANTED CARDS */}
-                      <div className="space-y-1">
-                        <p className="text-xxs font-bold uppercase text-slate-400 tracking-wider flex items-center gap-1">
-                          <TreePine className="w-3.5 h-3.5 text-emerald-400" />
+                      <div className="space-y-0.5">
+                        <p className="text-[9px] font-bold uppercase text-slate-400 tracking-wider flex items-center gap-1">
+                          <TreePine className="w-3 h-3 text-emerald-400" />
                           <span>{language === 'hi' ? "रोपे गए पेड़ों के बराबर" : "Trees Equivalent"}</span>
                         </p>
-                        <p className="text-2xl sm:text-3xl font-black text-emerald-400">
+                        <p className="text-lg sm:text-xl font-black text-emerald-400">
                           <AnimatedCounter value={results.treesPlanted} formatter={(v) => v.toLocaleString()} />
                         </p>
                       </div>
@@ -1250,13 +1250,13 @@ export default function SolarCalculator() {
                   </div>
 
                   {/* Right Side: Action Buttons */}
-                  <div className="flex items-center gap-3 w-full sm:w-auto">
+                  <div className="flex items-center gap-2.5 w-full sm:w-auto">
                     {/* Instagram Share Option */}
                     <button
                       onClick={handleInstagramShare}
-                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-xl sm:rounded-full bg-gradient-to-tr from-[#833AB4] via-[#E1306C] to-[#F77737] hover:scale-[1.02] active:scale-[0.98] text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:opacity-95 transition-all cursor-pointer shrink-0"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg sm:rounded-full bg-gradient-to-tr from-[#833AB4] via-[#E1306C] to-[#F77737] hover:scale-[1.02] active:scale-[0.98] text-white font-extrabold text-[11px] sm:text-xs tracking-wide shadow-sm hover:opacity-95 transition-all cursor-pointer shrink-0"
                     >
-                      <svg className="w-4 h-4 fill-white stroke-none" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 fill-white stroke-none" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
                       </svg>
                       <span>Instagram</span>
@@ -1305,9 +1305,9 @@ export default function SolarCalculator() {
                       })()}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-xl sm:rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg sm:rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold text-[11px] sm:text-xs tracking-wide shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                     >
-                      <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.456L0 24zm5.835-4.117c1.652.98 3.271 1.498 4.748 1.499 5.486 0 9.948-4.463 9.952-9.954.002-2.659-1.03-5.159-2.906-7.038C15.808 2.508 13.315 1.478 10.66 1.477c-5.489 0-9.954 4.464-9.958 9.957-.001 2.01.527 3.973 1.53 5.71l-.999 3.647 3.73-.978zm13.113-7.516c-.302-.152-1.791-.883-2.067-.984-.277-.101-.479-.152-.68.152-.201.302-.781.984-.956 1.186-.176.201-.353.227-.655.075-.302-.152-1.275-.47-2.428-1.499-.896-.8-1.5-.178-1.677-.48-.177-.302-.019-.465.132-.615.136-.135.302-.353.453-.529.151-.177.201-.277.302-.454.101-.177.05-.353-.025-.504-.075-.152-.68-1.639-.933-2.248-.247-.594-.499-.514-.68-.523-.176-.009-.378-.011-.58-.011-.202 0-.53.076-.807.379-.277.302-1.058 1.034-1.058 2.522 0 1.488 1.083 2.928 1.234 3.129.151.202 2.132 3.256 5.166 4.564.721.311 1.284.498 1.723.638.724.23 1.382.197 1.902.12.579-.085 1.791-.732 2.043-1.438.252-.706.252-1.312.176-1.438-.076-.126-.277-.202-.579-.354z" />
                       </svg>
                       <span>WhatsApp</span>
@@ -1316,7 +1316,7 @@ export default function SolarCalculator() {
                     {/* Download PDF button */}
                     <button
                       onClick={() => setShowPdfConfirm(true)}
-                      className="flex-1 sm:flex-initial flex items-center justify-center gap-2 px-6 py-3 rounded-xl sm:rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                      className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg sm:rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-extrabold text-[11px] sm:text-xs tracking-wide shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                     >
                       <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

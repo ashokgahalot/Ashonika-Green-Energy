@@ -115,20 +115,8 @@ export default function App() {
     };
 
     if (sectionId === 'calculator') {
-      if (location.pathname === '/') {
-        const element = document.getElementById('calculator');
-        if (element) {
-          const offset = 80;
-          const bodyRect = document.body.getBoundingClientRect().top;
-          const elementRect = element.getBoundingClientRect().top;
-          window.scrollTo({
-            top: elementRect - bodyRect - offset,
-            behavior: 'smooth'
-          });
-          setActiveSection('calculator');
-          return;
-        }
-      }
+      navigate('/calculator/');
+      return;
     }
 
     if (sectionId === 'contact') {

@@ -21,6 +21,7 @@ export default defineConfig(() => {
           'why-choose-us': path.resolve(__dirname, 'why-choose-us/index.html'),
           projects: path.resolve(__dirname, 'projects/index.html'),
           faqs: path.resolve(__dirname, 'faqs/index.html'),
+          calculator: path.resolve(__dirname, 'calculator/index.html'),
         },
       },
     },
