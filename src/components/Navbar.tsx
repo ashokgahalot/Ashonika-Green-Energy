@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
 import { motion } from 'motion/react';
 import Logo from './Logo.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -18,6 +19,7 @@ interface NavbarProps {
 export default function Navbar({ onNavigate, activeSection, theme = 'light', toggleTheme }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,11 +35,13 @@ export default function Navbar({ onNavigate, activeSection, theme = 'light', tog
   }, []);
 
   const menuItems = [
-    { label: 'Home', id: 'home' },
-    { label: 'About Us', id: 'about' },
-    { label: 'Services', id: 'services' },
-    { label: 'Why Choose Us', id: 'timeline' },
-    { label: 'Projects', id: 'projects' },
+    { label: t('nav', 'home'), id: 'home' },
+    { label: t('nav', 'about'), id: 'about' },
+    { label: t('nav', 'services'), id: 'services' },
+    { label: t('nav', 'calculator'), id: 'calculator' },
+    { label: t('nav', 'timeline'), id: 'timeline' },
+    { label: t('nav', 'projects'), id: 'projects' },
+    { label: t('nav', 'faqs'), id: 'faqs' },
   ];
 
   const handleMenuClick = (id: string) => {
@@ -62,23 +66,23 @@ export default function Navbar({ onNavigate, activeSection, theme = 'light', tog
           </div>
 
           {/* Desktop nav links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {menuItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => handleMenuClick(item.id)}
-                  className={`relative px-4 py-2 text-xs xl:text-sm font-medium tracking-wide rounded-full cursor-pointer transition-colors duration-300 ${
+                  className={`relative px-1.5 xl:px-3 py-1.5 text-[11px] xl:text-[13px] font-bold tracking-wide rounded-full cursor-pointer transition-colors duration-300 ${
                     isActive
-                      ? 'text-emerald-700 dark:text-emerald-400 font-bold'
-                      : 'text-slate-705 dark:text-slate-300 hover:text-emerald-650 dark:hover:text-emerald-400'
+                      ? 'text-emerald-700 dark:text-emerald-400'
+                      : 'text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400'
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="navPill"
-                      className="absolute inset-0 bg-emerald-50 dark:bg-emerald-950/40 rounded-full -z-10 border border-emerald-550/10 dark:border-emerald-400/20 shadow-xs"
+                      className="absolute inset-0 bg-emerald-50/50 dark:bg-emerald-950/40 rounded-full -z-10 border border-emerald-550/10 dark:border-emerald-400/20 shadow-xs"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -89,27 +93,38 @@ export default function Navbar({ onNavigate, activeSection, theme = 'light', tog
           </div>
 
           {/* Side action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-1.5 xl:gap-3 shrink-0">
             {/* Elegant Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-full border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 cursor-pointer flex items-center justify-center shadow-xs"
+              className="p-1.5 xl:p-2.5 rounded-full border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 cursor-pointer flex items-center justify-center shadow-xs"
               title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
               aria-label="Toggle visual theme"
             >
               {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-500 animate-[spin_6s_linear_infinite]" />
+                <Sun className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-500 animate-[spin_6s_linear_infinite]" />
               ) : (
-                <Moon className="w-4 h-4 text-emerald-600" />
+                <Moon className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-emerald-600" />
               )}
+            </button>
+
+            {/* Language Switcher Button (to the left of Get Quote) */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 px-2 xl:px-3.5 py-1.5 xl:py-2 text-[10px] xl:text-xs font-bold uppercase rounded-full border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all cursor-pointer shadow-xs select-none"
+              title="Switch Language / भाषा बदलें"
+            >
+              <span className={language === 'en' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-slate-400 dark:text-slate-500 font-medium'}>EN</span>
+              <span className="text-slate-300 dark:text-slate-700">|</span>
+              <span className={language === 'hi' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-slate-400 dark:text-slate-500 font-medium'}>हिन्दी</span>
             </button>
 
             <button
               onClick={() => handleMenuClick('contact')}
-              className="px-5 py-2.5 rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 text-white font-semibold text-xs tracking-wider uppercase hover:from-emerald-500 hover:to-emerald-400 cursor-pointer transition-all duration-200 transform hover:scale-[1.03] shadow-lg shadow-emerald-900/10 border border-emerald-400/20 flex items-center gap-1.5"
+              className="px-3.5 xl:px-5 py-2 xl:py-2.5 rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 text-white font-semibold text-[10px] xl:text-xs tracking-wider uppercase hover:from-emerald-500 hover:to-emerald-400 cursor-pointer transition-all duration-200 transform hover:scale-[1.03] shadow-lg shadow-emerald-900/10 border border-emerald-400/20 flex items-center gap-1"
             >
-              Get Quote
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              {t('nav', 'getQuote')}
+              <ArrowUpRight className="w-3 h-3 xl:w-3.5 xl:h-3.5" />
             </button>
           </div>
 
@@ -126,6 +141,17 @@ export default function Navbar({ onNavigate, activeSection, theme = 'light', tog
               ) : (
                 <Moon className="w-5 h-5 text-emerald-600" />
               )}
+            </button>
+
+            {/* Language Switcher for Mobile */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 px-2.5 py-1.5 text-[10px] font-bold uppercase rounded-lg border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all cursor-pointer shadow-xs select-none animate-pulse-gentle"
+              title="Switch Language / भाषा बदलें"
+            >
+              <span className={language === 'en' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400 dark:text-slate-500'}>EN</span>
+              <span className="text-slate-300 dark:text-slate-700">|</span>
+              <span className={language === 'hi' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400 dark:text-slate-500'}>हिन्दी</span>
             </button>
 
             <button
@@ -161,7 +187,7 @@ export default function Navbar({ onNavigate, activeSection, theme = 'light', tog
                 onClick={() => handleMenuClick('contact')}
                 className="w-full text-center py-3 rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 text-white font-bold tracking-wider uppercase hover:from-emerald-500 shadow-md flex items-center justify-center gap-2"
               >
-                <span>Get Quote</span>
+                <span>{t('nav', 'getQuote')}</span>
                 <ArrowUpRight className="w-4 h-4" />
               </button>
             </div>

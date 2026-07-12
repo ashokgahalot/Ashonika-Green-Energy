@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { Eye, MapPin, Minimize2, ZoomIn, Landmark, ChevronLeft, ChevronRight, ArrowRight, ArrowLeft, Search, X } from 'lucide-react';
 import SectionBackground3D from './SectionBackground3D.tsx';
 import TiltCard from './TiltCard.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface ProjectItem {
   id: string;
@@ -112,6 +113,7 @@ interface ProjectsProps {
 }
 
 export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, onBackToHome }: ProjectsProps) {
+  const { language, t } = useLanguage();
   const [filter, setFilter] = useState<'All' | 'Residential' | 'Commercial' | 'Industrial'>('All');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -119,16 +121,42 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
   // Carousel Active index state
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
+  const getCategoryLabel = (cat: string) => {
+    if (language === 'en') return cat;
+    switch (cat) {
+      case 'Residential': return 'घरेलू (Residential)';
+      case 'Commercial': return 'व्यावसायिक (Commercial)';
+      case 'Industrial': return 'औद्योगिक (Industrial)';
+      default: return cat;
+    }
+  };
+
   const projectsData: ProjectItem[] = [
+    {
+      id: 'proj_swastik',
+      title: 'Swastik Edible Oils',
+      category: 'Industrial',
+      location: language === 'en' ? 'Bor Khandi Kalan, Rajasthan' : 'बोड़ खंडी कलां, राजस्थान',
+      capacity: language === 'en' ? '1 MW Industrial Rooftop' : '1 मेगावाट औद्योगिक रूफटॉप',
+      beforeImg: 'https://lh3.googleusercontent.com/d/1Kp7nVL-WAdUWb3jjC8zbTgYrrbGm-D1u',
+      afterImg: 'https://lh3.googleusercontent.com/d/1wrP66CdkYW3s6O_iatc5MLWx3Kwhm5Qe',
+      description: language === 'en'
+        ? 'A massive 1 MW Industrial Rooftop Solar Power Plant engineered for Swastik Edible Oils in Bor Khandi Kalan, Rajasthan. This high-capacity system powers continuous manufacturing processes with clean energy.'
+        : 'बोड़ खंडी कलां, राजस्थान में स्वस्तिक एडिबल ऑइल्स के लिए निर्मित एक विशाल 1 मेगावाट औद्योगिक रूफटॉप सोलर पावर प्लांट। यह उच्च क्षमता प्रणाली स्वच्छ ऊर्जा के साथ निरंतर विनिर्माण प्रक्रियाओं को संचालित करती है।',
+      images: [
+        'https://lh3.googleusercontent.com/d/1Kp7nVL-WAdUWb3jjC8zbTgYrrbGm-D1u',
+        'https://lh3.googleusercontent.com/d/1wrP66CdkYW3s6O_iatc5MLWx3Kwhm5Qe'
+      ]
+    },
     {
       id: 'proj1',
       title: 'Jain Restaurant',
       category: 'Commercial',
-      location: 'RK Link Rd, Tilak Nagar, Kishangarh, Rajasthan 305801',
-      capacity: '35 kW Commercial Rooftop',
+      location: language === 'en' ? 'RK Link Rd, Tilak Nagar, Kishangarh, Rajasthan 305801' : 'आरके लिंक रोड, तिलक नगर, किशनगढ़, राजस्थान 305801',
+      capacity: language === 'en' ? '35 kW Commercial Rooftop' : '35 किलोवाट व्यावसायिक रूफटॉप',
       beforeImg: 'https://lh3.googleusercontent.com/d/1KtR6Pb1Hzy_xc65XTLtDo_vJ-yRdoSC0',
       afterImg: 'https://lh3.googleusercontent.com/d/1KBBNtASR678yyA1k7ElTqnfbGsOLo4zQ',
-      description: '',
+      description: language === 'en' ? '' : '',
       images: [
         'https://lh3.googleusercontent.com/d/1KtR6Pb1Hzy_xc65XTLtDo_vJ-yRdoSC0',
         'https://lh3.googleusercontent.com/d/1KBBNtASR678yyA1k7ElTqnfbGsOLo4zQ'
@@ -138,11 +166,13 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
       id: 'proj2',
       title: 'R.P. Wood Products Pvt. Ltd.',
       category: 'Industrial',
-      location: 'Near Balaji Temple, Ajmer-Jaipur Highway, N.H.-8 Gegal, Ajmer, Rajasthan 305001',
-      capacity: '800 kW Industrial Rooftop',
+      location: language === 'en' ? 'Near Balaji Temple, Ajmer-Jaipur Highway, N.H.-8 Gegal, Ajmer, Rajasthan 305001' : 'बालाजी मंदिर के पास, अजमेर-जयपुर हाईवे, एन.एच.-8 गेगल, अजमेर, राजस्थान 305001',
+      capacity: language === 'en' ? '800 kW Industrial Rooftop' : '800 किलोवाट औद्योगिक रूफटॉप',
       beforeImg: 'https://lh3.googleusercontent.com/d/18-SgWDtwmkRYI24PRTGgOntVS_kDX9kh',
       afterImg: 'https://lh3.googleusercontent.com/d/1Q-TT-dBmj4OHjIlCh7YrxIjbEyJXkE27',
-      description: 'An expansive industrial rooftop solar installation for R.P. Wood Products Pvt. Ltd., designed to seamlessly power heavy wood processing machinery and reduce grid reliance.',
+      description: language === 'en'
+        ? 'An expansive industrial rooftop solar installation for R.P. Wood Products Pvt. Ltd., designed to seamlessly power heavy wood processing machinery and reduce grid reliance.'
+        : 'आर.पी. वुड प्रोडक्ट्स प्राइवेट लिमिटेड के लिए एक व्यापक औद्योगिक रूफटॉप सोलर इन्स्टॉलेशन, जो भारी लकड़ी प्रसंस्करण मशीनरी को बिजली देने और ग्रिड पर निर्भरता कम करने के लिए डिज़ाइन किया गया है।',
       images: [
         'https://lh3.googleusercontent.com/d/18-SgWDtwmkRYI24PRTGgOntVS_kDX9kh',
         'https://lh3.googleusercontent.com/d/1Q-TT-dBmj4OHjIlCh7YrxIjbEyJXkE27',
@@ -153,11 +183,13 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
       id: 'proj3',
       title: 'Mr. Vinod (House)',
       category: 'Residential',
-      location: 'Railway Station, Kishangarh, Rajasthan',
-      capacity: '3 kW Residential',
+      location: language === 'en' ? 'Railway Station, Kishangarh, Rajasthan' : 'रेलवे स्टेशन, किशनगढ़, राजस्थान',
+      capacity: language === 'en' ? '3 kW Residential' : '3 किलोवाट घरेलू रूफटॉप',
       beforeImg: 'https://lh3.googleusercontent.com/d/1DdrQcTGILxBITQnTHfdjg4kpGvogSj2E',
       afterImg: 'https://lh3.googleusercontent.com/d/19e3Y4oepIQYAej794WrbfltK8JLPbZ73',
-      description: 'A custom high-efficiency 3 kW residential rooftop solar PV system designed to reduce grid reliance and deliver sustainable domestic electricity for Mr. Vinod.',
+      description: language === 'en'
+        ? 'A custom high-efficiency 3 kW residential rooftop solar PV system designed to reduce grid reliance and deliver sustainable domestic electricity for Mr. Vinod.'
+        : 'श्री विनोद के लिए ग्रिड पर निर्भरता को कम करने और टिकाऊ घरेलू बिजली प्रदान करने के लिए डिज़ाइन किया गया एक कस्टम उच्च दक्षता वाला 3 किलोवाट आवासीय रूफटॉप सोलर पीवी सिस्टम।',
       images: [
         'https://lh3.googleusercontent.com/d/1DdrQcTGILxBITQnTHfdjg4kpGvogSj2E',
         'https://lh3.googleusercontent.com/d/19e3Y4oepIQYAej794WrbfltK8JLPbZ73'
@@ -167,11 +199,13 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
       id: 'proj4',
       title: 'Mr. Vikas Jain (House)',
       category: 'Residential',
-      location: 'Shivaji Nagar, Kishangarh, Rajasthan',
-      capacity: '8 kW Residential',
+      location: language === 'en' ? 'Shivaji Nagar, Kishangarh, Rajasthan' : 'शिवाजी नगर, किशनगढ़, राजस्थान',
+      capacity: language === 'en' ? '8 kW Residential' : '8 किलोवाट घरेलू रूफटॉप',
       beforeImg: 'https://lh3.googleusercontent.com/d/1z3aDDxLHldiJVDZ7HwaV1XSTP4hfUGg7',
       afterImg: 'https://lh3.googleusercontent.com/d/1vGJD-OSEhoJEDphQgOfFv1OIjArxjMZS',
-      description: 'A stellar, state-of-the-art 8 kW residential solar plant integrated with premium tier-1 solar cells for smart home power solutions.',
+      description: language === 'en'
+        ? 'A stellar, state-of-the-art 8 kW residential solar plant integrated with premium tier-1 solar cells for smart home power solutions.'
+        : 'स्मार्ट होम पावर सॉल्यूशंस के लिए प्रीमियम टियर-1 सोलर सेल्स के साथ एकीकृत एक शानदार, अत्याधुनिक 8 किलोवाट आवासीय सोलर प्लांट।',
       images: [
         'https://lh3.googleusercontent.com/d/1z3aDDxLHldiJVDZ7HwaV1XSTP4hfUGg7',
         'https://lh3.googleusercontent.com/d/1vGJD-OSEhoJEDphQgOfFv1OIjArxjMZS'
@@ -254,13 +288,19 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
           <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-[11px] font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase rounded-full">
               <Eye className="w-3.5 h-3.5" />
-              Proven Operational Track Record
+              {language === 'en' ? 'Proven Operational Track Record' : 'प्रमाणित परिचालन ट्रैक रिकॉर्ड'}
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Grid Commissioned Sites</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
+              {language === 'en' ? (
+                <>Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Grid Commissioned Sites</span></>
+              ) : (
+                <>हमारे <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">ग्रिड चालू प्रोजेक्ट्स</span></>
+              )}
             </h2>
-            <p className="text-slate-600 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
-              Explore our real-world custom layouts, highlighting empty spaces on before-after premium smart solar grid commissioning.
+            <p className="text-slate-600 dark:text-slate-350 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
+              {language === 'en'
+                ? 'Explore our real-world custom layouts, highlighting empty spaces on before-after premium smart solar grid commissioning.'
+                : 'हमारे वास्तविक प्रोजेक्ट्स देखें, जिसमें खाली छत के स्थान बनाम हाई-पावर ग्रिड चालू होने के पहले और बाद की तस्वीरें शामिल हैं।'}
             </p>
           </div>
 
@@ -287,7 +327,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                         alt={project.title}
                       />
                       <div className="absolute top-2 left-2 bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-850 px-2.5 py-1 rounded-md text-[8px] font-bold text-emerald-700 dark:text-emerald-400 capitalize font-mono z-20">
-                        {project.category}
+                        {getCategoryLabel(project.category)}
                       </div>
                     </div>
 
@@ -301,7 +341,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                           {project.title}
                         </h3>
                         <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium font-sans">
-                          Capacity: {project.capacity}
+                          {language === 'en' ? 'Capacity' : 'क्षमता'}: {project.capacity}
                         </p>
                       </div>
                     </div>
@@ -359,7 +399,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
               onClick={onNavigateToProjectsPage}
               className="px-6 py-3.5 rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-xs md:text-sm tracking-wider uppercase cursor-pointer transition-all duration-200 shadow-md flex items-center justify-center gap-2 border border-emerald-400/25 hover:-translate-y-0.5"
             >
-              <span>All Sites</span>
+              <span>{language === 'en' ? 'All Sites' : 'सभी साइटें'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -384,14 +424,14 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
               {/* Header block */}
               <div className="mb-6">
                 <span className="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/25 rounded-md text-xs font-mono font-semibold capitalize mb-2">
-                  {selectedProject.category}
+                  {getCategoryLabel(selectedProject.category)}
                 </span>
                 <h3 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
                   {selectedProject.title}
                 </h3>
                 <p className="text-xs md:text-sm text-gray-400 mt-2 flex items-center gap-1">
                   <MapPin className="w-4 h-4 text-red-500 shrink-0" />
-                  {selectedProject.location} • Installed Capacity: {selectedProject.capacity}
+                  {selectedProject.location} • {language === 'en' ? 'Installed Capacity' : 'स्थापित क्षमता'}: {selectedProject.capacity}
                 </p>
               </div>
 
@@ -408,7 +448,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                 {selectedProject.description && (
                   <div className="md:col-span-5 space-y-4">
                     <h4 className="text-xs font-bold text-[#FFC107] uppercase tracking-widest border-b border-white/5 pb-2">
-                      Project Overview
+                      {language === 'en' ? 'Project Overview' : 'प्रोजेक्ट का विवरण'}
                     </h4>
                     <p className="text-xs text-gray-300 leading-relaxed">
                       {selectedProject.description}
@@ -422,10 +462,10 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
               <div className="p-4 bg-emerald-950/20 border border-emerald-500/20 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
                   <h5 className="text-xs font-bold text-white uppercase tracking-wider">
-                    Request custom feasibility proposal
+                    {language === 'en' ? 'Request custom feasibility proposal' : 'कस्टम व्यवहार्यता प्रस्ताव का अनुरोध करें'}
                   </h5>
                   <p className="text-[10px] text-gray-400 mt-0.5 font-medium">
-                    We use CAD satellite simulators to model solar system performance.
+                    {language === 'en' ? 'We use CAD satellite simulators to model solar system performance.' : 'हम सोलर सिस्टम के प्रदर्शन को मॉडल करने के लिए सीएडी उपग्रह सिमुलेटर का उपयोग करते हैं।'}
                   </p>
                 </div>
                 <button
@@ -441,7 +481,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                   }}
                   className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-[#FFC107] text-[#071B2F] font-bold text-xs tracking-wider uppercase hover:bg-amber-400 cursor-pointer transition-all flex items-center justify-center gap-1"
                 >
-                  <span>Request Survey</span>
+                  <span>{language === 'en' ? 'Request Survey' : 'मुफ़्त सर्वे का अनुरोध'}</span>
                   <ZoomIn className="w-4 h-4" />
                 </button>
               </div>
@@ -466,7 +506,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 text-xs font-bold transition-all border border-slate-200/60 cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to Home</span>
+              <span>{language === 'en' ? 'Back to Home' : 'मुख्य पृष्ठ पर जाएँ'}</span>
             </button>
           </div>
         )}
@@ -476,13 +516,19 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
           <div className="space-y-4 max-w-xl">
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-100 text-[11px] font-bold tracking-widest text-[#0B8F4D] uppercase rounded-full">
               <Eye className="w-3.5 h-3.5" />
-              Proven Operational Track Record
+              {language === 'en' ? 'Proven Operational Track Record' : 'प्रमाणित परिचालन ट्रैक रिकॉर्ड'}
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-none">
-              Featured <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Grid Installations</span>
+              {language === 'en' ? (
+                <>Featured <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Grid Installations</span></>
+              ) : (
+                <>विशेष <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">ग्रिड इन्स्टॉलेशन</span></>
+              )}
             </h2>
             <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
-              Explore our physical layout, showcasing empty roof spaces versus high-powered smart solar grid commissioning.
+              {language === 'en'
+                ? 'Explore our physical layout, showcasing empty roof spaces versus high-powered smart solar grid commissioning.'
+                : 'हमारा वास्तविक लेआउट देखें, जिसमें खाली छत बनाम हाई-पावर सोलर ग्रिड चालू करने के दृश्य प्रदर्शित हैं।'}
             </p>
           </div>
         </div>
@@ -501,7 +547,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                     : 'bg-white dark:bg-slate-800 border border-slate-200/50 dark:border-slate-700/50 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
                 }`}
               >
-                {cat}
+                {cat === 'All' ? (language === 'en' ? 'All' : 'सभी') : getCategoryLabel(cat)}
               </button>
             ))}
           </div>
@@ -510,7 +556,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
           <div className="relative w-full md:w-96 select-none">
             <input
               type="text"
-              placeholder="Search by locations, people, capacity..."
+              placeholder={language === 'en' ? "Search by locations, people, capacity..." : "स्थान, नाम, क्षमता से खोजें..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-10 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-xs md:text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-medium"
@@ -534,7 +580,10 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
         {/* Search Results count indicator */}
         {searchQuery && (
           <div className="mb-6 px-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
-            Found <span className="text-emerald-600 dark:text-emerald-400 font-bold">{searchedProjects.length}</span> site{searchedProjects.length !== 1 ? 's' : ''} matching "{searchQuery}"
+            {language === 'en' 
+              ? `Found ${searchedProjects.length} site${searchedProjects.length !== 1 ? 's' : ''} matching "${searchQuery}"`
+              : `"${searchQuery}" से मेल खाने वाली ${searchedProjects.length} साइटें मिलीं`
+            }
           </div>
         )}
 
@@ -544,9 +593,14 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
             <div className="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
               <Search className="w-6 h-6" />
             </div>
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-250 mb-1">No matching commissioned sites found</h3>
+            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-250 mb-1">
+              {language === 'en' ? 'No matching commissioned sites found' : 'कोई मेल खाने वाली साइट नहीं मिली'}
+            </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Try adjusting your keywords (location, name, capacity, category) or clear search filter
+              {language === 'en' 
+                ? 'Try adjusting your keywords (location, name, capacity, category) or clear search filter'
+                : 'कृपया अन्य कीवर्ड (स्थान, क्षमता, श्रेणी) का उपयोग करें या फ़िल्टर हटाएँ'
+              }
             </p>
           </div>
         )}
@@ -567,7 +621,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                   alt={project.title}
                 />
                 <div className="absolute top-2 left-2 md:top-3 md:left-3 bg-white/95 border border-slate-200 px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-md text-[8px] md:text-[9px] font-bold text-emerald-700 capitalize font-mono z-20">
-                  {project.category}
+                  {getCategoryLabel(project.category)}
                 </div>
               </div>
 
@@ -580,7 +634,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                   {project.title}
                 </h3>
                 <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">
-                  Capacity: {project.capacity}
+                  {language === 'en' ? 'Capacity' : 'क्षमता'}: {project.capacity}
                 </p>
               </div>
             </TiltCard>
@@ -606,14 +660,14 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
             {/* Header block */}
             <div className="mb-6">
               <span className="inline-block px-3 py-1 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-md text-xs font-mono font-semibold capitalize mb-2">
-                {selectedProject.category}
+                {getCategoryLabel(selectedProject.category)}
               </span>
               <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
                 {selectedProject.title}
               </h3>
               <p className="text-xs md:text-sm text-slate-600 mt-2 flex items-center gap-1">
                 <MapPin className="w-4 h-4 text-red-500 shrink-0" />
-                {selectedProject.location} • Installed Capacity: {selectedProject.capacity}
+                {selectedProject.location} • {language === 'en' ? 'Installed Capacity' : 'स्थापित क्षमता'}: {selectedProject.capacity}
               </p>
             </div>
 
@@ -630,7 +684,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
               {selectedProject.description && (
                 <div className="md:col-span-5 space-y-4">
                   <h4 className="text-xs font-bold text-emerald-700 uppercase tracking-widest border-b border-slate-200/60 pb-2">
-                    Project Overview
+                    {language === 'en' ? 'Project Overview' : 'प्रोजेक्ट का विवरण'}
                   </h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
                     {selectedProject.description}
@@ -644,10 +698,10 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
             <div className="p-4 bg-emerald-50/60 border border-emerald-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
                 <h5 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
-                  Request custom feasibility proposal
+                  {language === 'en' ? 'Request custom feasibility proposal' : 'कस्टम व्यवहार्यता प्रस्ताव का अनुरोध करें'}
                 </h5>
                 <p className="text-[10px] text-slate-500 mt-0.5 font-medium">
-                  We use CAD satellite simulators to model solar system performance.
+                  {language === 'en' ? 'We use CAD satellite simulators to model solar system performance.' : 'हम सोलर सिस्टम के प्रदर्शन को मॉडल करने के लिए सीएडी उपग्रह सिमुलेटर का उपयोग करते हैं।'}
                 </p>
               </div>
               <button
@@ -663,7 +717,7 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
                 }}
                 className="w-full sm:w-auto px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs tracking-wider uppercase cursor-pointer transition-all flex items-center justify-center gap-1"
               >
-                <span>Request Survey</span>
+                <span>{language === 'en' ? 'Request Survey' : 'मुफ़्त सर्वे का अनुरोध'}</span>
                 <ZoomIn className="w-4 h-4" />
               </button>
             </div>

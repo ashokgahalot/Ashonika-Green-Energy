@@ -138,3 +138,19 @@ h1, h2, h3, h4 {
     -webkit-text-fill-color: transparent !important;
   }
 }
+
+@keyframes gentle-glow {
+  0%, 100% {
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.45), 0 0 10px 2px rgba(16, 185, 129, 0.25);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 10px 30px -2px rgba(16, 185, 129, 0.7), 0 0 22px 10px rgba(16, 185, 129, 0.5);
+    transform: scale(1.03);
+  }
+}
+
+.animate-gentle-glow {
+  animation: gentle-glow 4s ease-in-out infinite;
+}
+

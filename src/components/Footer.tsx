@@ -6,6 +6,7 @@
 import React from 'react';
 import { Mail, Phone, Facebook, Instagram, Youtube, Linkedin, Heart } from 'lucide-react';
 import Logo from './Logo.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -13,6 +14,7 @@ interface FooterProps {
 
 export default function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const { language } = useLanguage();
 
   return (
     <footer id="footer-section-wrapper" className="relative bg-slate-50 border-t border-slate-200/60 pt-24 pb-8 overflow-hidden font-sans">
@@ -49,7 +51,11 @@ export default function Footer({ onNavigate }: FooterProps) {
               <Logo />
             </div>
             <p className="text-slate-600 text-xs md:text-sm leading-relaxed">
-              Ashonika Green Energy is a premier certified solar EPC corporation specializing in high-voltage microgrid layouts, net-metering synchronization, and lifetime tracking coordinates for commercial, public, and private properties.
+              {language === 'en' ? (
+                "Ashonika Green Energy is a premier certified solar EPC corporation specializing in high-voltage microgrid layouts, net-metering synchronization, and lifetime tracking coordinates for commercial, public, and private properties."
+              ) : (
+                "आशोनिका ग्रीन एनर्जी एक प्रमुख प्रमाणित सोलर EPC कंपनी है जो व्यावसायिक, सार्वजनिक और निजी संपत्तियों के लिए हाई-वोल्टेज माइक्रोग्रिड लेआउट, नेट-मीटरिंग सिंक्रोनाइजेशन और लाइफटाइम ट्रैकिंग में विशेषज्ञता रखती है।"
+              )}
             </p>
 
             {/* Social handles */}
@@ -96,7 +102,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           {/* Quick inline coordinates */}
           <div className="space-y-3 font-mono text-[11px] md:text-xs text-slate-600 self-stretch md:self-auto flex flex-col justify-center border-t md:border-t-0 md:border-l border-slate-200 pt-6 md:pt-0 md:pl-8 shrink-0">
             <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 tracking-widest uppercase block mb-1">
-              Contact Info
+              {language === 'en' ? 'Contact Info' : 'संपर्क विवरण'}
             </span>
             <p className="flex items-center gap-2">
               <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
@@ -112,11 +118,11 @@ export default function Footer({ onNavigate }: FooterProps) {
 
         {/* Lower row: Copy notes */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
-          <p>© {currentYear} Ashonika Green Energy Private Limited. All rights reserved.</p>
+          <p>© {currentYear} Ashonika Green Energy Private Limited. {language === 'en' ? 'All rights reserved.' : 'सर्वाधिकार सुरक्षित।'}</p>
           <p className="flex items-center gap-1">
-            Engineered with
+            {language === 'en' ? 'Engineered with' : 'कार्बन-मुक्त पृथ्वी के लिए'}
             <Heart className="w-3 h-3 text-rose-500 fill-current" />
-            for a carbon-neutral planet.
+            {language === 'en' ? 'for a carbon-neutral planet.' : 'प्रेमपूर्वक निर्मित।'}
           </p>
         </div>
 

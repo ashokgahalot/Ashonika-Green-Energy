@@ -6,6 +6,7 @@
 import React from 'react';
 import { Award, Landmark, Zap, Clock, TrendingUp, CheckSquare } from 'lucide-react';
 import SectionBackground3D from './SectionBackground3D.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface FeatureItem {
   id: string;
@@ -16,46 +17,48 @@ interface FeatureItem {
 }
 
 export default function WhyChooseUs() {
+  const { language, t } = useLanguage();
+
   const features: FeatureItem[] = [
     {
       id: 'products',
-      title: 'Premium Quality Products',
-      description: 'We prioritize Tier-1 micro-silicon hardware with 25-Year peak performance guarantees.',
+      title: t('whyPartner', 'f1_title'),
+      description: t('whyPartner', 'f1_desc'),
       icon: <Award className="w-5 h-5 text-emerald-400" />,
       accent: 'border-emerald-500/20 text-emerald-400 bg-emerald-500/10'
     },
     {
       id: 'engineers',
-      title: 'Certified Engineers',
-      description: 'In-house design and deployment managed strictly by licensed master electricians and civil leads.',
+      title: t('whyPartner', 'f2_title'),
+      description: t('whyPartner', 'f2_desc'),
       icon: <CheckSquare className="w-5 h-5 text-indigo-400" />,
       accent: 'border-indigo-500/20 text-indigo-400 bg-indigo-500/10'
     },
     {
       id: 'subsidy',
-      title: 'Government Subsidy Support',
-      description: 'Hassle-free application submission under regional net-metering schemes and state quotas.',
+      title: t('whyPartner', 'f3_title'),
+      description: t('whyPartner', 'f3_desc'),
       icon: <Landmark className="w-5 h-5 text-[#FFC107]" />,
       accent: 'border-amber-500/20 text-amber-400 bg-amber-500/10'
     },
     {
       id: 'installation',
-      title: 'Precision Fast Installation',
-      description: 'Rapid structural deployment within 72 hours of regulatory civil approvals.',
+      title: t('whyPartner', 'f4_title'),
+      description: t('whyPartner', 'f4_desc'),
       icon: <Zap className="w-5 h-5 text-sky-400" />,
       accent: 'border-sky-500/20 text-sky-400 bg-sky-500/10'
     },
     {
       id: 'support',
-      title: 'Lifetime Expert Support',
-      description: '24/7 prioritized operational response with on-demand service dispatches.',
+      title: t('whyPartner', 'f5_title'),
+      description: t('whyPartner', 'f5_desc'),
       icon: <Clock className="w-5 h-5 text-rose-500" />,
       accent: 'border-rose-500/20 text-rose-400 bg-rose-500/10'
     },
     {
       id: 'monitoring',
-      title: 'Performance Monitoring',
-      description: 'Continuous cloud-linked performance tracking dashboard with predictive maintenance alerts.',
+      title: t('whyPartner', 'f6_title'),
+      description: t('whyPartner', 'f6_desc'),
       icon: <TrendingUp className="w-5 h-5 text-lime-400" />,
       accent: 'border-lime-500/20 text-lime-400 bg-lime-500/10'
     }
@@ -72,13 +75,21 @@ export default function WhyChooseUs() {
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <span className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-[11px] font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase rounded-full">
             <Award className="w-3.5 h-3.5" />
-            Uncompromised Corporate Standards
+            {t('whyPartner', 'badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
-            Why Partner with <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika?</span>
+            {language === 'en' ? (
+              <>
+                Why Partner with <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika?</span>
+              </>
+            ) : (
+              <>
+                <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika</span> को क्यों चुनें?
+              </>
+            )}
           </h2>
           <p className="text-slate-600 dark:text-slate-350 text-xs md:text-sm">
-            We deliver state-of-the-art clean energy solutions backed by rigorous certified safety engineering.
+            {t('whyPartner', 'subheading')}
           </p>
         </div>
 
@@ -94,12 +105,12 @@ export default function WhyChooseUs() {
               </div>
               <div className="space-y-0.5 sm:space-y-1">
                 <span className="text-[8px] sm:text-[10px] font-bold text-slate-550 dark:text-slate-400 uppercase tracking-widest font-mono block">
-                  0{index + 1} / Feature
+                  0{index + 1} / {language === 'en' ? 'Feature' : 'विशेषता'}
                 </span>
                 <h3 className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 tracking-tight">
                   {feature.title}
                 </h3>
-                <p className="text-slate-600 dark:text-slate-350 text-[10px] sm:text-xs md:text-[13px] leading-relaxed">
+                <p className="text-slate-650 dark:text-slate-350 text-[10px] sm:text-xs md:text-[13px] leading-relaxed">
                   {feature.description}
                 </p>
               </div>

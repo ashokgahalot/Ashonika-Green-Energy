@@ -7,8 +7,11 @@ import React, { useState, useEffect } from 'react';
 import { Target, Leaf, Sparkles, Award, ArrowRight, Sun, Zap, Cpu } from 'lucide-react';
 import { motion } from 'motion/react';
 import SectionBackground3D from './SectionBackground3D.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 export default function About() {
+  const { language, t } = useLanguage();
+
   return (
     <section id="about" className="relative py-28 bg-white dark:bg-slate-950 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40 transition-colors duration-300">
       <SectionBackground3D type="about" />
@@ -24,19 +27,27 @@ export default function About() {
           <div className="space-y-3">
             <span className="flex items-center justify-center gap-2 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-450 uppercase">
               <Sparkles className="w-4 h-4 animate-pulse" />
-              World-Class Clean Energy
+              {t('about', 'badge')}
             </span>
             <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
-              About <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika</span>
+              {language === 'en' ? (
+                <>
+                  About <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika</span>
+                </>
+              ) : (
+                <>
+                  Ashonika <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">के बारे में</span>
+                </>
+              )}
             </h2>
           </div>
           
           <div className="space-y-6 text-slate-600 dark:text-slate-350 text-sm md:text-lg leading-relaxed max-w-3xl mx-auto">
-            <p>
-              Ashonika stands at the forefront of the clean energy transition, specializing in premium, high-tier Solar Engineering, Procurement, and Commissioning (EPC) solutions. We are dedicated to delivering highly efficient grid-tied, hybrid, and off-grid power structures that empower residential, business, and industrial clients with complete energy independence.
+            <p className="whitespace-pre-line text-left md:text-center">
+              {t('about', 'para1')}
             </p>
-            <p>
-              By integrating state-of-the-art monocrystalline PV modules, smart solid-state inverter systems, and durable power storage technology, Ashonika transforms idle spaces into high-yield clean energy generators. Our certified engineering framework guarantees maximum structural safety, long-term electricity yield, and reliable post-commissioning support—powering a sustainable tomorrow for decades to come.
+            <p className="whitespace-pre-line text-left md:text-center text-slate-500 dark:text-slate-400">
+              {t('about', 'para2')}
             </p>
           </div>
         </div>
@@ -70,19 +81,27 @@ export default function About() {
           >
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-500/15 text-[10px] font-bold tracking-widest text-[#0B8F4D] uppercase">
               <Sparkles className="w-3 h-3" />
-              Strategic Network
+              {t('trusted', 'badge')}
             </span>
-            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-3 tracking-tight">
-              Associated <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">With</span>
+            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-slate-100 mt-3 tracking-tight">
+              {language === 'en' ? (
+                <>
+                  Associated <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">With</span>
+                </>
+              ) : (
+                <>
+                  हमारे <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">प्रतिष्ठित सहयोगी</span>
+                </>
+              )}
             </h3>
-            <p className="text-slate-650 text-xs md:text-sm mt-2">
-              Collaboratively driving high-efficiency clean energy deployments across key operational domains.
+            <p className="text-slate-650 dark:text-slate-400 text-xs md:text-sm mt-2">
+              {t('trusted', 'description')}
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <motion.div 
-              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-emerald-500/30 transition-all duration-300"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800/40 hover:border-emerald-500/30 transition-all duration-300"
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { 
@@ -96,14 +115,14 @@ export default function About() {
                 <Sun className="w-6 h-6 animate-pulse" />
               </div>
               <div>
-                <span className="text-sm font-bold text-slate-800 tracking-tight">
+                <span className="text-sm font-bold text-slate-800 dark:text-slate-200 tracking-tight">
                   RP Solar Energy
                 </span>
               </div>
             </motion.div>
 
             <motion.div 
-              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-emerald-500/30 transition-all duration-300"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800/40 hover:border-emerald-500/30 transition-all duration-300"
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { 
@@ -117,14 +136,14 @@ export default function About() {
                 <Zap className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-sm font-bold text-slate-800 tracking-tight">
+                <span className="text-sm font-bold text-slate-800 dark:text-slate-200 tracking-tight">
                   SB Power
                 </span>
               </div>
             </motion.div>
 
             <motion.div 
-              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200/60 hover:border-emerald-500/30 transition-all duration-300"
+              className="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800/40 hover:border-emerald-500/30 transition-all duration-300"
               variants={{
                 hidden: { opacity: 0, y: 30 },
                 visible: { 
@@ -138,7 +157,7 @@ export default function About() {
                 <Cpu className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-sm font-bold text-slate-800 tracking-tight whitespace-nowrap">
+                <span className="text-sm font-bold text-slate-800 dark:text-slate-200 tracking-tight whitespace-nowrap">
                   Solar Technician Ajmer
                 </span>
               </div>

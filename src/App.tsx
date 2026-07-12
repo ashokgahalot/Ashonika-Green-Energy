@@ -21,11 +21,15 @@ import Projects from './components/Projects.tsx';
 import Process from './components/Process.tsx';
 import ContactForm from './components/Contactform.tsx';
 import Footer from './components/Footer.tsx';
+import Faqs from './components/Faqs.tsx';
+import SolarCalculator from './components/SolarCalculator.tsx';
+import { useLanguage } from './context/LanguageContext.tsx';
 
 export default function App() {
   const [initializing, setInitializing] = useState(true);
   const [activeSection, setActiveSection] = useState<string>('home');
   const [contactSubject, setContactSubject] = useState<string>('Solar Installation');
+  const { language, t } = useLanguage();
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('theme');
@@ -78,6 +82,9 @@ export default function App() {
     } else if (path === '/projects') {
       title = 'Our Solar Project Portfolio | Ashonika Green Energy';
       description = 'Browse our extensive portfolio of grid-tie residential, commercial, and industrial solar installations.';
+    } else if (path === '/faqs' || path === '/faqs/') {
+      title = 'Frequently Asked Questions (FAQs) | Ashonika Green Energy';
+      description = 'Explore comprehensive answers to 18 common questions about rooftop solar power systems, net metering, subsidies, and AMC services with Ashonika.';
     }
 
     document.title = title;
@@ -99,11 +106,30 @@ export default function App() {
       home: '/',
       about: '/about/',
       services: '/services/',
+      calculator: '/calculator/',
       timeline: '/why-choose-us/',
       projects: '/projects/',
       'projects-page': '/projects/',
+      faqs: '/faqs/',
       contact: '#contact'
     };
+
+    if (sectionId === 'calculator') {
+      if (location.pathname === '/') {
+        const element = document.getElementById('calculator');
+        if (element) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          window.scrollTo({
+            top: elementRect - bodyRect - offset,
+            behavior: 'smooth'
+          });
+          setActiveSection('calculator');
+          return;
+        }
+      }
+    }
 
     if (sectionId === 'contact') {
       if (location.pathname === '/') {
@@ -169,6 +195,10 @@ export default function App() {
       setActiveSection('timeline');
     } else if (path === '/projects') {
       setActiveSection('projects');
+    } else if (path === '/faqs') {
+      setActiveSection('faqs');
+    } else if (path === '/calculator') {
+      setActiveSection('calculator');
     }
   }, [location.pathname]);
 
@@ -206,34 +236,49 @@ export default function App() {
             {/* Hero section landing front */}
             <header
               id="home"
-              className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+              className="relative min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center overflow-hidden pt-20"
             >
               {/* Dynamic Holographic Earth Glow Canvas Background */}
-              <InteractiveScene />
+              <InteractiveScene theme={theme} />
 
                {/* Ambient Top Gradients */}
               <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-black/5 to-transparent z-10 pointer-events-none" />
               <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white dark:from-slate-950 to-transparent z-10 pointer-events-none transition-colors duration-300" />
 
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center lg:text-left py-24">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center lg:text-left py-12 md:py-16 lg:py-20">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   
                   {/* Hero Copy (7cols) */}
                   <div className="lg:col-span-7 space-y-6 md:space-y-8">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase animate-pulse select-none">
                       <Sparkles className="w-3.5 h-3.5" />
-                      <span>Tomorrow's Smart Grid Today</span>
+                      <span>{t('hero', 'tag')}</span>
                     </div>
 
                     <div className="space-y-4">
-                      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-none">
-                        Turn Your Electricity Bill Into a{' '}
-                        <span className="bg-gradient-to-r from-emerald-600 via-amber-500 to-emerald-600 bg-clip-text text-transparent">
-                          Long-Term Asset
-                        </span>
+                      <h1 className={language === 'hi'
+                        ? 'text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-slate-50 tracking-normal leading-[1.8] xs:leading-[1.8] sm:leading-[1.8] md:leading-[1.8] lg:leading-[1.8]'
+                        : 'text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight sm:leading-none'
+                      }>
+                        {language === 'en' ? (
+                          <>
+                            Turn Your Electricity Bill Into a{' '}
+                            <span className="bg-gradient-to-r from-emerald-600 via-amber-500 to-emerald-600 bg-clip-text text-transparent">
+                              Long-Term Asset
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            बिजली के बढ़ते खर्च से{' '}
+                            <span className="inline-block px-1 py-3 -my-3 bg-gradient-to-r from-emerald-600 via-amber-500 to-emerald-600 bg-clip-text text-transparent">
+                              छुटकारा पाएँ
+                            </span>
+                            , सोलर के साथ बचत की नई शुरुआत करें।
+                          </>
+                        )}
                       </h1>
                       <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed">
-                        End-to-End Solar EPC Solutions Designed for Maximum Savings and Long-Term Performance.
+                        {t('hero', 'description')}
                       </p>
                     </div>
 
@@ -241,16 +286,23 @@ export default function App() {
                     <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
                       <button
                         onClick={() => handleScrollToSection('contact')}
-                        className="w-full sm:w-auto px-8 py-4 rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-xs md:text-sm tracking-wider uppercase cursor-pointer transition-all duration-200 transform hover:scale-[1.03] shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 border border-emerald-400/25"
+                        className="w-full sm:w-auto px-8 py-4 rounded-full bg-linear-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-xs md:text-sm tracking-wider uppercase cursor-pointer transition-all duration-200 transform hover:scale-[1.03] shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 border border-emerald-400/25 animate-gentle-glow"
                       >
                         <PhoneCall className="w-4 h-4" />
-                        <span>Free Solar Consultation</span>
+                        <span>{t('hero', 'button')}</span>
+                      </button>
+                      <button
+                        onClick={() => handleScrollToSection('calculator')}
+                        className="w-full sm:w-auto px-8 py-4 rounded-full border border-slate-300 dark:border-slate-700 hover:border-slate-450 dark:hover:border-slate-500 text-slate-800 dark:text-slate-200 hover:bg-slate-55 dark:hover:bg-slate-900/40 font-bold text-xs md:text-sm tracking-wider uppercase cursor-pointer transition-all duration-200 transform hover:scale-[1.03] flex items-center justify-center gap-2"
+                      >
+                        <Calculator className="w-4 h-4 text-emerald-500" />
+                        <span>{language === 'hi' ? 'सोलर कैलकुलेटर आज़माएं' : 'Try Solar Calculator'}</span>
                       </button>
                     </div>
                   </div>
 
                   {/* Empty space/Visual aspect in Hero to make way for the rotating Globe Canvas (5cols) */}
-                  <div className="lg:col-span-5 h-[350px] lg:h-[500px] pointer-events-none relative" />
+                  <div className="lg:col-span-5 h-[200px] sm:h-[250px] lg:h-[450px] pointer-events-none relative" />
 
                 </div>
               </div>
@@ -274,6 +326,14 @@ export default function App() {
             {/* Horiz/Vertical Journey Pipeline Section */}
             <Process />
 
+            {/* Interactive Solar Savings Calculator on Home Page */}
+            <div id="calculator" className="scroll-mt-24">
+              <SolarCalculator />
+            </div>
+
+            {/* Frequently Asked Questions Section */}
+            <Faqs onContactClick={() => handleScrollToSection('contact')} isHomePage={true} />
+
             {/* Free Site Assessment Contact Lead Forms Section */}
             <ContactForm selectedSubject={contactSubject} onSubjectChange={setContactSubject} />
 
@@ -286,21 +346,26 @@ export default function App() {
         <Route path="/about" element={
           <div className="pt-20 min-h-screen flex flex-col">
             <header className="relative pt-20 pb-16 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40">
-              <InteractiveScene />
+              <InteractiveScene theme={theme} />
               <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-slate-950 to-transparent pointer-events-none transition-colors duration-300" />
 
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase select-none">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Get To Know Ashonika</span>
+                  <span>{language === 'hi' ? 'आशोनिका को जानें' : 'Get To Know Ashonika'}</span>
                 </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
-                  About <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Our Vision & Mission</span>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-normal">
+                  {language === 'hi' ? (
+                    <>
+                      हमारे <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">दृष्टिकोण और लक्ष्य</span> के बारे में
+                    </>
+                  ) : (
+                    <>
+                      About <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Our Vision & Mission</span>
+                    </>
+                  )}
                 </h1>
-                <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-                  Empowering communities with commercial & residential solar energy installations. Learn more about our technical engineering pedigree and sustainability benchmarks.
-                </p>
               </div>
             </header>
 
@@ -316,21 +381,26 @@ export default function App() {
         <Route path="/services" element={
           <div className="pt-20 min-h-screen flex flex-col">
             <header className="relative pt-20 pb-16 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40">
-              <InteractiveScene />
+              <InteractiveScene theme={theme} />
               <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-slate-950 to-transparent pointer-events-none transition-colors duration-300" />
 
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase select-none">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>High-Yield Solar Architecture</span>
+                  <span>{language === 'hi' ? 'उच्च-दक्षता सोलर तकनीक' : 'High-Yield Solar Architecture'}</span>
                 </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
-                  Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Solar Solutions</span>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-normal">
+                  {language === 'hi' ? (
+                    <>
+                      हमारे <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">सोलर समाधान</span>
+                    </>
+                  ) : (
+                    <>
+                      Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Solar Solutions</span>
+                    </>
+                  )}
                 </h1>
-                <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-                  From premium residential systems to high-voltage industrial solar EPC projects. Explore our customizable engineering services.
-                </p>
               </div>
             </header>
 
@@ -346,21 +416,26 @@ export default function App() {
         <Route path="/why-choose-us" element={
           <div className="pt-20 min-h-screen flex flex-col">
             <header className="relative pt-20 pb-16 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40">
-              <InteractiveScene />
+              <InteractiveScene theme={theme} />
               <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-slate-950 to-transparent pointer-events-none transition-colors duration-300" />
 
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase select-none">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>The Ashonika Advantage</span>
+                  <span>{language === 'hi' ? 'आशोनिका के लाभ' : 'The Ashonika Advantage'}</span>
                 </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
-                  Why Choose <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika Energy</span>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-normal">
+                  {language === 'hi' ? (
+                    <>
+                      <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">आशोनिका एनर्जी</span> को क्यों चुनें
+                    </>
+                  ) : (
+                    <>
+                      Why Choose <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Ashonika Energy</span>
+                    </>
+                  )}
                 </h1>
-                <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-                  Discover why over 200+ clients trust us for sustainable energy: premium grade Tier-1 components, certified engineers, and government subsidy processing.
-                </p>
               </div>
             </header>
 
@@ -378,25 +453,100 @@ export default function App() {
         <Route path="/projects" element={
           <div className="pt-20 min-h-screen flex flex-col">
             <header className="relative pt-20 pb-16 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40">
-              <InteractiveScene />
+              <InteractiveScene theme={theme} />
               <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
               <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-slate-950 to-transparent pointer-events-none transition-colors duration-300" />
 
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase select-none">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>Our National Engineering Portfolio</span>
+                  <span>{language === 'hi' ? 'हमारा राष्ट्रीय इंजीनियरिंग पोर्टफोलियो' : 'Our National Engineering Portfolio'}</span>
                 </div>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
-                  Ashonika <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Project Portfolio</span>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-normal">
+                  {language === 'hi' ? (
+                    <>
+                      आशोनिका <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">प्रोजेक्ट पोर्टफोलियो</span>
+                    </>
+                  ) : (
+                    <>
+                      Ashonika <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Project Portfolio</span>
+                    </>
+                  )}
                 </h1>
-                <p className="text-slate-600 dark:text-slate-350 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-                  Complete engineering logs of our nationwide grid-tie commissioning catalog, including live efficiency comparisons and case analyses.
-                </p>
               </div>
             </header>
 
             <Projects viewMode="full" onBackToHome={() => handleScrollToSection('home')} />
+
+            <ContactForm selectedSubject={contactSubject} onSubjectChange={setContactSubject} />
+
+            <Footer onNavigate={handleScrollToSection} />
+          </div>
+        } />
+
+        {/* Separate Standalone FAQs Page */}
+        <Route path="/faqs" element={
+          <div className="pt-20 min-h-screen flex flex-col">
+            <header className="relative pt-20 pb-16 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40">
+              <InteractiveScene theme={theme} />
+              <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-slate-950 to-transparent pointer-events-none transition-colors duration-300" />
+
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase select-none">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>{language === 'hi' ? 'सोलर ज्ञान केंद्र और सहायता' : 'Solar Knowledge Base & Help'}</span>
+                </div>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-normal">
+                  {language === 'hi' ? (
+                    <>
+                      अक्सर पूछे जाने वाले <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">प्रश्न</span>
+                    </>
+                  ) : (
+                    <>
+                      Frequently Asked <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Questions</span>
+                    </>
+                  )}
+                </h1>
+              </div>
+            </header>
+
+            <Faqs onContactClick={() => handleScrollToSection('contact')} showTitle={false} />
+
+            <ContactForm selectedSubject={contactSubject} onSubjectChange={setContactSubject} />
+
+            <Footer onNavigate={handleScrollToSection} />
+          </div>
+        } />
+
+        {/* Standalone Solar Calculator Page */}
+        <Route path="/calculator" element={
+          <div className="pt-20 min-h-screen flex flex-col">
+            <header className="relative pt-20 pb-16 bg-slate-50 dark:bg-slate-900/40 overflow-hidden border-b border-slate-200/60 dark:border-slate-800/40">
+              <InteractiveScene theme={theme} />
+              <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white dark:from-slate-950 to-transparent pointer-events-none transition-colors duration-300" />
+
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/15 text-xs font-bold tracking-widest text-amber-600 dark:text-amber-400 uppercase select-none">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>{language === 'hi' ? 'सोलर सेविंग्स एस्टीमेटर' : 'Solar Savings Estimator'}</span>
+                </div>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-normal">
+                  {language === 'hi' ? (
+                    <>
+                      हमारा <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">सोलर कैलकुलेटर</span>
+                    </>
+                  ) : (
+                    <>
+                      Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Solar Calculator</span>
+                    </>
+                  )}
+                </h1>
+              </div>
+            </header>
+
+            <SolarCalculator />
 
             <ContactForm selectedSubject={contactSubject} onSubjectChange={setContactSubject} />
 

@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { ArrowLeftRight, CheckCircle2, PhoneCall, Ruler, DraftingCompass, FileCheck, HardHat, ShieldCheck, ChevronRight } from 'lucide-react';
 import SectionBackground3D from './SectionBackground3D.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface ProgressStep {
   number: number;
@@ -17,79 +18,56 @@ interface ProgressStep {
 }
 
 export default function Process() {
+  const { language, t, tArray } = useLanguage();
   const [activeStep, setActiveStep] = useState<number>(1);
 
   const stepsData: ProgressStep[] = [
     {
       number: 1,
-      title: 'Consultation & Feasibility',
-      duration: '1-2 Days',
-      description: 'Initial structural, billing assessment, and financial savings calculations.',
-      detailedPoints: [
-        'Analyze past 12-month electric utility utility records',
-        'Simulate ROI solar payback periods using CAD models',
-        'Finalize custom finance options and state subsidy eligibility check'
-      ],
+      title: t('process', 'step1_title'),
+      duration: language === 'en' ? '1-2 Days' : '1-2 दिन',
+      description: t('process', 'step1_desc'),
+      detailedPoints: tArray('process', 'step1_points'),
       icon: <PhoneCall className="w-5 h-5" />
     },
     {
       number: 2,
-      title: 'Site Survey & Engineering',
-      duration: '2-3 Days',
-      description: 'Physical rooftop shadow analysis, drone scans, and civil structural diagnostics.',
-      detailedPoints: [
-        'Drone thermal scans to check roof shadow patterns',
-        'Civil structural checks to verify roof load thresholds',
-        'Sizing exact anchor placement spots to protect water barriers'
-      ],
+      title: t('process', 'step2_title'),
+      duration: language === 'en' ? '2-3 Days' : '2-3 दिन',
+      description: t('process', 'step2_desc'),
+      detailedPoints: tArray('process', 'step2_points'),
       icon: <Ruler className="w-5 h-5" />
     },
     {
       number: 3,
-      title: 'Besboke Grid Design',
-      duration: '3-4 Days',
-      description: 'Custom 3D layout simulation of electrical cabling and wind-load structures.',
-      detailedPoints: [
-        '3D CAD grid mapping of panel configurations',
-        'Electrical string layouts to minimize inverter loss',
-        'Structural static reviews for gust levels above 150 km/h'
-      ],
+      title: t('process', 'step3_title'),
+      duration: language === 'en' ? '3-4 Days' : '3-4 दिन',
+      description: t('process', 'step3_desc'),
+      detailedPoints: tArray('process', 'step3_points'),
       icon: <DraftingCompass className="w-5 h-5" />
     },
     {
       number: 4,
-      title: 'Permitting & Approvals',
-      duration: '7-14 Days',
-      description: 'Liaison with municipal boards & state electricity DISCOM net-meter limits approval.',
-      detailedPoints: [
-        'Submit load clearances to state electric DISCOM',
-        'Apply for Central PM-Surya Ghar national quota subsidies',
-        'Complete regulatory engineering peer-review endorsements'
-      ],
+      title: t('process', 'step4_title'),
+      duration: language === 'en' ? '7-14 Days' : '7-14 दिन',
+      description: t('process', 'step4_desc'),
+      detailedPoints: tArray('process', 'step4_points'),
       icon: <FileCheck className="w-5 h-5" />
     },
     {
       number: 5,
-      title: 'Civil & Panel Installation',
-      duration: '2-3 Days',
-      description: 'Deploying panel tracks, solar arrays, string cabling, and microinverter networks.',
-      detailedPoints: [
-        'Secure hot-dip galvanized elevated structures',
-        'Layout Tier-1 high efficiency solar PV modules',
-        'Integrate smart string management and surge protection modules'
-      ],
+      title: t('process', 'step5_title'),
+      duration: language === 'en' ? '2-3 Days' : '2-3 दिन',
+      description: t('process', 'step5_desc'),
+      detailedPoints: tArray('process', 'step5_points'),
       icon: <HardHat className="w-5 h-5" />
     },
     {
       number: 6,
-      title: 'Commissioning & Sync',
-      duration: '1-2 Days',
-      description: 'Final grid inspection, net-metering synch, and active telemetry startup.',
-      detailedPoints: [
-        'Conduct safety resistance insulation grid checks',
-        'Commission the dual-directional net meter grid sync',
-        'Enable mobile cloud-linked solar telemetry and metrics control'
-      ],
+      title: t('process', 'step6_title'),
+      duration: language === 'en' ? '1-2 Days' : '1-2 दिन',
+      description: t('process', 'step6_desc'),
+      detailedPoints: tArray('process', 'step6_points'),
       icon: <ShieldCheck className="w-5 h-5" />
     }
   ];
@@ -108,13 +86,17 @@ export default function Process() {
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-xs font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase animate-pulse">
             <CheckCircle2 className="w-3.5 h-3.5" />
-            Engineering Workflow Pipeline
+            {t('process', 'badge')}
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
-            Our 6-Step <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Solar Journey</span>
+            {language === 'en' ? (
+              <>Our 6-Step <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Solar Journey</span></>
+            ) : (
+              <>सोलर इंस्टॉलेशन की <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">हमारी 6-चरणीय प्रक्रिया</span></>
+            )}
           </h2>
-          <p className="text-slate-600 text-sm md:text-base">
-            From the initial layout estimates down to double-checked net-meter grid syncing, we supervise every milestone.
+          <p className="text-slate-600 dark:text-slate-350 text-sm md:text-base">
+            {t('process', 'subheading')}
           </p>
         </div>
 
@@ -142,7 +124,7 @@ export default function Process() {
 
                 <div className="mt-4 space-y-1 px-2">
                   <span className="block text-[10px] font-bold text-emerald-600 uppercase tracking-wider">
-                    Step 0{step.number}
+                    {language === 'en' ? 'Step' : 'चरण'} 0{step.number}
                   </span>
                   <h4 className={`text-xs font-bold transition-colors ${
                     isSelected ? 'text-emerald-750 font-extrabold' : 'text-slate-600 group-hover:text-slate-900'
@@ -175,7 +157,7 @@ export default function Process() {
               {/* Step detailed information */}
               <div className="flex-1 min-w-0">
                 <span className="block text-[9px] font-mono font-bold text-emerald-600 uppercase tracking-widest leading-none">
-                  Step 0{step.number}
+                  {language === 'en' ? 'Step' : 'चरण'} 0{step.number}
                 </span>
                 <h3 className="text-sm sm:text-base font-bold text-slate-800 tracking-tight mt-1 leading-snug">
                   {step.title}
@@ -193,10 +175,10 @@ export default function Process() {
             <div className="md:col-span-7 space-y-4">
               <div className="flex items-center gap-3">
                 <span className="px-3.5 py-1 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100 text-xs font-mono font-bold">
-                  Step 0{currentStepObj.number}
+                  {language === 'en' ? 'Step' : 'चरण'} 0{currentStepObj.number}
                 </span>
                 <span className="text-xs font-semibold text-slate-500">
-                  Standard Execution Phase 0{currentStepObj.number}
+                  {language === 'en' ? `Standard Execution Phase 0${currentStepObj.number}` : `प्रक्रिया का ${currentStepObj.number === 1 ? 'पहला' : currentStepObj.number === 2 ? 'दूसरा' : currentStepObj.number === 3 ? 'तीसरा' : currentStepObj.number === 4 ? 'चौथा' : currentStepObj.number === 5 ? 'पाँचवाँ' : 'अंतिम'} चरण`}
                 </span>
               </div>
 
@@ -226,13 +208,13 @@ export default function Process() {
                   {currentStepObj.icon}
                 </div>
                 <h5 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
-                  Engineering Quality
+                  {t('process', 'right_quality')}
                 </h5>
                 <p className="text-sm font-extrabold text-slate-800">
-                  Certified Installation
+                  {t('process', 'right_certified')}
                 </p>
                 <div className="text-[9px] text-emerald-600 font-semibold uppercase mt-2">
-                  Full Compliance
+                  {t('process', 'right_compliance')}
                 </div>
               </div>
             </div>

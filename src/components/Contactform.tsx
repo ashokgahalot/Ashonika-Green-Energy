@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, RefreshCw, Send, Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
 import SectionBackground3D from './SectionBackground3D.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface ContactFormProps {
   selectedSubject?: string;
@@ -20,6 +21,7 @@ const TIME_SLOTS = [
 ];
 
 export default function ContactForm({ selectedSubject, onSubjectChange }: ContactFormProps = {}) {
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -44,37 +46,37 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
     const newErrors: Record<string, string> = {};
     
     if (!formData.name.trim()) {
-      newErrors.name = 'Full name is required';
+      newErrors.name = language === 'en' ? 'Full name is required' : 'पूरा नाम लिखना अनिवार्य है';
     } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Full name must be at least 2 characters';
+      newErrors.name = language === 'en' ? 'Full name must be at least 2 characters' : 'पूरा नाम कम से कम 2 अक्षरों का होना चाहिए';
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Contact number is required';
+      newErrors.phone = language === 'en' ? 'Contact number is required' : 'मोबाइल नंबर लिखना अनिवार्य है';
     } else if (!/^[0-9+() \-]{8,15}$/.test(formData.phone.trim())) {
-      newErrors.phone = 'Please enter a valid phone number (8-15 digits)';
+      newErrors.phone = language === 'en' ? 'Please enter a valid phone number (8-15 digits)' : 'कृपया एक वैध मोबाइल नंबर दर्ज करें (8-15 अंक)';
     }
 
     if (formData.email.trim() && !/\S+@\S+\.\S+/.test(formData.email.trim())) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = language === 'en' ? 'Please enter a valid email address' : 'कृपया एक वैध ईमेल पता दर्ज करें';
     }
 
     if (formData.subject === 'Free Site Survey') {
       if (!formData.siteAddress.trim()) {
-        newErrors.siteAddress = 'Full site address is required';
+        newErrors.siteAddress = language === 'en' ? 'Full site address is required' : 'साइट का पूरा पता लिखना अनिवार्य है';
       }
       if (!formData.scheduleDate) {
-        newErrors.scheduleDate = 'Booking date is required';
+        newErrors.scheduleDate = language === 'en' ? 'Booking date is required' : 'तारीख चुनना अनिवार्य है';
       }
       if (!formData.scheduleTime) {
-        newErrors.scheduleTime = 'Booking time slot is required';
+        newErrors.scheduleTime = language === 'en' ? 'Booking time slot is required' : 'समय का स्लॉट चुनना अनिवार्य है';
       }
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = language === 'en' ? 'Message is required' : 'संदेश लिखना अनिवार्य है';
     } else if (formData.message.trim().length < 5) {
-      newErrors.message = 'Message must be at least 5 characters';
+      newErrors.message = language === 'en' ? 'Message must be at least 5 characters' : 'संदेश कम से कम 5 अक्षरों का होना चाहिए';
     }
 
     setErrors(newErrors);
@@ -156,13 +158,17 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/10 text-xs font-bold tracking-widest text-[#0B8F4D] dark:text-emerald-400 uppercase">
             <Mail className="w-3.5 h-3.5" />
-            Corporate Communications
+            {t('contact', 'badge')}
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight leading-tight">
-            Connect With Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Power Experts</span>
+            {language === 'en' ? (
+              <>Connect With Our <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">Power Experts</span></>
+            ) : (
+              <>हमारे <span className="bg-gradient-to-r from-emerald-600 to-amber-500 bg-clip-text text-transparent">सोलर विशेषज्ञों से जुड़ें</span></>
+            )}
           </h2>
           <p className="text-slate-600 dark:text-slate-350 text-sm md:text-base">
-            Have a custom requirement, installation request, or maintenance query? Fill out our validated request form below.
+            {t('contact', 'description')}
           </p>
         </div>
 
@@ -173,8 +179,8 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
           <div className="lg:col-span-5 p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800/40 shadow-md flex flex-col justify-between relative overflow-hidden group">
             
             <div className="space-y-6">
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 block pb-2 border-b border-slate-1 00">
-                Ashonika Headquarters
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 block pb-2 border-b border-slate-100">
+                {language === 'en' ? 'Ashonika Headquarters' : 'आशोनिका मुख्यालय'}
               </span>
 
               {/* Dynamic decorative spacing */}
@@ -188,10 +194,10 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                      Operational office
+                      {language === 'en' ? 'Operational office' : 'कार्यालय का पता'}
                     </h4>
                     <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                      208, Norda Ki Dhani, Sarana, Magra, Ajmer, Rajasthan 305811
+                      {language === 'en' ? '208, Norda Ki Dhani, Sarana, Magra, Ajmer, Rajasthan 305811' : '208, नोर्डा की ढाणी, सरना, मगरा, अजमेर, राजस्थान 305811'}
                     </p>
                   </div>
                 </div>
@@ -205,7 +211,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                      Telephone Helpline
+                      {language === 'en' ? 'Telephone Helpline' : 'हेल्पलाइन नंबर'}
                     </h4>
                     <p className="text-xs text-slate-605 mt-1 font-mono">
                       +91 77280-23503
@@ -222,7 +228,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                      Corporate Mail
+                      {language === 'en' ? 'Corporate Mail' : 'आधिकारिक ईमेल'}
                     </h4>
                     <p className="text-xs text-slate-605 mt-1 font-mono">
                       info@ashonika.com
@@ -241,7 +247,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                 className="w-full py-3 rounded-xl bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white border border-emerald-150 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-4 h-4 fill-current animate-pulse" />
-                <span>Chat On WhatsApp</span>
+                <span>{language === 'en' ? 'Chat On WhatsApp' : 'व्हाट्सएप पर चैट करें'}</span>
               </a>
             </div>
 
@@ -256,10 +262,14 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                 </div>
                 <div className="space-y-4">
                   <h3 className="text-xl md:text-2xl font-bold text-slate-900">
-                    Message Sent Successfully!
+                    {language === 'en' ? 'Message Sent Successfully!' : 'संदेश सफलतापूर्वक भेजा गया!'}
                   </h3>
                   <p className="text-slate-650 text-sm max-w-sm mx-auto">
-                    Hi <span className="text-emerald-600 font-semibold">{formData.name}</span>, your request has been recorded. Our specialized engineers will check your details and contact you shortly.
+                    {language === 'en' ? (
+                      <>Hi <span className="text-emerald-600 font-semibold">{formData.name}</span>, your request has been recorded. Our specialized engineers will check your details and contact you shortly.</>
+                    ) : (
+                      <>नमस्ते <span className="text-emerald-600 font-semibold">{formData.name}</span>, आपका अनुरोध दर्ज कर लिया गया है। हमारे सोलर विशेषज्ञ जल्द ही आपसे संपर्क करेंगे।</>
+                    )}
                   </p>
                 </div>
 
@@ -267,7 +277,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   onClick={handleReset}
                   className="px-8 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-widest transition-all shadow-md hover:scale-[1.02] cursor-pointer"
                 >
-                  OK
+                  {language === 'en' ? 'OK' : 'ठीक है'}
                 </button>
               </div>
             ) : (
@@ -283,7 +293,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
                     <label htmlFor="form-field-name" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                      Full Name *
+                      {language === 'en' ? 'Full Name *' : 'पूरा नाम *'}
                     </label>
                     <input
                       id="form-field-name"
@@ -291,7 +301,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-800 focus:outline-hidden ${
                         errors.name ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 focus:border-emerald-500'
                       }`}
-                      placeholder="e.g. Ashonika"
+                      placeholder={language === 'en' ? 'e.g. Ashonika' : 'जैसे: आशोनिका'}
                       value={formData.name}
                       onChange={(e) => {
                         setFormData({ ...formData, name: e.target.value });
@@ -303,7 +313,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
 
                   <div className="space-y-1.5">
                     <label htmlFor="form-field-phone" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                      Contact Number *
+                      {language === 'en' ? 'Contact Number *' : 'मोबाइल नंबर *'}
                     </label>
                     <input
                       id="form-field-phone"
@@ -324,7 +334,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
 
                 <div className="space-y-1.5 col-span-1 sm:col-span-2">
                   <label htmlFor="form-field-email" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                    Email address (Optional)
+                    {language === 'en' ? 'Email address (Optional)' : 'ईमेल पता (वैकल्पिक)'}
                   </label>
                   <input
                     id="form-field-email"
@@ -332,7 +342,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                     className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-800 focus:outline-hidden ${
                       errors.email ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 focus:border-emerald-500'
                     }`}
-                    placeholder="e.g. ashonika@company.com"
+                    placeholder={language === 'en' ? 'e.g. ashonika@company.com' : 'जैसे: ashonika@company.com'}
                     value={formData.email}
                     onChange={(e) => {
                       setFormData({ ...formData, email: e.target.value });
@@ -344,7 +354,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
 
                 <div className="space-y-1.5">
                   <label htmlFor="form-field-subject" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                    Subject *
+                    {language === 'en' ? 'Subject *' : 'विषय *'}
                   </label>
                   <div className="relative">
                     <select
@@ -362,10 +372,10 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                         setErrors(updatedErrors);
                       }}
                     >
-                      <option value="Solar Installation">Solar Installation</option>
-                      <option value="Solar Maintenance/Repair">Solar Maintenance/Repair</option>
-                      <option value="Free Site Survey">Free Site Survey</option>
-                      <option value="Other">Other</option>
+                      <option value="Solar Installation">{language === 'en' ? 'Solar Installation' : 'सोलर पैनल इंस्टॉलेशन (Solar Installation)'}</option>
+                      <option value="Solar Maintenance/Repair">{language === 'en' ? 'Solar Maintenance/Repair' : 'सोलर रिपेयर/मेंटेनेंस (Solar Maintenance/Repair)'}</option>
+                      <option value="Free Site Survey">{language === 'en' ? 'Free Site Survey' : 'मुफ़्त साइट सर्वे (Free Site Survey)'}</option>
+                      <option value="Other">{language === 'en' ? 'Other' : 'अन्य (Other)'}</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                       <ArrowRight className="w-4 h-4 rotate-90" />
@@ -377,12 +387,12 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                 {formData.subject === 'Free Site Survey' && (
                   <div className="space-y-5 p-4 rounded-2xl bg-white border border-emerald-100 animate-fadeIn shadow-xs">
                     <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest block font-mono">
-                      Survey Address Parameters
+                      {language === 'en' ? 'Survey Address Parameters' : 'सर्वेक्षण पते के विवरण'}
                     </span>
 
                     <div className="space-y-1.5">
                       <label htmlFor="form-field-address" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                        Full Site Address *
+                        {language === 'en' ? 'Full Site Address *' : 'साइट का पूरा पता *'}
                       </label>
                       <input
                         id="form-field-address"
@@ -390,7 +400,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                         className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-805 focus:outline-hidden ${
                           errors.siteAddress ? 'border-rose-500 focus:border-rose-500' : 'border-emerald-100 focus:border-emerald-500'
                         }`}
-                        placeholder="Complete location address where rooftop assessment is needed"
+                        placeholder={language === 'en' ? 'Complete location address where rooftop assessment is needed' : 'वह पूरा पता जहाँ सोलर पैनल लगाया जाना है'}
                         value={formData.siteAddress}
                         onChange={(e) => {
                           setFormData({ ...formData, siteAddress: e.target.value });
@@ -404,7 +414,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       {/* Date Select Row */}
                       <div className="space-y-1.5 text-left">
                         <label htmlFor="form-field-date" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                          Preferred Date *
+                          {language === 'en' ? 'Preferred Date *' : 'पसंदीदा तारीख *'}
                         </label>
                         <input
                           id="form-field-date"
@@ -424,21 +434,21 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                       {/* Time Select Row */}
                       <div className="space-y-1.5 text-left">
                         <label htmlFor="form-field-time" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                          Preferred Time (8:00 AM - 6:00 PM) *
+                          {language === 'en' ? 'Preferred Time (8:00 AM - 6:00 PM) *' : 'पसंदीदा समय (सुबह 8:00 से शाम 6:00) *'}
                         </label>
                         <div className="relative">
                           <select
-                            id="form-field-time"
-                            className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-805 focus:outline-hidden appearance-none cursor-pointer pr-10 ${
-                              errors.scheduleTime ? 'border-rose-500 focus:border-rose-500' : 'border-emerald-100 focus:border-emerald-500'
-                            }`}
-                            value={formData.scheduleTime}
-                            onChange={(e) => {
-                              setFormData({ ...formData, scheduleTime: e.target.value });
-                              if (errors.scheduleTime) setErrors({ ...errors, scheduleTime: '' });
-                            }}
+                             id="form-field-time"
+                             className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-805 focus:outline-hidden appearance-none cursor-pointer pr-10 ${
+                               errors.scheduleTime ? 'border-rose-500 focus:border-rose-500' : 'border-emerald-100 focus:border-emerald-500'
+                             }`}
+                             value={formData.scheduleTime}
+                             onChange={(e) => {
+                               setFormData({ ...formData, scheduleTime: e.target.value });
+                               if (errors.scheduleTime) setErrors({ ...errors, scheduleTime: '' });
+                             }}
                           >
-                            <option value="">Select a time slot</option>
+                            <option value="">{language === 'en' ? 'Select a time slot' : 'समय का चयन करें'}</option>
                             {TIME_SLOTS.map((slot) => (
                               <option key={slot} value={slot}>
                                 {slot}
@@ -457,7 +467,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
 
                 <div className="space-y-1.5">
                   <label htmlFor="form-field-message" className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
-                    Message *
+                    {language === 'en' ? 'Message *' : 'आपका संदेश/पूछताछ *'}
                   </label>
                   <textarea
                     id="form-field-message"
@@ -465,7 +475,7 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                     className={`w-full px-4 py-3 rounded-xl bg-white border text-xs md:text-sm text-slate-800 focus:outline-hidden ${
                       errors.message ? 'border-rose-500 focus:border-rose-500' : 'border-slate-200 focus:border-emerald-500'
                     }`}
-                    placeholder="Provide specific guidelines, dimensions, or inquiries here..."
+                    placeholder={language === 'en' ? 'Provide specific guidelines, dimensions, or inquiries here...' : 'अपनी आवश्यकता या कोई अन्य जानकारी यहाँ लिखें...'}
                     value={formData.message}
                     onChange={(e) => {
                       setFormData({ ...formData, message: e.target.value });
@@ -483,12 +493,12 @@ export default function ContactForm({ selectedSubject, onSubjectChange }: Contac
                   {formState === 'submitting' ? (
                     <>
                       <RefreshCw className="w-4 h-4 animate-spin" />
-                      <span>Processing...</span>
+                      <span>{language === 'en' ? 'Processing...' : 'भेजा जा रहा है...'}</span>
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>Send Your Message</span>
+                      <span>{language === 'en' ? 'Send Your Message' : 'संदेश भेजें'}</span>
                     </>
                   )}
                 </button>
