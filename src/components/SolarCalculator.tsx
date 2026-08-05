@@ -263,6 +263,16 @@ export default function SolarCalculator() {
     });
 
     setIsCalculating(true);
+
+    // Trigger Google Analytics 4 (GA4) key event
+    if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+      (window as any).gtag('event', 'calculator_form_submit', {
+        input_type: inputType,
+        input_value: valueNum,
+        customer_category: customerCategory,
+        plant_size: plantSize
+      });
+    }
   };
 
   const resetForm = () => {
