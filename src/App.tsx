@@ -23,6 +23,7 @@ import ContactForm from './components/Contactform.tsx';
 import Footer from './components/Footer.tsx';
 import Faqs from './components/Faqs.tsx';
 import SolarCalculator from './components/SolarCalculator.tsx';
+import SeoContentSection from './components/SeoContentSection.tsx';
 import { useLanguage } from './context/LanguageContext.tsx';
 
 export default function App() {
@@ -67,8 +68,8 @@ export default function App() {
   // Dynamic document title and meta description update based on page route for superior search indexing (SEO)
   useEffect(() => {
     const path = location.pathname;
-    let title = 'Ashonika Green Energy | Premium Solar EPC Solutions';
-    let description = 'Ashonika Green Energy is a premier certified solar EPC corporation specializing in high-voltage microgrid layouts, net-metering, and commercial/residential installations.';
+    let title = 'Ashonika Green Energy | Best Solar Company, Installer & EPC in Kishangarh, Ajmer, Rajasthan & India';
+    let description = 'Ashonika Green Energy is the best solar company, installer & rooftop solar EPC in Kishangarh, Ajmer, Rajasthan & across India. Get PM Surya Ghar Yojana solar subsidy assistance, top solar panel prices, 3kW/5kW/10kW system installation, on-grid/off-grid inverters & commercial solar plants with 25-year warranties.';
 
     if (path === '/about') {
       title = 'About Us | Ashonika Green Energy';
@@ -321,6 +322,9 @@ export default function App() {
 
             {/* Frequently Asked Questions Section */}
             <Faqs onContactClick={() => handleScrollToSection('contact')} isHomePage={true} />
+
+            {/* Keyword-Rich SEO & AI Search Knowledge Base Section */}
+            <SeoContentSection />
 
             {/* Free Site Assessment Contact Lead Forms Section */}
             <ContactForm selectedSubject={contactSubject} onSubjectChange={setContactSubject} />

@@ -116,6 +116,37 @@ export default function Footer({ onNavigate }: FooterProps) {
 
         </div>
 
+        {/* SEO Footer Extension: Keyword-Optimized Locations & Service Coverage */}
+        <div className="py-8 border-b border-slate-200/60 space-y-6">
+          <div className="space-y-2">
+            <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 tracking-wider uppercase">
+              {language === 'hi' ? 'सोलर सर्विस क्षेत्र और प्रमुख स्थान' : 'Solar Service Regions & Major Coverage Areas'}
+            </h4>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+              <strong>Kishangarh & Ajmer District:</strong> Sarana, Magra, Madanganj Kishangarh, Harmara, Marble Slurry Area, Pushkar, Beawar, Kekri, Nasirabad, Ajmer City, Silora Industrial Area.
+            </p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+              <strong>Rajasthan Solar EPC Coverage:</strong> Jaipur, Jodhpur, Udaipur, Kota, Bhilwara, Bikaner, Alwar, Sikar, Nagaur, Chittorgarh, Pali, Tonk, Jhunjhunu, Hanumangarh, Sri Ganganagar, and all districts across Rajasthan.
+            </p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+              <strong>Pan-India EPC Network:</strong> Delhi NCR, Haryana, Punjab, Madhya Pradesh, Gujarat, Uttar Pradesh, and nationwide commercial & industrial solar EPC projects in India.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 text-[10px] text-slate-500">
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Best Solar Company Kishangarh</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Solar Panel Dealer Ajmer</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">PM Surya Ghar Subsidy Rajasthan</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">3kW Rooftop Solar Cost</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">5kW Solar Plant Price</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">10kW Commercial Solar EPC</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Loom Solar Dealer Rajasthan</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">On-Grid Solar Installer Ajmer</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Hybrid Solar Power System</span>
+            <span className="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Top Solar EPC Company India</span>
+          </div>
+        </div>
+
         {/* Lower row: Copy notes */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-slate-400 gap-4">
           <p>© {currentYear} Ashonika Green Energy Private Limited. {language === 'en' ? 'All rights reserved.' : 'सर्वाधिकार सुरक्षित।'}</p>
