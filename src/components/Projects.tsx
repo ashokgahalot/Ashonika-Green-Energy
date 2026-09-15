@@ -8,6 +8,8 @@ import { Eye, MapPin, Minimize2, ZoomIn, Landmark, ChevronLeft, ChevronRight, Ar
 import SectionBackground3D from './SectionBackground3D.tsx';
 import TiltCard from './TiltCard.tsx';
 import { useLanguage } from '../context/LanguageContext.tsx';
+import saanviRoofImg from '../assets/images/saanvi_stonex_roof_1789493518633.jpg';
+import saanviShedImg from '../assets/images/saanvi_stonex_shed_1789493551241.jpg';
 
 interface ProjectItem {
   id: string;
@@ -132,6 +134,24 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
   };
 
   const projectsData: ProjectItem[] = [
+    {
+      id: 'proj_saanvi_stonex',
+      title: 'Saanvi Stonex',
+      category: 'Industrial',
+      location: language === 'en'
+        ? 'PLOT NO. E1-109, RIICO INDUSTRIAL AREA, PHASE 6, Madanganj, Kishangarh, Rajasthan'
+        : 'प्लॉट नं. E1-109, रीको औद्योगिक क्षेत्र, फेज 6, मदनगंज, किशनगढ़, राजस्थान',
+      capacity: language === 'en' ? '170 kW Industrial Rooftop' : '170 किलोवाट औद्योगिक रूफटॉप',
+      beforeImg: saanviRoofImg,
+      afterImg: saanviShedImg,
+      description: language === 'en'
+        ? 'A 170 kW Industrial Rooftop Solar Power Plant engineered for Saanvi Stonex at PLOT NO. E1-109, RIICO INDUSTRIAL AREA, PHASE 6, Madanganj, Kishangarh, Rajasthan. High-efficiency solar arrays equipped with safe walkway infrastructure power heavy industrial marble processing operations.'
+        : 'प्लॉट नं. E1-109, रीको औद्योगिक क्षेत्र, फेज 6, मदनगंज, किशनगढ़, राजस्थान में सान्वी स्टोनेक्स के लिए 170 किलोवाट का औद्योगिक रूफटॉप सोलर पावर प्लांट। सुरक्षित वॉकवे इंफ्रास्ट्रक्चर से सुसज्जित उच्च दक्षता वाले सोलर पैनल भारी औद्योगिक संगमरमर प्रसंस्करण को स्वच्छ ऊर्जा प्रदान करते हैं।',
+      images: [
+        saanviRoofImg,
+        saanviShedImg
+      ]
+    },
     {
       id: 'proj_swastik',
       title: 'Swastik Edible Oils',
