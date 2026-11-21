@@ -18,12 +18,11 @@ import Services from './components/Services.tsx';
 import WhyChooseUs from './components/WhyChooseUs.tsx';
 import TrustedBrands from './components/TrustedBrands.tsx';
 import Projects from './components/Projects.tsx';
-import Process from './components/Process.tsx';
 import ContactForm from './components/Contactform.tsx';
 import Footer from './components/Footer.tsx';
 import Faqs from './components/Faqs.tsx';
 import SolarCalculator from './components/SolarCalculator.tsx';
-import SeoContentSection from './components/SeoContentSection.tsx';
+import InstagramReels from './components/InstagramReels.tsx';
 import { useLanguage } from './context/LanguageContext.tsx';
 
 export default function App() {
@@ -312,25 +311,19 @@ export default function App() {
             {/* Portfolio Showcase Carousel Section on Home Page */}
             <Projects viewMode="carousel" onNavigateToProjectsPage={() => handleScrollToSection('projects-page')} />
 
-            {/* Horiz/Vertical Journey Pipeline Section */}
-            <Process />
-
             {/* Interactive Solar Savings Calculator on Home Page */}
             <div id="calculator" className="scroll-mt-24">
               <SolarCalculator />
             </div>
 
-            {/* Frequently Asked Questions Section */}
-            <Faqs onContactClick={() => handleScrollToSection('contact')} isHomePage={true} />
-
-            {/* Keyword-Rich SEO & AI Search Knowledge Base Section */}
-            <SeoContentSection />
+            {/* Instagram Reels Carousel Section */}
+            <InstagramReels />
 
             {/* Free Site Assessment Contact Lead Forms Section */}
             <ContactForm selectedSubject={contactSubject} onSubjectChange={setContactSubject} />
 
             {/* Corporate Slogan Wave Dark Footer */}
-            <Footer onNavigate={handleScrollToSection} />
+            <Footer onNavigate={handleScrollToSection} showSeoRegions={false} />
           </>
         } />
 
