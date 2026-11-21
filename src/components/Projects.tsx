@@ -135,6 +135,25 @@ export default function Projects({ viewMode = 'full', onNavigateToProjectsPage, 
 
   const projectsData: ProjectItem[] = [
     {
+      id: 'proj_jay_shiv_stonex',
+      title: 'Jay Shiv Stonex',
+      category: 'Industrial',
+      location: language === 'en'
+        ? 'Kishangarh, Ajmer 305801'
+        : 'किशनगढ़, अजमेर 305801',
+      capacity: language === 'en' ? '30 kW Industrial' : '30 किलोवाट औद्योगिक',
+      beforeImg: '/assets/aistudio/jay1_19564cb1.png',
+      afterImg: '/assets/aistudio/jay2_013bef64.png',
+      description: language === 'en'
+        ? 'A 30 kW Industrial Rooftop Solar Power Plant engineered for Jay Shiv Stonex in Kishangarh, Ajmer 305801. High-efficiency solar arrays with galvanized walkway and heavy-duty mounting infrastructure power industrial stone processing operations.'
+        : 'किशनगढ़, अजमेर 305801 में जय शिव स्टोनेक्स के लिए 30 किलोवाट का औद्योगिक रूफटॉप सोलर पावर प्लांट। गैल्वेनाइज्ड वॉकवे और मजबूत माउंटिंग स्ट्रक्चर से सुसज्जित उच्च दक्षता वाले सोलर पैनल औद्योगिक स्टोन प्रोसेसिंग को स्वच्छ ऊर्जा प्रदान करते हैं।',
+      images: [
+        '/assets/aistudio/jay1_19564cb1.png',
+        '/assets/aistudio/jay2_013bef64.png',
+        '/assets/aistudio/jay3_ab6565d2.png'
+      ]
+    },
+    {
       id: 'proj_saanvi_stonex',
       title: 'Saanvi Stonex',
       category: 'Industrial',
